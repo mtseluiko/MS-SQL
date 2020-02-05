@@ -1,0 +1,10 @@
+{
+	"name": "xml",
+	"erdAbbreviation": "<xml>",
+	"dtdAbbreviation": "{xml}",
+	"parentType": "binary",
+	"useSample": false,
+	"defaultValues": {
+		"primaryKey": false
+	}
+}

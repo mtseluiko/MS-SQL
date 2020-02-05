@@ -1,0 +1,11 @@
+{
+	"name": "binary",
+	"erdAbbreviation": "<bin>",
+	"dtdAbbreviation": "{BIN}",
+	"parentType": "binary",
+	"useSample": false,
+	"defaultValues": {
+		"primaryKey": false,
+		"mode": "binary"
+	}
+}

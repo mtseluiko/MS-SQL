@@ -1,0 +1,63 @@
+{
+	"model": {
+		"modelName": "New model",
+		"dbVersion": "2019",
+		"dbVendor": "MSSQLServer"
+	},
+	"container": {
+		"name": "New schema",
+		"indexes": []
+	},
+	"collection": {
+		"collectionName": "New table",
+		"memory_optimized": false,
+		"collectionUsers": [],
+		"collation": {},
+		"constrCheck": true,
+		"constrEnforceUpserts": true,
+		"constrEnforceReplication": true
+	},
+	"field": {
+		"name": "New column",
+		"type": "char",
+		"mode": "varchar",
+		"length": 10
+	},
+	"patternField": {
+		"name": "^[a-zA-Z0-9_.-]+$"
+	},
+	"multipleField": {
+		"primaryKey": true
+	},
+	"subschema": {},
+	"arrayItem": {},
+	"choice": {},
+	"relationship": {},
+	"user": {},
+	"view": {
+		"viewOn": "",
+		"pipeline": ""
+	},
+	"UDFs": {
+		"name": "New UDF",
+		"udfID": "",
+		"udfDescription": "",
+		"udfFunction": "",
+		"udfComments": ""
+	},
+	"UDAs": {
+		"name": "New UDA",
+		"udfID": "",
+		"udfDescription": "",
+		"udfFunction": "",
+		"udfComments": ""
+	},
+	"SecIdxs": {
+		"name": "New Secondary Index",
+		"SecIndxKey": "",
+		"SecIndxID": "",
+		"SecIndxDescription": "",
+		"SecIndxFunction": "",
+		"SecIndxComments": ""
+	}
+}

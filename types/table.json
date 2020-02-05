@@ -1,0 +1,22 @@
+{
+	"name": "table",
+	"erdAbbreviation": "<tbl>",
+	"dtdAbbreviation": "{tbl}",
+	"parentType": "string",
+	"useSample": true,
+	"defaultValues": {
+		"primaryKey": false,
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"default": "",
+		"minLength": "",
+		"maxLength": "",
+		"pattern": "",
+		"enum": [],
+		"sample":"",
+		"comments":""
+	}
+}

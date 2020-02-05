@@ -1,0 +1,10 @@
+{
+	"name": "rowversion",
+	"erdAbbreviation": "<rowv>",
+	"dtdAbbreviation": "{rowv}",
+	"parentType": "binary",
+	"useSample": false,
+	"defaultValues": {
+		"primaryKey": false
+	}
+}
