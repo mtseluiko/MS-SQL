@@ -6,6 +6,7 @@
 	"useSample": false,
 	"defaultValues": {
 		"primaryKey": false,
-		"mode": "binary"
+		"mode": "binary",
+		"length": 10
 	}
 }
