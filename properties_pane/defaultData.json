@@ -13,9 +13,11 @@
 		"memory_optimized": false,
 		"collectionUsers": [],
 		"collation": {},
-		"constrCheck": true,
-		"constrEnforceUpserts": true,
-		"constrEnforceReplication": true
+		"chkConstr": {
+			"constrCheck": true,
+			"constrEnforceUpserts": true,
+			"constrEnforceReplication": true
+		}
 	},
 	"field": {
 		"name": "New column",
