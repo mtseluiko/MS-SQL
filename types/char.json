@@ -4,6 +4,7 @@
 	"dtdAbbreviation": "{ABC}",
 	"parentType": "string",
 	"useSample": true,
+	"default": true,
 	"defaultValues": {
 		"primaryKey": false,
 		"relationshipType": "",
