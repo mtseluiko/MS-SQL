@@ -117,6 +117,99 @@ making sure that you maintain a proper JSON format.
 {
 	"lowerTab": "JsonDetails",
 	"structure": {
+		"nvarchar": [
+			"name",
+			"code",
+			"schemaId",
+			"type",
+			{
+				"propertyName": "Has max length",
+				"propertyKeyword": "hasMaxLength",
+				"propertyType": "checkbox"
+			},
+			{
+				"propertyName": "Length",
+				"propertyKeyword": "length",
+				"propertyType": "numeric",
+				"valueType": "number",
+				"propertyTooltip": "Setting for Length must be between 1 and 4000",
+				"minValue": 1,
+				"maxValue": 4000,
+				"step": 1,
+				"dependency": {
+					"type": "not",
+					"values": [{
+						"key": "hasMaxLength",
+						"value": true
+					}]
+				}
+			},
+			"default",
+			"description",
+			"required",
+			{
+				"propertyName": "Sparse",
+				"propertyKeyword": "sparse",
+				"propertyType": "checkbox"
+			},
+			{
+				"propertyName": "Masked with function",
+				"propertyKeyword": "maskedWith",
+				"propertyTooltip": "Limit exposure of sensitive data with this function",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Encryption",
+				"propertyType": "group",
+				"propertyKeyword": "encryption",
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "Key name",
+						"propertyKeyword": "COLUMN_ENCRYPTION_KEY",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Type",
+						"propertyKeyword": "ENCRYPTION_TYPE",
+						"propertyType": "select",
+						"options": [
+							"DETERMINISTIC",
+							"RANDOMIZED"
+						],
+						"data": "options",
+						"valueType": "string"
+					},
+					{
+						"propertyName": "Algorithm",
+						"propertyKeyword": "ENCRYPTION_ALGORITHM",
+						"propertyType": "text"
+					}
+				]
+			},
+			"primaryKey",
+			{
+				"propertyName": "Clustered",
+				"propertyKeyword": "clustered",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "primaryKey",
+					"value": true
+				}
+			},
+			"foreignCollection",
+			"foreignField",
+			"relationshipType",
+			"minLength",
+			"maxLength",
+			"pattern",
+			"format",
+			"enum",
+			"sample",
+			"comments"
+		],
 		"char": [
 			"name",
 			"code",
@@ -130,8 +223,6 @@ making sure that you maintain a proper JSON format.
 					"char",
 					"nchar",
 					"ntext",
-					"nvarchar",
-					"nvarchar(MAX)",
 					"text",
 					"varchar",
 					"varchar(MAX)"

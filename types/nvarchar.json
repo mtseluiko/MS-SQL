@@ -1,0 +1,28 @@
+{
+	"name": "nvarchar",
+	"erdAbbreviation": "<nvchr>",
+	"dtdAbbreviation": "{ABC}",
+	"parentType": "document",
+	"useSample": true,
+	"default": true,
+	"jsonType": {
+		"order": 2
+	},
+	"defaultValues": {
+		"primaryKey": false,
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"default": "",
+		"minLength": "",
+		"maxLength": "",
+		"pattern": "",
+		"enum": [],
+		"sample":"",
+		"comments":"",
+		"hasMaxLength": false,
+		"length": 10
+	}
+}
