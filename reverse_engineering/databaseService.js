@@ -18,7 +18,7 @@ const getConnectionClient = async connectionInfo => {
 };
 
 const getAllDatabasesTablesInfo = async (client, includeViews = true) => {
-	const viewJoin = includeViews ? `JOIN '+ quotename(name) + '.sys.views v on v.schema_id = t.schema_id` : '';
+	const viewJoin = includeViews ? `LEFT JOIN '+ quotename(name) + '.sys.views v on v.schema_id = t.schema_id` : '';
 	const orderByView = includeViews ? `, view_name` : '';
 	const viewName = includeViews ? `, v.name as view_name` : '';
 	return await client.request()
@@ -27,13 +27,9 @@ const getAllDatabasesTablesInfo = async (client, includeViews = true) => {
 		select @sql = 
 			(select ' UNION ALL
 				SELECT ' +  + quotename(name,'''') + ' as database_name,
-							s.name COLLATE DATABASE_DEFAULT
-								AS schema_name,
 							t.name COLLATE DATABASE_DEFAULT as table_name
 							${viewName}
 							FROM '+ quotename(name) + '.sys.tables t
-							JOIN '+ quotename(name) + '.sys.schemas s
-								on s.schema_id = t.schema_id
 							${viewJoin}
 							WHERE t.is_ms_shipped = 0
 							'
@@ -42,9 +38,8 @@ const getAllDatabasesTablesInfo = async (client, includeViews = true) => {
 			order by [name] for xml path(''), type).value('.', 'nvarchar(max)');
 
 		set @sql = stuff(@sql, 1, 12, '') + ' order by database_name,
-																		schema_name,
-																		table_name
-																		${orderByView}';
+														table_name
+														${orderByView}';
 
 		execute (@sql);
 		`);
