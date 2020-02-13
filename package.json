@@ -14,7 +14,7 @@
             "versions": [
                 "2016",
                 "2017",
-				"2019"
+                "2019"
             ]
         },
         "features": {
@@ -22,7 +22,7 @@
             "disablePatternField": false,
             "disableMultipleTypes": true,
             "enableForwardEngineering": false,
-            "disableReverseEngineering": true,
+            "disableReverseEngineering": false,
             "disableChoices": true,
             "enableJsonType": true
         }

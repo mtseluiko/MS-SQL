@@ -6,5 +6,5 @@
   "dependencies": {
     "mssql": "^3.3.0"
   },
-  "installed": false
+  "installed": true
 }
