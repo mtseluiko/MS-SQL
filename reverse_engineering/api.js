@@ -1,50 +1,54 @@
 'use strict';
 
 const { getClient, setClient, clearClient } = require('./connectionState');
-const { getObjects } = require('./databaseService');
+const { getObjects } = require('./databaseService/databaseService');
+const { reverseCollectionsToJSON, structureJSONSchemas } = require('./reverseEngineeringService/reverseEngineeringService');
 
 module.exports = {
-	connect: function(connectionInfo, logger, callback, app) {
-		return new Promise(async (resolve, reject) => {
-			const client = getClient();
-			if (!client) {
-				try {
-					await setClient(connectionInfo);
-					resolve(getClient());
-				} catch(error) {
-					reject(error);
-				}
-			}
+	async connect(connectionInfo, logger, callback, app) {
+		const client = getClient();
+		if (!client) {
+			await setClient(connectionInfo);
+			return getClient()
+		}
 
-			resolve(client);
-		});
+		return client;
 	},
 
-	disconnect: function(connectionInfo, logger, callback, app){
+	disconnect(connectionInfo, logger, callback, app) {
 		clearClient();
 		callback();
 	},
 
-	testConnection: function(connectionInfo, logger, callback, app){
+	testConnection(connectionInfo, logger, callback, app) {
 		callback(true);
 	},
 
-	getDatabases: function(connectionInfo, logger, callback, app){
+	getDatabases(connectionInfo, logger, callback, app) {
 		callback();
 	},
 
-	getDocumentKinds: function(connectionInfo, logger, callback, app) {
+	getDocumentKinds(connectionInfo, logger, callback, app) {
 		callback();
 	},
 
-	getDbCollectionsNames: function(connectionInfo, logger, callback, app) {
-		this.connect(connectionInfo)
-			.then(client => getObjects(client).then(objects => callback(null, objects)))
-			.catch(error => callback({ message: error.message, stack: error.stack }));
+	async getDbCollectionsNames(connectionInfo, logger, callback, app) {
+		try {
+			const client = await this.connect(connectionInfo);
+			const objects = await getObjects(client);
+			callback(null, objects);
+		} catch(e) {
+			callback({ message: error.message, stack: error.stack });
+		}
 	},
 
-	getDbCollectionsData: function(connectionInfo, logger, callback, app) {
-		const client = getClient();
-		callback({ client: client && client.config })
+	async getDbCollectionsData(collectionsInfo, logger, callback, app) {
+		try {
+			const { collections } = collectionsInfo.collectionData;
+			const jsonSchemas = await reverseCollectionsToJSON(getClient(), collections);
+			callback(null, structureJSONSchemas(jsonSchemas));
+		} catch (error) {
+			callback({ message: error.message, stack: error.stack })
+		}
 	}
 };
