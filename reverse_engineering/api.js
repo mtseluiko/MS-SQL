@@ -2,7 +2,7 @@
 
 const { getClient, setClient, clearClient } = require('./connectionState');
 const { getObjects } = require('./databaseService/databaseService');
-const { reverseCollectionsToJSON, structureJSONSchemas } = require('./reverseEngineeringService/reverseEngineeringService');
+const { reverseCollectionsToJSON, structureJSONSchemas, getCollectionsRelationships } = require('./reverseEngineeringService/reverseEngineeringService');
 
 module.exports = {
 	async connect(connectionInfo, logger, callback, app) {
@@ -45,8 +45,12 @@ module.exports = {
 	async getDbCollectionsData(collectionsInfo, logger, callback, app) {
 		try {
 			const { collections } = collectionsInfo.collectionData;
-			const jsonSchemas = await reverseCollectionsToJSON(getClient(), collections);
-			callback(null, structureJSONSchemas(jsonSchemas));
+			const client = getClient();
+			const [jsonSchemas, relationships] = await Promise.all([
+				await reverseCollectionsToJSON(client, collections),
+				await getCollectionsRelationships(client, collections),
+			]);
+			callback(null, structureJSONSchemas(jsonSchemas), null, relationships);
 		} catch (error) {
 			callback({ message: error.message, stack: error.stack })
 		}

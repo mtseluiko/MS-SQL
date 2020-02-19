@@ -24,7 +24,8 @@
             "enableForwardEngineering": false,
             "disableReverseEngineering": false,
             "disableChoices": true,
-            "enableJsonType": true
+            "enableJsonType": true,
+            "views": true
         }
     },
     "description": "Hackolade plugin for Microsoft SQL Server",

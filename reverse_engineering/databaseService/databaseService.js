@@ -25,6 +25,7 @@ const getTableInfo = async (connectionClient, dbName, tableName) => {
 		FROM information_schema.columns as c
 		LEFT JOIN INFORMATION_SCHEMA.VIEW_TABLE_USAGE t ON t.view_name=c.table_name
 		LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE k ON k.table_name=c.table_name
+		INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc ON tc.constraint_name=k.constraint_name AND tc.constraint_type='PRIMARY KEY'
 		where c.table_name = ${tableName}
 	;`
 };
@@ -37,6 +38,32 @@ const getTableRow = async (connectionClient, dbName, tableName) => {
 		.query`EXEC('SELECT TOP 1 * FROM ' + @TableName + ';');`;
 };
 
+const getTableForeignKeys = async (connectionClient, dbName) => {
+	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	return await currentDbConnectionClient
+		.query`
+		SELECT obj.name AS FK_NAME,
+				sch.name AS [schema_name],
+				tab1.name AS [table],
+				col1.name AS [column],
+				tab2.name AS [referenced_table],
+				col2.name AS [referenced_column]
+		FROM sys.foreign_key_columns fkc
+		INNER JOIN sys.objects obj
+			ON obj.object_id = fkc.constraint_object_id
+		INNER JOIN sys.tables tab1
+			ON tab1.object_id = fkc.parent_object_id
+		INNER JOIN sys.schemas sch
+			ON tab1.schema_id = sch.schema_id
+		INNER JOIN sys.columns col1
+			ON col1.column_id = parent_column_id AND col1.object_id = tab1.object_id
+		INNER JOIN sys.tables tab2
+			ON tab2.object_id = fkc.referenced_object_id
+		INNER JOIN sys.columns col2
+			ON col2.column_id = referenced_column_id AND col2.object_id = tab2.object_id
+		`
+};
+
 const getObjects = async (client) => client.config.database
 	? await getObjectsFromDatabase(client)
 	: await getObjectsFromDatabases(client);
@@ -46,4 +73,5 @@ module.exports = {
 	getObjects,
 	getTableInfo,
 	getTableRow,
+	getTableForeignKeys,
 }

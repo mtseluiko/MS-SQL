@@ -1,5 +1,5 @@
-const { getTableInfo, getTableRow } = require('../databaseService/databaseService');
-const { transformDatabaseTableInfoToJSON } = require('./helpers');
+const { getTableInfo, getTableRow, getTableForeignKeys } = require('../databaseService/databaseService');
+const { transformDatabaseTableInfoToJSON, reverseTableForeignKeys } = require('./helpers');
 
 const structureJSONSchemas = jsonSchemas =>
 	jsonSchemas.reduce((structuredJSONSchemas, jsonSchema) => {
@@ -16,13 +16,23 @@ const structureJSONSchemas = jsonSchemas =>
 		return structuredJSONSchemas;
 	}, jsonSchemas);
 
+const getCollectionsRelationships = async (dbConnectionClient, tablesInfo) => {
+	return await Object.entries(tablesInfo).reduce(async (relationships, [dbName]) => {
+		const tableForeignKeys = await getTableForeignKeys(dbConnectionClient, dbName);
+		const tableRelationships = reverseTableForeignKeys(tableForeignKeys, dbName);
+		return [...await relationships, ...tableRelationships];
+	}, Promise.resolve([]));
+};
+
 const reverseCollectionsToJSON = async (dbConnectionClient, tablesInfo) => {
 	return await Object.entries(tablesInfo).reduce(async (jsonSchemas, [dbName, tableNames]) => {
 		const tablesInfo = await Promise.all(
 			tableNames.map(async tableName => {
 				const trimmedTableName = tableName.replace(/ \(v\)$/, '');
-				const tableInfo = await getTableInfo(dbConnectionClient, dbName, trimmedTableName);
-				const tableRow = await getTableRow(dbConnectionClient, dbName, trimmedTableName)
+				const [tableInfo, tableRow] = await Promise.all([
+					await getTableInfo(dbConnectionClient, dbName, trimmedTableName),
+					await getTableRow(dbConnectionClient, dbName, trimmedTableName),
+				]);
 				const isView = tableInfo.length && tableInfo[0]['RELATED_TABLE'];
 				const jsonSchema = { properties: transformDatabaseTableInfoToJSON(tableInfo) };
 				return {
@@ -49,4 +59,5 @@ const reverseCollectionsToJSON = async (dbConnectionClient, tablesInfo) => {
 module.exports = {
 	reverseCollectionsToJSON,
 	structureJSONSchemas,
+	getCollectionsRelationships,
 }
