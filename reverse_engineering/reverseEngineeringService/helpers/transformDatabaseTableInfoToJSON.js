@@ -55,13 +55,33 @@ const handleDefault = (columnType, value) => {
 	return { default: validValue };
 };
 
+const handleMaxLengthDataTypes = (maxLength, typeObject) => {
+	switch(typeObject.type) {
+		case 'nvarchar': return { ...typeObject, hasMaxLength: maxLength === -1 };
+		case 'binary': {
+			if (typeObject.mode === 'varbinary' && maxLength === -1) {
+				return { ...typeObject, mode: 'varbinary(MAX)' }
+			}
+
+			return typeObject;
+		};
+		case 'char': {
+			if (typeObject.mode === 'varchar' && maxLength === -1) {
+				return { ...typeObject, mode: 'varchar(MAX)' }
+			}
+
+			return typeObject;
+		};
+		default: return typeObject;
+	}
+}
+
 const handleColumnProperty = (column, propertyName, value) => {
 	switch(propertyName) {
-		case 'DATA_TYPE': return handleType(value);
+		case 'DATA_TYPE': return handleMaxLengthDataTypes(column['CHARACTER_MAXIMUM_LENGTH'], handleType(value));
 		case 'CHARACTER_MAXIMUM_LENGTH': return { length: value };
 		case 'COLUMN_DEFAULT': return handleDefault(handleType(column['DATA_TYPE']).type, value);
 		case 'IS_NULLABLE': return { required: value === 'NO' ? true : false };
-		case 'CHARACTER_MAXIMUM_LENGTH': return { length: value };
 		case 'NUMERIC_SCALE': return { scale: !isNaN(value) ? value : '' };
 		case 'PRIMARY_KEY_COLUMN': return { primaryKey: column['COLUMN_NAME'] === value };
 		default: return {};
