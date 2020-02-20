@@ -9,7 +9,10 @@ const structureJSONSchemas = jsonSchemas =>
 			const relatedTableSchemaIndex = structuredJSONSchemas.findIndex(({ collectionName, dbName }) =>
 				jsonSchema.relatedTable === `${dbName}.${collectionName}`);
 			delete jsonSchema.relatedTable;
-			structuredJSONSchemas[relatedTableSchemaIndex].views.push(jsonSchema);
+			if (relatedTableSchemaIndex !== -1) {
+				structuredJSONSchemas[relatedTableSchemaIndex].views.push(jsonSchema);
+			}
+
 			return structuredJSONSchemas.filter((schema, i) => i !== currentIndex);
 		}
 
