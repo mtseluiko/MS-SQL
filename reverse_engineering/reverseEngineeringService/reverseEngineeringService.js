@@ -1,5 +1,5 @@
-const { getTableInfo, getTableRow, getTableForeignKeys } = require('../databaseService/databaseService');
-const { transformDatabaseTableInfoToJSON, reverseTableForeignKeys } = require('./helpers');
+const { getTableInfo, getTableRow, getTableForeignKeys, getDatabaseIndexes } = require('../databaseService/databaseService');
+const { transformDatabaseTableInfoToJSON, reverseTableForeignKeys, reverseTableIndexes } = require('./helpers');
 
 const structureJSONSchemas = jsonSchemas =>
 	jsonSchemas.reduce((structuredJSONSchemas, jsonSchema) => {
@@ -19,13 +19,14 @@ const structureJSONSchemas = jsonSchemas =>
 const getCollectionsRelationships = async (dbConnectionClient, tablesInfo) => {
 	return await Object.entries(tablesInfo).reduce(async (relationships, [dbName]) => {
 		const tableForeignKeys = await getTableForeignKeys(dbConnectionClient, dbName);
-		const tableRelationships = reverseTableForeignKeys(tableForeignKeys, dbName);
-		return [...await relationships, ...tableRelationships];
+		const reversedTableRelationships = reverseTableForeignKeys(tableForeignKeys, dbName);
+		return [...await relationships, ...reversedTableRelationships];
 	}, Promise.resolve([]));
 };
 
 const reverseCollectionsToJSON = async (dbConnectionClient, tablesInfo) => {
 	return await Object.entries(tablesInfo).reduce(async (jsonSchemas, [dbName, tableNames]) => {
+		const databaseIndexes = await getDatabaseIndexes(dbConnectionClient, dbName);
 		const tablesInfo = await Promise.all(
 			tableNames.map(async tableName => {
 				const trimmedTableName = tableName.replace(/ \(v\)$/, '');
@@ -34,7 +35,8 @@ const reverseCollectionsToJSON = async (dbConnectionClient, tablesInfo) => {
 					await getTableRow(dbConnectionClient, dbName, trimmedTableName),
 				]);
 				const isView = tableInfo.length && tableInfo[0]['RELATED_TABLE'];
-				const jsonSchema = { properties: transformDatabaseTableInfoToJSON(tableInfo) };
+				const jsonSchema = transformDatabaseTableInfoToJSON(tableInfo);
+				const tableIndexes = databaseIndexes.filter(index => index.TableName === tableName);
 				return {
 					collectionName: tableName,
 					dbName,
@@ -47,6 +49,7 @@ const reverseCollectionsToJSON = async (dbConnectionClient, tablesInfo) => {
 						views: [],
 						standardDoc: tableRow,
 					}),
+					entityLevel: { Indxs: reverseTableIndexes(tableIndexes) },
 					documents: [],
 					emptyBucket: false,
 				};
