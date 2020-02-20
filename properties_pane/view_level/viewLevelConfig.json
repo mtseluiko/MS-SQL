@@ -18,6 +18,10 @@
 				"propertyTooltip": "comments",
 				"propertyType": "details",
 				"template": "textarea"
+			},
+			{
+				"propertyKeyword": "pipeline",
+				"hidden": true
 			}
 		]
 	}
