@@ -50,8 +50,9 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					} : {
 						validation: { jsonSchema },
 						views: [],
-						standardDoc: tableRow,
 					}),
+					standardDoc: tableRow,
+					collectionDocs: tableRow,
 					entityLevel: { Indxs: reverseTableIndexes(tableIndexes) },
 					documents: [],
 					emptyBucket: false,
