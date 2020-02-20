@@ -16,20 +16,23 @@ const structureJSONSchemas = jsonSchemas =>
 		return structuredJSONSchemas;
 	}, jsonSchemas);
 
-const getCollectionsRelationships = async (dbConnectionClient, tablesInfo) => {
+const getCollectionsRelationships = logger => async (dbConnectionClient, tablesInfo) => {
 	return await Object.entries(tablesInfo).reduce(async (relationships, [dbName]) => {
+		logger.progress({ message: 'Fetching tables relationships', containerName: dbName });
 		const tableForeignKeys = await getTableForeignKeys(dbConnectionClient, dbName);
 		const reversedTableRelationships = reverseTableForeignKeys(tableForeignKeys, dbName);
 		return [...await relationships, ...reversedTableRelationships];
 	}, Promise.resolve([]));
 };
 
-const reverseCollectionsToJSON = async (dbConnectionClient, tablesInfo) => {
+const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo) => {
 	return await Object.entries(tablesInfo).reduce(async (jsonSchemas, [dbName, tableNames]) => {
+		logger.progress({ message: 'Fetching database indexes', containerName: dbName });
 		const databaseIndexes = await getDatabaseIndexes(dbConnectionClient, dbName);
 		const tablesInfo = await Promise.all(
 			tableNames.map(async tableName => {
 				const trimmedTableName = tableName.replace(/ \(v\)$/, '');
+				logger.progress({ message: 'Fetching table information', containerName: dbName, entityName: trimmedTableName });
 				const [tableInfo, tableRow] = await Promise.all([
 					await getTableInfo(dbConnectionClient, dbName, trimmedTableName),
 					await getTableRow(dbConnectionClient, dbName, trimmedTableName),

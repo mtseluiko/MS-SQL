@@ -38,20 +38,24 @@ module.exports = {
 			const objects = await getObjects(client);
 			callback(null, objects);
 		} catch(e) {
+			logger.log('error', { message: error.message, stack: error.stack, error }, 'Retrieving databases and tables information');
 			callback({ message: error.message, stack: error.stack });
 		}
 	},
 
 	async getDbCollectionsData(collectionsInfo, logger, callback, app) {
 		try {
+			logger.log('info', collectionsInfo, 'Retrieving schema', collectionsInfo.hiddenKeys);
+			logger.progress({ message: 'Start reverse-engineering process' });
 			const { collections } = collectionsInfo.collectionData;
 			const client = getClient();
 			const [jsonSchemas, relationships] = await Promise.all([
-				await reverseCollectionsToJSON(client, collections),
-				await getCollectionsRelationships(client, collections),
+				await reverseCollectionsToJSON(logger)(client, collections),
+				await getCollectionsRelationships(logger)(client, collections),
 			]);
 			callback(null, structureJSONSchemas(jsonSchemas), null, relationships);
 		} catch (error) {
+			logger.log('error', { message: error.message, stack: error.stack, error }, 'Reverse-engineering process failed');
 			callback({ message: error.message, stack: error.stack })
 		}
 	}

@@ -32,10 +32,14 @@ const getTableInfo = async (connectionClient, dbName, tableName) => {
 
 const getTableRow = async (connectionClient, dbName, tableName) => {
 	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
-	return await currentDbConnectionClient
-		.request()
-		.input('tableName', sql.VarChar, tableName)
-		.query`EXEC('SELECT TOP 1 * FROM [' + @TableName + '];');`;
+	try {
+		return await currentDbConnectionClient
+			.request()
+			.input('tableName', sql.VarChar, tableName)
+			.query`EXEC('SELECT TOP 1 * FROM [' + @TableName + '];');`;
+	} catch (e) {
+		return [];
+	}
 };
 
 const getTableForeignKeys = async (connectionClient, dbName) => {
