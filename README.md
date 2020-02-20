@@ -1,4 +1,4 @@
-# Cassandra
+# Microsoft SQL
 Hackolade plugin for Microsoft SQL Server and Azure SQL 
 
 Not ready for production!!
