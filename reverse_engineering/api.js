@@ -2,7 +2,12 @@
 
 const { getClient, setClient, clearClient } = require('./connectionState');
 const { getObjects } = require('./databaseService/databaseService');
-const { reverseCollectionsToJSON, structureJSONSchemas, getCollectionsRelationships } = require('./reverseEngineeringService/reverseEngineeringService');
+const {
+	reverseCollectionsToJSON,
+	structureJSONSchemas,
+	getCollectionsRelationships,
+} = require('./reverseEngineeringService/reverseEngineeringService');
+const logInfo = require('./helpers/logInfo');
 
 module.exports = {
 	async connect(connectionInfo, logger, callback, app) {
@@ -20,8 +25,15 @@ module.exports = {
 		callback();
 	},
 
-	testConnection(connectionInfo, logger, callback, app) {
-		callback(true);
+	async testConnection(connectionInfo, logger, callback, app) {
+		try {
+			logInfo('Test connection', connectionInfo, logger);
+			await this.connect(connectionInfo);
+			callback(null);
+		} catch(e) {
+			logger.log('error', { message: error.message, stack: error.stack, error }, 'Test connection');
+			callback({ message: error.message, stack: error.stack });
+		}
 	},
 
 	getDatabases(connectionInfo, logger, callback, app) {
@@ -34,10 +46,11 @@ module.exports = {
 
 	async getDbCollectionsNames(connectionInfo, logger, callback, app) {
 		try {
+			logInfo('Retrieving databases and tables information', connectionInfo, logger);
 			const client = await this.connect(connectionInfo);
 			const objects = await getObjects(client);
 			callback(null, objects);
-		} catch(e) {
+		} catch(error) {
 			logger.log('error', { message: error.message, stack: error.stack, error }, 'Retrieving databases and tables information');
 			callback({ message: error.message, stack: error.stack });
 		}

@@ -78,6 +78,7 @@
 					"key": "authMethod",
 					"value": "Connection string"
 				},
+				"isHiddenKey": true,
 				"validation": {
 					"regex": "([^\\s])"
 				}
@@ -109,6 +110,7 @@
 					"key": "authMethod",
 					"value": "Username / Password"
 				},
+				"isHiddenKey": true,
 				"validation": {
 					"regex": "([^\\s])"
 				}
