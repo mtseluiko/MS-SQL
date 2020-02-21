@@ -94,15 +94,13 @@ const transformColumnToJSON = column =>
 		...handleColumnProperty(column, propertyName, value),
 	}), {});
 
-const transformDatabaseTableInfoToJSON = tableInfo => tableInfo.reduce((columnSchemas, column) => ({
-	required: [
-		...columnSchemas.required,
-		...(column['IS_NULLABLE'] === 'NO' ? [column['COLUMN_NAME']] : [])
-	],
-	properties: {
-		...columnSchemas.properties,
-		[column['COLUMN_NAME']]: transformColumnToJSON(column),
-	}
-}), { required: [], properties: {} });
+const transformDatabaseTableInfoToJSON = tableInfo => jsonSchema =>
+	tableInfo.reduce((columnSchemas, column) => ({
+		...columnSchemas,
+		properties: {
+			...columnSchemas.properties,
+			[column['COLUMN_NAME']]: transformColumnToJSON(column),
+		}
+	}), jsonSchema);
 
 module.exports = transformDatabaseTableInfoToJSON;

@@ -1,5 +1,19 @@
-const { getTableInfo, getTableRow, getTableForeignKeys, getDatabaseIndexes } = require('../databaseService/databaseService');
-const { transformDatabaseTableInfoToJSON, reverseTableForeignKeys, reverseTableIndexes } = require('./helpers');
+const {
+	getTableInfo,
+	getTableRow,
+	getTableForeignKeys,
+	getDatabaseIndexes,
+	getTableColumnsDefault,
+	getDatabaseMemoryOptimizedTables,
+} = require('../databaseService/databaseService');
+const {
+	transformDatabaseTableInfoToJSON,
+	reverseTableForeignKeys,
+	reverseTableIndexes,
+	defineRequiredFields,
+	defineFieldsDefault,
+} = require('./helpers');
+const pipe = require('../helpers/pipe');
 
 const structureJSONSchemas = jsonSchemas =>
 	jsonSchemas.reduce((structuredJSONSchemas, jsonSchema) => {
@@ -30,19 +44,29 @@ const getCollectionsRelationships = logger => async (dbConnectionClient, tablesI
 
 const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo) => {
 	return await Object.entries(tablesInfo).reduce(async (jsonSchemas, [dbName, tableNames]) => {
-		logger.progress({ message: 'Fetching database indexes', containerName: dbName });
-		const databaseIndexes = await getDatabaseIndexes(dbConnectionClient, dbName);
+		logger.progress({ message: 'Fetching database information', containerName: dbName });
+		const [databaseIndexes, databaseMemoryOptimizedTables] = await Promise.all([
+			await getDatabaseIndexes(dbConnectionClient, dbName),
+			await getDatabaseMemoryOptimizedTables(dbConnectionClient, dbName),
+		]);
 		const tablesInfo = await Promise.all(
 			tableNames.map(async tableName => {
 				const trimmedTableName = tableName.replace(/ \(v\)$/, '');
+				const tableIndexes = databaseIndexes.filter(index => index.TableName === tableName);
 				logger.progress({ message: 'Fetching table information', containerName: dbName, entityName: trimmedTableName });
+
 				const [tableInfo, tableRow] = await Promise.all([
 					await getTableInfo(dbConnectionClient, dbName, trimmedTableName),
 					await getTableRow(dbConnectionClient, dbName, trimmedTableName),
 				]);
 				const isView = tableInfo.length && tableInfo[0]['RELATED_TABLE'];
-				const jsonSchema = transformDatabaseTableInfoToJSON(tableInfo);
-				const tableIndexes = databaseIndexes.filter(index => index.TableName === tableName);
+
+				const jsonSchema = pipe(
+					transformDatabaseTableInfoToJSON(tableInfo),
+					defineRequiredFields,
+					defineFieldsDefault(await getTableColumnsDefault(dbConnectionClient, dbName, trimmedTableName)),
+				)({ required: [], properties: {} });
+
 				return {
 					collectionName: tableName,
 					dbName,
@@ -56,7 +80,10 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					}),
 					standardDoc: tableRow,
 					collectionDocs: tableRow,
-					entityLevel: { Indxs: reverseTableIndexes(tableIndexes) },
+					entityLevel: {
+						Indxs: reverseTableIndexes(tableIndexes),
+						memory_optimized: databaseMemoryOptimizedTables.includes(trimmedTableName),
+					},
 					documents: [],
 					emptyBucket: false,
 				};

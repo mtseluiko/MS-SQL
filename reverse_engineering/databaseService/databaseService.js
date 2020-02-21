@@ -98,6 +98,32 @@ const getDatabaseIndexes = async (connectionClient, dbName) => {
 		`;
 };
 
+const getTableColumnsDefault = async (connectionClient, dbName, tableName) => {
+	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	return currentDbConnectionClient.query`
+		select
+			st.name [Table],
+			sc.name [Column],
+			sep.value [Description]
+		from sys.tables st
+		inner join sys.columns sc on st.object_id = sc.object_id
+		left join sys.extended_properties sep on st.object_id = sep.major_id
+														and sc.column_id = sep.minor_id
+														and sep.name = 'MS_Description'
+		where st.name = ${tableName}
+	`;
+};
+
+const getDatabaseMemoryOptimizedTables = async (connectionClient, dbName) => {
+	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	return currentDbConnectionClient.query`
+		SELECT o.name
+		FROM sys.memory_optimized_tables_internal_attributes AS moa
+		LEFT JOIN sys.objects o ON o.object_id=moa.object_id
+		WHERE o.type='U'
+	`;
+};
+
 const getObjects = async (client) => client.config.database
 	? await getObjectsFromDatabase(client)
 	: await getObjectsFromDatabases(client);
@@ -109,4 +135,6 @@ module.exports = {
 	getTableRow,
 	getTableForeignKeys,
 	getDatabaseIndexes,
+	getTableColumnsDefault,
+	getDatabaseMemoryOptimizedTables,
 }
