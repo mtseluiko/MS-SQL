@@ -3,7 +3,7 @@ const {
 	getTableRow,
 	getTableForeignKeys,
 	getDatabaseIndexes,
-	getTableColumnsDefault,
+	getTableColumnsDescription,
 	getDatabaseMemoryOptimizedTables,
 } = require('../databaseService/databaseService');
 const {
@@ -11,7 +11,7 @@ const {
 	reverseTableForeignKeys,
 	reverseTableIndexes,
 	defineRequiredFields,
-	defineFieldsDefault,
+	defineFieldsDescription,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
 
@@ -64,7 +64,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 				const jsonSchema = pipe(
 					transformDatabaseTableInfoToJSON(tableInfo),
 					defineRequiredFields,
-					defineFieldsDefault(await getTableColumnsDefault(dbConnectionClient, dbName, trimmedTableName)),
+					defineFieldsDescription(await getTableColumnsDescription(dbConnectionClient, dbName, trimmedTableName)),
 				)({ required: [], properties: {} });
 
 				return {

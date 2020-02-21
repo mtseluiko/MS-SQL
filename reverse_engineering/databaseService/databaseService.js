@@ -98,7 +98,7 @@ const getDatabaseIndexes = async (connectionClient, dbName) => {
 		`;
 };
 
-const getTableColumnsDefault = async (connectionClient, dbName, tableName) => {
+const getTableColumnsDescription = async (connectionClient, dbName, tableName) => {
 	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
 	return currentDbConnectionClient.query`
 		select
@@ -135,6 +135,6 @@ module.exports = {
 	getTableRow,
 	getTableForeignKeys,
 	getDatabaseIndexes,
-	getTableColumnsDefault,
+	getTableColumnsDescription,
 	getDatabaseMemoryOptimizedTables,
 }

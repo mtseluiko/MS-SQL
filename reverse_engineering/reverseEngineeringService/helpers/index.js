@@ -2,12 +2,12 @@ const transformDatabaseTableInfoToJSON = require('./transformDatabaseTableInfoTo
 const reverseTableForeignKeys = require('./reverseTableForeignKeys');
 const reverseTableIndexes = require('./reverseTableIndexes');
 const defineRequiredFields = require('./defineRequiredFields');
-const defineFieldsDefault = require('./defineFieldsDefault');
+const defineFieldsDescription = require('./defineFieldsDescription');
 
 module.exports = {
 	transformDatabaseTableInfoToJSON,
 	reverseTableForeignKeys,
 	reverseTableIndexes,
 	defineRequiredFields,
-	defineFieldsDefault,
+	defineFieldsDescription,
 }
