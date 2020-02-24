@@ -83,6 +83,7 @@ const handleColumnProperty = (column, propertyName, value) => {
 		case 'COLUMN_DEFAULT': return handleDefault(handleType(column['DATA_TYPE']).type, value);
 		case 'IS_NULLABLE': return { required: value === 'NO' ? true : false };
 		case 'NUMERIC_SCALE': return { scale: !isNaN(value) ? value : '' };
+		case 'NUMERIC_PRECISION': return { precision: !isNaN(value) ? value : '' };
 		case 'PRIMARY_KEY_COLUMN': return { primaryKey: column['COLUMN_NAME'] === value };
 		default: return {};
 	}

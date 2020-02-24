@@ -44,8 +44,7 @@ const getTableRow = async (connectionClient, dbName, tableName) => {
 
 const getTableForeignKeys = async (connectionClient, dbName) => {
 	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
-	return await currentDbConnectionClient
-		.query`
+	return await currentDbConnectionClient.query`
 		SELECT obj.name AS FK_NAME,
 				sch.name AS [schema_name],
 				tab1.name AS [table],
@@ -70,8 +69,7 @@ const getTableForeignKeys = async (connectionClient, dbName) => {
 
 const getDatabaseIndexes = async (connectionClient, dbName) => {
 	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
-	return await currentDbConnectionClient
-		.query`
+	return await currentDbConnectionClient.query`
 		SELECT
 			TableName = t.name,
 			IndexName = ind.name,

@@ -416,6 +416,26 @@ making sure that you maintain a proper JSON format.
 					]
 				}
 			},
+						{
+				"propertyName": "Precision",
+				"propertyKeyword": "precision",
+				"propertyType": "numeric",
+				"valueType": "number",
+				"allowNegative": false,
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "mode",
+							"value": "decimal"
+						},
+						{
+							"key": "mode",
+							"value": "numeric"
+						}
+					]
+				}
+			},
 			"default",
 			"description",
 			"required",
