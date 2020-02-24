@@ -12,21 +12,40 @@ const {
 	reverseTableIndexes,
 	defineRequiredFields,
 	defineFieldsDescription,
+	doesViewHaveRelatedTables,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
 
-const structureJSONSchemas = jsonSchemas =>
+const changeViewPropertiesToReferences = (jsonSchema, tableInfo) => {
+	return tableInfo.reduce((jsonSchemaAcc, column) => {
+		const columnName = column['COLUMN_NAME'];
+		if (!jsonSchemaAcc.properties[columnName]) {
+			return jsonSchemaAcc;
+		}
+
+		return {
+			...jsonSchemaAcc,
+			properties: {
+				...jsonSchemaAcc.properties,
+				[columnName]: {$ref: `#collection/definitions/${tableInfo['RELATED_TABLE']}/${columnName}`},
+			},
+		};
+	}, jsonSchema);
+};
+
+const mergeCollectionsWithViews = jsonSchemas =>
 	jsonSchemas.reduce((structuredJSONSchemas, jsonSchema) => {
-		if (jsonSchema.relatedTable) {
+		if (jsonSchema.relatedTables) {
 			const currentIndex = structuredJSONSchemas.findIndex(structuredSchema =>
-				jsonSchema.relatedTable === structuredSchema.relatedTable);
+				jsonSchema.collectionName === structuredSchema.collectionName);
 			const relatedTableSchemaIndex = structuredJSONSchemas.findIndex(({ collectionName, dbName }) =>
-				jsonSchema.relatedTable === `${dbName}.${collectionName}`);
-			delete jsonSchema.relatedTable;
-			if (relatedTableSchemaIndex !== -1) {
+				jsonSchema.dbName === dbName && jsonSchema.relatedTables.includes(collectionName));
+
+			if (relatedTableSchemaIndex !== -1 && doesViewHaveRelatedTables(jsonSchema, structuredJSONSchemas)) {
 				structuredJSONSchemas[relatedTableSchemaIndex].views.push(jsonSchema);
 			}
 
+			delete jsonSchema.relatedTables;
 			return structuredJSONSchemas.filter((schema, i) => i !== currentIndex);
 		}
 
@@ -71,9 +90,9 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					collectionName: tableName,
 					dbName,
 					...(isView ? {
-						jsonSchema,
+						jsonSchema: changeViewPropertiesToReferences(jsonSchema, tableInfo),
 						name: trimmedTableName,
-						relatedTable: `${dbName}.${tableInfo[0]['RELATED_TABLE']}`,
+						relatedTables: tableInfo.map((columnInfo => columnInfo['RELATED_TABLE'])),
 					} : {
 						validation: { jsonSchema },
 						views: [],
@@ -95,6 +114,6 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 
 module.exports = {
 	reverseCollectionsToJSON,
-	structureJSONSchemas,
+	mergeCollectionsWithViews,
 	getCollectionsRelationships,
 }

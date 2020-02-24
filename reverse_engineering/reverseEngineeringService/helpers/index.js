@@ -3,6 +3,7 @@ const reverseTableForeignKeys = require('./reverseTableForeignKeys');
 const reverseTableIndexes = require('./reverseTableIndexes');
 const defineRequiredFields = require('./defineRequiredFields');
 const defineFieldsDescription = require('./defineFieldsDescription');
+const doesViewHaveRelatedTables = require('./doesViewHaveRelatedTables');
 
 module.exports = {
 	transformDatabaseTableInfoToJSON,
@@ -10,4 +11,5 @@ module.exports = {
 	reverseTableIndexes,
 	defineRequiredFields,
 	defineFieldsDescription,
+	doesViewHaveRelatedTables,
 }

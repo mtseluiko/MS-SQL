@@ -4,7 +4,7 @@ const { getClient, setClient, clearClient } = require('./connectionState');
 const { getObjects } = require('./databaseService/databaseService');
 const {
 	reverseCollectionsToJSON,
-	structureJSONSchemas,
+	mergeCollectionsWithViews,
 	getCollectionsRelationships,
 } = require('./reverseEngineeringService/reverseEngineeringService');
 const logInfo = require('./helpers/logInfo');
@@ -66,7 +66,7 @@ module.exports = {
 				await reverseCollectionsToJSON(logger)(client, collections),
 				await getCollectionsRelationships(logger)(client, collections),
 			]);
-			callback(null, structureJSONSchemas(jsonSchemas), null, relationships);
+			callback(null, mergeCollectionsWithViews(jsonSchemas), null, relationships);
 		} catch (error) {
 			logger.log('error', { message: error.message, stack: error.stack, error }, 'Reverse-engineering process failed');
 			callback({ message: error.message, stack: error.stack })
