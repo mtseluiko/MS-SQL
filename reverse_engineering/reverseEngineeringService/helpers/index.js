@@ -4,6 +4,7 @@ const reverseTableIndexes = require('./reverseTableIndexes');
 const defineRequiredFields = require('./defineRequiredFields');
 const defineFieldsDescription = require('./defineFieldsDescription');
 const doesViewHaveRelatedTables = require('./doesViewHaveRelatedTables');
+const reverseTableCheckConstraints = require('./reverseTableCheckConstraints');
 
 module.exports = {
 	transformDatabaseTableInfoToJSON,
@@ -12,4 +13,5 @@ module.exports = {
 	defineRequiredFields,
 	defineFieldsDescription,
 	doesViewHaveRelatedTables,
+	reverseTableCheckConstraints,
 }

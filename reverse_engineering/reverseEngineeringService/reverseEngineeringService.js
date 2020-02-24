@@ -5,6 +5,7 @@ const {
 	getDatabaseIndexes,
 	getTableColumnsDescription,
 	getDatabaseMemoryOptimizedTables,
+	getDatabaseCheckConstraints,
 } = require('../databaseService/databaseService');
 const {
 	transformDatabaseTableInfoToJSON,
@@ -13,6 +14,7 @@ const {
 	defineRequiredFields,
 	defineFieldsDescription,
 	doesViewHaveRelatedTables,
+	reverseTableCheckConstraints,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
 
@@ -64,14 +66,16 @@ const getCollectionsRelationships = logger => async (dbConnectionClient, tablesI
 const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo) => {
 	return await Object.entries(tablesInfo).reduce(async (jsonSchemas, [dbName, tableNames]) => {
 		logger.progress({ message: 'Fetching database information', containerName: dbName });
-		const [databaseIndexes, databaseMemoryOptimizedTables] = await Promise.all([
+		const [databaseIndexes, databaseMemoryOptimizedTables, databaseCheckConstraints] = await Promise.all([
 			await getDatabaseIndexes(dbConnectionClient, dbName),
 			await getDatabaseMemoryOptimizedTables(dbConnectionClient, dbName),
+			await getDatabaseCheckConstraints(dbConnectionClient, dbName),
 		]);
 		const tablesInfo = await Promise.all(
 			tableNames.map(async tableName => {
 				const trimmedTableName = tableName.replace(/ \(v\)$/, '');
-				const tableIndexes = databaseIndexes.filter(index => index.TableName === tableName);
+				const tableIndexes = databaseIndexes.filter(index => index.TableName === trimmedTableName);
+				const tableCheckConstraints = databaseCheckConstraints.filter(cc => cc.table === trimmedTableName);
 				logger.progress({ message: 'Fetching table information', containerName: dbName, entityName: trimmedTableName });
 
 				const [tableInfo, tableRow] = await Promise.all([
@@ -102,6 +106,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					entityLevel: {
 						Indxs: reverseTableIndexes(tableIndexes),
 						memory_optimized: databaseMemoryOptimizedTables.includes(trimmedTableName),
+						chkConstr: reverseTableCheckConstraints(tableCheckConstraints),
 					},
 					documents: [],
 					emptyBucket: false,

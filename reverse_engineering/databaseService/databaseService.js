@@ -124,6 +124,25 @@ const getDatabaseMemoryOptimizedTables = async (connectionClient, dbName) => {
 	`;
 };
 
+const getDatabaseCheckConstraints = async (connectionClient, dbName) => {
+	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	return currentDbConnectionClient.query`
+		select con.[name],
+			t.[name] as [table],
+			col.[name] as column_name,
+			con.[definition],
+			con.[is_not_trusted],
+			con.[is_disabled],
+			con.[is_not_for_replication]
+		from sys.check_constraints con
+		left outer join sys.objects t
+			on con.parent_object_id = t.object_id
+		left outer join sys.all_columns col
+			on con.parent_column_id = col.column_id
+			and con.parent_object_id = col.object_id
+	`;
+};
+
 const getObjects = async (client) => client.config.database
 	? await getObjectsFromDatabase(client)
 	: await getObjectsFromDatabases(client);
@@ -137,4 +156,5 @@ module.exports = {
 	getDatabaseIndexes,
 	getTableColumnsDescription,
 	getDatabaseMemoryOptimizedTables,
+	getDatabaseCheckConstraints,
 }
