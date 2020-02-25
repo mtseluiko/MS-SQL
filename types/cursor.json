@@ -1,0 +1,10 @@
+{
+	"name": "cursor",
+	"erdAbbreviation": "<curs>",
+	"dtdAbbreviation": "{curs}",
+	"parentType": "binary",
+	"useSample": false,
+	"defaultValues": {
+		"primaryKey": false
+	}
+}
