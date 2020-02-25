@@ -146,7 +146,11 @@ making sure that you maintain a proper JSON format.
 			},
 			"default",
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			{
 				"propertyName": "Sparse",
 				"propertyKeyword": "sparse",
@@ -278,7 +282,11 @@ making sure that you maintain a proper JSON format.
 			},
 			"default",
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			{
 				"propertyName": "Sparse",
 				"propertyKeyword": "sparse",
@@ -438,7 +446,11 @@ making sure that you maintain a proper JSON format.
 			},
 			"default",
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			{
 				"propertyName": "Identity",
 				"propertyType": "block",
@@ -547,7 +559,11 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			{
 				"propertyName": "Sparse",
 				"propertyKeyword": "sparse",
@@ -631,7 +647,11 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			{
 				"propertyName": "Sparse",
 				"propertyKeyword": "sparse",
@@ -702,7 +722,11 @@ making sure that you maintain a proper JSON format.
 			"refPath",
 			"type",
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			"comments"
 		],
 		"geometry": [
@@ -713,7 +737,11 @@ making sure that you maintain a proper JSON format.
 			"refPath",
 			"type",
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			"comments"
 		],
 		"hierarchyid": [
@@ -724,7 +752,11 @@ making sure that you maintain a proper JSON format.
 			"refPath",
 			"type",
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			{
 				"propertyName": "Sparse",
 				"propertyKeyword": "sparse",
@@ -742,7 +774,11 @@ making sure that you maintain a proper JSON format.
 			"schemaId",
 			"type",
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			{
 				"propertyName": "Sparse",
 				"propertyKeyword": "sparse",
@@ -760,7 +796,11 @@ making sure that you maintain a proper JSON format.
 			"refPath",
 			"type",
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			{
 				"propertyName": "Sparse",
 				"propertyKeyword": "sparse",
@@ -779,7 +819,7 @@ making sure that you maintain a proper JSON format.
 			"enum",
 			"sample",
 			"comments"
-		],   
+		],
 		"xml": [
 			"name",
 			"code",
@@ -788,7 +828,11 @@ making sure that you maintain a proper JSON format.
 			"refPath",
 			"type",
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			{
 				"propertyName": "Sparse",
 				"propertyKeyword": "sparse",
@@ -818,7 +862,11 @@ making sure that you maintain a proper JSON format.
 			"schemaId",
 			"type",
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			"comments"
 		],
 		"rowversion": [
@@ -829,7 +877,11 @@ making sure that you maintain a proper JSON format.
 			"refPath",
 			"type",
 			"description",
-			"required",
+			{
+				"propertyName": "Not null",
+				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
 			"comments"
 		]
 	}
