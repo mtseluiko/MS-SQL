@@ -103,6 +103,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					}),
 					standardDoc: tableRow,
 					collectionDocs: tableRow,
+					documents: tableRow,
 					entityLevel: {
 						Indxs: reverseTableIndexes(tableIndexes),
 						memory_optimized: databaseMemoryOptimizedTables.includes(trimmedTableName),

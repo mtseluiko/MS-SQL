@@ -604,11 +604,11 @@ making sure that you maintain a proper JSON format.
 				"valueType": "string"
 			},
 			{
-				"propertyName": "Scale",
-				"propertyKeyword": "scale",
+				"propertyName": "Fractional seconds precision",
+				"propertyKeyword": "fractSecPrecision",
 				"propertyType": "numeric",
 				"valueType": "number",
-				"propertyTooltip": "Setting for Scale must be between 0 and 7",
+				"propertyTooltip": "Setting for precision must be between 0 and 7",
 				"minValue": 0,
 				"maxValue": 7,
 				"step": 1,
