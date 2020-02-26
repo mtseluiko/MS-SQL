@@ -109,7 +109,6 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 						memory_optimized: databaseMemoryOptimizedTables.includes(trimmedTableName),
 						chkConstr: reverseTableCheckConstraints(tableCheckConstraints),
 					},
-					documents: [],
 					emptyBucket: false,
 				};
 			})
