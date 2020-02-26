@@ -2,12 +2,11 @@
 	"name": "nvarchar",
 	"erdAbbreviation": "<nvchr>",
 	"dtdAbbreviation": "{ABC}",
-	"parentType": "document",
-	"useSample": true,
-	"default": true,
 	"jsonType": {
-		"order": 2
+		"order": 1,
+		"name": "nvarchar"
 	},
+	"structureType": true,
 	"defaultValues": {
 		"primaryKey": false,
 		"relationshipType": "",
@@ -22,7 +21,7 @@
 		"enum": [],
 		"sample":"",
 		"comments":"",
-		"hasMaxLength": false,
+		"hasMaxLength": true,
 		"length": 10
 	}
 }

@@ -122,28 +122,6 @@ making sure that you maintain a proper JSON format.
 			"code",
 			"schemaId",
 			"type",
-			{
-				"propertyName": "Has max length",
-				"propertyKeyword": "hasMaxLength",
-				"propertyType": "checkbox"
-			},
-			{
-				"propertyName": "Length",
-				"propertyKeyword": "length",
-				"propertyType": "numeric",
-				"valueType": "number",
-				"propertyTooltip": "Setting for Length must be between 1 and 4000",
-				"minValue": 1,
-				"maxValue": 4000,
-				"step": 1,
-				"dependency": {
-					"type": "not",
-					"values": [{
-						"key": "hasMaxLength",
-						"value": true
-					}]
-				}
-			},
 			"default",
 			"description",
 			{
@@ -229,26 +207,21 @@ making sure that you maintain a proper JSON format.
 					"ntext",
 					"text",
 					"varchar",
-					"varchar(MAX)"
+					"nvarchar"
 				],
 				"data": "options",
 				"valueType": "string"
 			},
 			{
-				"propertyName": "Length",
-				"propertyKeyword": "length",
-				"propertyType": "numeric",
-				"valueType": "number",
-				"propertyTooltip": "Setting for Length must be between 1 and 8000",
-				"minValue": 1,
-				"maxValue": 8000,
-				"step": 1,
+				"propertyName": "Has max length",
+				"propertyKeyword": "hasMaxLength",
+				"propertyType": "checkbox",
 				"dependency": {
 					"type": "or",
 					"values": [
 						{
 							"key": "mode",
-							"value": "char"
+							"value": "nvarchar"
 						},
 						{
 							"key": "mode",
@@ -262,23 +235,58 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "length",
 				"propertyType": "numeric",
 				"valueType": "number",
+				"propertyTooltip": "Setting for Length must be between 1 and 8000",
+				"minValue": 1,
+				"maxValue": 8000,
+				"step": 1,
+				"dependency": [{
+					"type": "and",
+					"values": [{
+						"type": "or",
+						"values": [{
+							"key": "mode",
+							"value": "char"
+						},{
+							"key": "mode",
+							"value": "varchar"
+						}]
+					},{
+						"type": "not",
+						"values": {
+							"key": "hasMaxLength",
+							"value": true
+						}
+					}]
+				}]
+			},
+			{
+				"propertyName": "Length",
+				"propertyKeyword": "length",
+				"propertyType": "numeric",
+				"valueType": "number",
 				"propertyTooltip": "Setting for Length must be between 1 and 4000",
 				"minValue": 1,
 				"maxValue": 4000,
 				"step": 1,
-				"dependency": {
-					"type": "or",
-					"values": [
-						{
+				"dependency": [{
+					"type": "and",
+					"values": [{
+						"type": "or",
+						"values": [{
 							"key": "mode",
 							"value": "nchar"
-						},
-						{
+						},{
 							"key": "mode",
 							"value": "nvarchar"
+						}]
+					},{
+						"type": "not",
+						"values": {
+							"key": "hasMaxLength",
+							"value": true
 						}
-					]
-				}
+					}]
+				}]
 			},
 			"default",
 			"description",
@@ -308,15 +316,7 @@ making sure that you maintain a proper JSON format.
 						},
 						{
 							"key": "mode",
-							"value": "nvarchar(MAX)"
-						},
-						{
-							"key": "mode",
 							"value": "varchar"
-						},
-						{
-							"key": "mode",
-							"value": "varchar(MAX)"
 						}
 					]
 				}
@@ -529,11 +529,19 @@ making sure that you maintain a proper JSON format.
 				"options": [
 					"binary",
 					"image",
-					"varbinary",
-					"varbinary(MAX)"
+					"varbinary"
 				],
 				"data": "options",
 				"valueType": "string"
+			},
+			{
+				"propertyName": "Has max length",
+				"propertyKeyword": "hasMaxLength",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "mode",
+					"value": "varbinary"
+				}
 			},
 			{
 				"propertyName": "Length",
@@ -544,19 +552,25 @@ making sure that you maintain a proper JSON format.
 				"minValue": 1,
 				"maxValue": 8000,
 				"step": 1,
-				"dependency": {
-					"type": "or",
-					"values": [
-						{
+				"dependency": [{
+					"type": "and",
+					"values": [{
+						"type": "or",
+						"values": [{
 							"key": "mode",
 							"value": "binary"
-						},
-						{
+						},{
 							"key": "mode",
 							"value": "varbinary"
+						}]
+					},{
+						"type": "not",
+						"values": {
+							"key": "hasMaxLength",
+							"value": true
 						}
-					]
-				}
+					}]
+				}]
 			},
 			"description",
 			{
@@ -578,10 +592,6 @@ making sure that you maintain a proper JSON format.
 						{
 							"key": "mode",
 							"value": "varbinary"
-						},
-						{
-							"key": "mode",
-							"value": "varbinary(MAX)"
 						}
 					]
 				}

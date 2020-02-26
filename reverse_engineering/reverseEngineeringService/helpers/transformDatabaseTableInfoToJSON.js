@@ -15,6 +15,7 @@ const handleType = type => {
 		case 'ntext':
 		case 'text':
 		case 'char':
+		case 'nvarchar':
 		case 'varchar': return { type: 'char', mode: type };
 		case 'bigint':
 		case 'decimal':
@@ -35,8 +36,7 @@ const handleType = type => {
 		case 'uniqueidentifier':
 		case 'xml':
 		case 'cursor':
-		case 'rowversion':
-		case 'nvarchar': return { type };
+		case 'rowversion': return { type };
 		default: return { type };
 	}
 };
@@ -57,17 +57,16 @@ const handleDefault = (columnType, value) => {
 
 const handleMaxLengthDataTypes = (maxLength, typeObject) => {
 	switch(typeObject.type) {
-		case 'nvarchar': return { ...typeObject, hasMaxLength: maxLength === -1 };
 		case 'binary': {
 			if (typeObject.mode === 'varbinary' && maxLength === -1) {
-				return { ...typeObject, mode: 'varbinary(MAX)' }
+				return { ...typeObject, hasMaxLength: true }
 			}
 
 			return typeObject;
 		};
 		case 'char': {
-			if (typeObject.mode === 'varchar' && maxLength === -1) {
-				return { ...typeObject, mode: 'varchar(MAX)' }
+			if ((typeObject.mode === 'varchar' || typeObject.mode === 'nvarchar') && maxLength === -1) {
+				return { ...typeObject, hasMaxLength: true }
 			}
 
 			return typeObject;
