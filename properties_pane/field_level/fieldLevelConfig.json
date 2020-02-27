@@ -142,6 +142,10 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "Has max length",
 				"propertyKeyword": "hasMaxLength",
 				"propertyType": "checkbox",
+				"typeDecorator": {
+					"value": "MAX",
+					"dependency": { "key": "hasMaxLength", "value": true }
+				},
 				"dependency": {
 					"type": "or",
 					"values": [
@@ -165,6 +169,7 @@ making sure that you maintain a proper JSON format.
 				"minValue": 1,
 				"maxValue": 8000,
 				"step": 1,
+				"typeDecorator": true,
 				"dependency": [{
 					"type": "and",
 					"values": [{
@@ -194,6 +199,7 @@ making sure that you maintain a proper JSON format.
 				"minValue": 1,
 				"maxValue": 4000,
 				"step": 1,
+				"typeDecorator": true,
 				"dependency": [{
 					"type": "and",
 					"values": [{
@@ -356,6 +362,9 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "numeric",
 				"valueType": "number",
 				"allowNegative": false,
+				"typeDecorator": {
+					"value": "{precision}, {scale}"
+				},
 				"dependency": {
 					"type": "or",
 					"values": [
@@ -464,6 +473,10 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "Has max length",
 				"propertyKeyword": "hasMaxLength",
 				"propertyType": "checkbox",
+				"typeDecorator": {
+					"value": "MAX",
+					"dependency": { "key": "hasMaxLength", "value": true }
+				},
 				"dependency": {
 					"key": "mode",
 					"value": "varbinary"
@@ -478,6 +491,7 @@ making sure that you maintain a proper JSON format.
 				"minValue": 1,
 				"maxValue": 8000,
 				"step": 1,
+				"typeDecorator": true,
 				"dependency": [{
 					"type": "and",
 					"values": [{

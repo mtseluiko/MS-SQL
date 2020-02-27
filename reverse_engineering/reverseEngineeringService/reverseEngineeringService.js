@@ -15,25 +15,9 @@ const {
 	defineFieldsDescription,
 	doesViewHaveRelatedTables,
 	reverseTableCheckConstraints,
+	changeViewPropertiesToReferences,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
-
-const changeViewPropertiesToReferences = (jsonSchema, tableInfo) => {
-	return tableInfo.reduce((jsonSchemaAcc, column) => {
-		const columnName = column['COLUMN_NAME'];
-		if (!jsonSchemaAcc.properties[columnName]) {
-			return jsonSchemaAcc;
-		}
-
-		return {
-			...jsonSchemaAcc,
-			properties: {
-				...jsonSchemaAcc.properties,
-				[columnName]: {$ref: `#collection/definitions/${tableInfo['RELATED_TABLE']}/${columnName}`},
-			},
-		};
-	}, jsonSchema);
-};
 
 const mergeCollectionsWithViews = jsonSchemas =>
 	jsonSchemas.reduce((structuredJSONSchemas, jsonSchema) => {
