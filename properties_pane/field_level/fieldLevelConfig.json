@@ -778,6 +778,7 @@ making sure that you maintain a proper JSON format.
 			"refPath",
 			"type",
 			"description",
+			"default",
 			{
 				"propertyName": "Not null",
 				"propertyKeyword": "required",
