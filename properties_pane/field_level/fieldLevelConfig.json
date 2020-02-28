@@ -438,11 +438,12 @@ making sure that you maintain a proper JSON format.
 				"valueType": "string"
 			},
 			{
-				"propertyName": "Scale",
-				"propertyKeyword": "scale",
+				"propertyName": "Precision",
+				"propertyKeyword": "precision",
 				"propertyType": "numeric",
 				"valueType": "number",
 				"allowNegative": false,
+				"typeDecorator": true,
 				"dependency": {
 					"type": "or",
 					"values": [
@@ -457,15 +458,13 @@ making sure that you maintain a proper JSON format.
 					]
 				}
 			},
-						{
-				"propertyName": "Precision",
-				"propertyKeyword": "precision",
+			{
+				"propertyName": "Scale",
+				"propertyKeyword": "scale",
 				"propertyType": "numeric",
 				"valueType": "number",
 				"allowNegative": false,
-				"typeDecorator": {
-					"value": "{precision}, {scale}"
-				},
+				"typeDecorator": true,
 				"dependency": {
 					"type": "or",
 					"values": [
