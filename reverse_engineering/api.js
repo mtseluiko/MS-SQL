@@ -14,7 +14,7 @@ module.exports = {
 		const client = getClient();
 		if (!client) {
 			await setClient(connectionInfo);
-			return getClient()
+			return getClient();
 		}
 
 		return client;
@@ -30,7 +30,7 @@ module.exports = {
 			logInfo('Test connection', connectionInfo, logger);
 			await this.connect(connectionInfo);
 			callback(null);
-		} catch(e) {
+		} catch(error) {
 			logger.log('error', { message: error.message, stack: error.stack, error }, 'Test connection');
 			callback({ message: error.message, stack: error.stack });
 		}
