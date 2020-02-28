@@ -19,7 +19,7 @@
 	"TOOLBAR___SHOW_FOREIGN_MASTER": "Toggle foreign master",
 	"TOOLBAR___SHOW_MODEL_VIEW": "Toggle model views",
 	"TOOLBAR___DISTRIBUTE_ORTHOGONALLY": "Distribute tables orthogonally",
-	"OBJECT___BROWSER_BUCKET": "Databases",
+	"OBJECT___BROWSER_BUCKET": "Schemas",
 	"OBJECT___BROWSER_NOT_IN_BUCKET": "Undefined Schema",
 	"OBJECT___BROWSER_COLLECTION": "Tables",
 	"OBJECT___BROWSER_VIEWS": "Views",

@@ -41,7 +41,7 @@ const handleType = type => {
 	}
 };
 
-const handleDefault = (columnType, value) => {
+const handleDefault = (typeObject, value) => {
 	if (!value) {
 		return { default: '' };
 	}
@@ -50,7 +50,7 @@ const handleDefault = (columnType, value) => {
 	const validValue = {
 		numeric: Number(value.replace(replaceRegex, '')),
 		char: value.replace(replaceRegex, ''),
-	}[columnType] || value.replace(replaceRegex, '');
+	}[typeObject.type] || value.replace(replaceRegex, '');
 
 	return { default: validValue };
 };
@@ -79,7 +79,7 @@ const handleColumnProperty = (column, propertyName, value) => {
 	switch(propertyName) {
 		case 'DATA_TYPE': return handleMaxLengthDataTypes(column['CHARACTER_MAXIMUM_LENGTH'], handleType(value));
 		case 'CHARACTER_MAXIMUM_LENGTH': return { length: value };
-		case 'COLUMN_DEFAULT': return handleDefault(handleType(column['DATA_TYPE']).type, value);
+		case 'COLUMN_DEFAULT': return handleDefault(handleType(column['DATA_TYPE']), value);
 		case 'IS_NULLABLE': return { required: value === 'NO' ? true : false };
 		case 'DATETIME_PRECISION': return { fractSecPrecision: !isNaN(value) ? value : '' };
 		case 'NUMERIC_SCALE': return { scale: !isNaN(value) ? value : '' };
