@@ -7,8 +7,6 @@ const reverseTableForeignKeys = (tableForeignKeys, dbName) =>
 		childDbName: dbName,
 		childCollection: foreignKey.table,
 		childField: foreignKey.column,
-		parentCardinality: '1',
-		childCardinality: '0..n',
 	}));
 
 module.exports = reverseTableForeignKeys;

@@ -31,7 +31,10 @@
 	"subschema": {},
 	"arrayItem": {},
 	"choice": {},
-	"relationship": {},
+	"relationship": {
+		"parentCardinality": "1",
+		"childCardinality": "0..n"
+	},
 	"user": {},
 	"view": {
 		"viewOn": "",
