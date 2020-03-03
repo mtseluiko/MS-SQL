@@ -21,11 +21,12 @@ const getConnectionClient = async connectionInfo => {
 const getTableInfo = async (connectionClient, dbName, tableName) => {
 	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
 	return await currentDbConnectionClient.query`
-		SELECT c.*, t.table_name as RELATED_TABLE, k.column_name as PRIMARY_KEY_COLUMN
+		SELECT c.*, v.table_name as RELATED_TABLE, k.column_name as PRIMARY_KEY_COLUMN
 		FROM information_schema.columns as c
-		LEFT JOIN INFORMATION_SCHEMA.VIEW_TABLE_USAGE t ON t.view_name=c.table_name
+		LEFT JOIN INFORMATION_SCHEMA.VIEW_TABLE_USAGE v ON t.view_name=c.table_name
 		LEFT JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc ON tc.TABLE_NAME=c.TABLE_NAME AND tc.constraint_type='PRIMARY KEY'
 		LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE k ON k.CONSTRAINT_NAME=tc.CONSTRAINT_NAME
+		LEFT JOIN INFORMATION_SCHEMA.TABLES t ON t.TABLE_NAME=c.table_name
 		where c.table_name = ${tableName}
 	;`
 };

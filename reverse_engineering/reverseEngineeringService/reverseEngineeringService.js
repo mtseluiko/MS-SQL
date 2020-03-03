@@ -66,6 +66,9 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					await getTableInfo(dbConnectionClient, dbName, trimmedTableName),
 					await getTableRow(dbConnectionClient, dbName, trimmedTableName),
 				]);
+
+
+
 				const isView = tableInfo.length && tableInfo[0]['RELATED_TABLE'];
 
 				const jsonSchema = pipe(
