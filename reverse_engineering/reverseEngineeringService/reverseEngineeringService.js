@@ -56,33 +56,31 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 			await getDatabaseCheckConstraints(dbConnectionClient, dbName),
 		]);
 		const tablesInfo = await Promise.all(
-			tableNames.map(async tableName => {
-				const trimmedTableName = tableName.replace(/ \(v\)$/, '');
-				const tableIndexes = databaseIndexes.filter(index => index.TableName === trimmedTableName);
-				const tableCheckConstraints = databaseCheckConstraints.filter(cc => cc.table === trimmedTableName);
-				logger.progress({ message: 'Fetching table information', containerName: dbName, entityName: trimmedTableName });
+			tableNames.map(async tableNameWithSchema => {
+				const trimmedTableName = tableNameWithSchema.replace(/ \(v\)$/, '');
+				const [schemaName, tableName] = trimmedTableName.split('.');
+				const tableIndexes = databaseIndexes.filter(index => index.TableName === tableName);
+				const tableCheckConstraints = databaseCheckConstraints.filter(cc => cc.table === tableName);
+				logger.progress({ message: 'Fetching table information', containerName: dbName, entityName: tableName });
 
 				const [tableInfo, tableRow] = await Promise.all([
-					await getTableInfo(dbConnectionClient, dbName, trimmedTableName),
-					await getTableRow(dbConnectionClient, dbName, trimmedTableName),
+					await getTableInfo(dbConnectionClient, dbName, tableName, schemaName),
+					await getTableRow(dbConnectionClient, dbName, tableName, schemaName),
 				]);
-
-
-
 				const isView = tableInfo.length && tableInfo[0]['RELATED_TABLE'];
 
 				const jsonSchema = pipe(
 					transformDatabaseTableInfoToJSON(tableInfo),
 					defineRequiredFields,
-					defineFieldsDescription(await getTableColumnsDescription(dbConnectionClient, dbName, trimmedTableName)),
+					defineFieldsDescription(await getTableColumnsDescription(dbConnectionClient, dbName, tableName)),
 				)({ required: [], properties: {} });
 
 				return {
 					collectionName: tableName,
-					dbName,
+					dbName: `${dbName}.${schemaName}`,
 					...(isView ? {
 						jsonSchema: changeViewPropertiesToReferences(jsonSchema, tableInfo),
-						name: trimmedTableName,
+						name: tableName,
 						relatedTables: tableInfo.map((columnInfo => columnInfo['RELATED_TABLE'])),
 					} : {
 						validation: { jsonSchema },
@@ -93,8 +91,11 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					documents: tableRow,
 					entityLevel: {
 						Indxs: reverseTableIndexes(tableIndexes),
-						memory_optimized: databaseMemoryOptimizedTables.includes(trimmedTableName),
+						memory_optimized: databaseMemoryOptimizedTables.includes(tableName),
 						chkConstr: reverseTableCheckConstraints(tableCheckConstraints),
+					},
+					bucketInfo: {
+						databaseName: dbName,
 					},
 					emptyBucket: false,
 				};

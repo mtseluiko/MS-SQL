@@ -18,26 +18,28 @@ const getConnectionClient = async connectionInfo => {
 	return await sql.connect(connectionInfo.connectionString);
 };
 
-const getTableInfo = async (connectionClient, dbName, tableName) => {
+const getTableInfo = async (connectionClient, dbName, tableName, tableSchema) => {
 	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
 	return await currentDbConnectionClient.query`
 		SELECT c.*, v.table_name as RELATED_TABLE, k.column_name as PRIMARY_KEY_COLUMN
 		FROM information_schema.columns as c
-		LEFT JOIN INFORMATION_SCHEMA.VIEW_TABLE_USAGE v ON t.view_name=c.table_name
+		LEFT JOIN INFORMATION_SCHEMA.VIEW_TABLE_USAGE v ON v.view_name=c.table_name
 		LEFT JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc ON tc.TABLE_NAME=c.TABLE_NAME AND tc.constraint_type='PRIMARY KEY'
 		LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE k ON k.CONSTRAINT_NAME=tc.CONSTRAINT_NAME
 		LEFT JOIN INFORMATION_SCHEMA.TABLES t ON t.TABLE_NAME=c.table_name
-		where c.table_name = ${tableName}
+		WHERE c.table_name = ${tableName}
+		AND c.table_schema = ${tableSchema}
 	;`
 };
 
-const getTableRow = async (connectionClient, dbName, tableName) => {
+const getTableRow = async (connectionClient, dbName, tableName, tableSchema) => {
 	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
 	try {
 		return await currentDbConnectionClient
 			.request()
 			.input('tableName', sql.VarChar, tableName)
-			.query`EXEC('SELECT TOP 1 * FROM [' + @TableName + '];');`;
+			.input('tableSchema', sql.VarChar, tableSchema)
+			.query`EXEC('SELECT TOP 1 * FROM [' + @TableSchema + '].[' + @TableName + '];');`;
 	} catch (e) {
 		return [];
 	}
