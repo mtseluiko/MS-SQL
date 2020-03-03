@@ -1,7 +1,7 @@
 'use strict';
 
 const { getClient, setClient, clearClient } = require('./connectionState');
-const { getObjects } = require('./databaseService/databaseService');
+const { getObjects, getDatabases } = require('./databaseService/databaseService');
 const {
 	reverseCollectionsToJSON,
 	mergeCollectionsWithViews,
@@ -36,18 +36,27 @@ module.exports = {
 		}
 	},
 
-	getDatabases(connectionInfo, logger, callback, app) {
-		callback();
+	async getDatabases(connectionInfo, logger, callback, app) {
+		try {
+			const client = await this.connect(connectionInfo);
+			const databases = await getDatabases(client);
+			const databaseNames = databases.map(database => database.name);
+			callback(null, databaseNames);
+		} catch(error) {
+			logger.log('error', { message: error.message, stack: error.stack, error }, 'Retrieving database list');
+			callback({ message: error.message, stack: error.stack });
+		}
 	},
 
 	getDocumentKinds(connectionInfo, logger, callback, app) {
-		callback();
+		callback(null, []);
 	},
 
 	async getDbCollectionsNames(connectionInfo, logger, callback, app) {
 		try {
 			logInfo('Retrieving databases and tables information', connectionInfo, logger);
-			const client = await this.connect(connectionInfo);
+			const connectionInfoWithDatabaseName = { ...connectionInfo, databaseName: connectionInfo.database };
+			const client = await this.connect(connectionInfoWithDatabaseName);
 			const objects = await getObjects(client);
 			callback(null, objects);
 		} catch(error) {
@@ -64,7 +73,7 @@ module.exports = {
 			const client = getClient();
 			const [jsonSchemas, relationships] = await Promise.all([
 				await reverseCollectionsToJSON(logger)(client, collections),
-				await getCollectionsRelationships(logger)(client, collections),
+				await getCollectionsRelationships(logger)(client, client.config.database),
 			]);
 			callback(null, mergeCollectionsWithViews(jsonSchemas), null, relationships);
 		} catch (error) {

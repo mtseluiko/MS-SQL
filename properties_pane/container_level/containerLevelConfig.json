@@ -72,6 +72,11 @@ making sure that you maintain a proper JSON format.
 				"propertyTooltip": "comments",
 				"propertyType": "details",
 				"template": "textarea"
+			},
+			{
+				"propertyName": "Database name",
+				"propertyKeyword": "databaseName",
+				"propertyType": "text"
 			}
 		],
 		"containerLevelKeys": []

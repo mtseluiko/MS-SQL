@@ -1,17 +1,28 @@
 const getObjectsFromDatabase = async client => {
 	const tablesInfo = await client.query`select * from INFORMATION_SCHEMA.tables`;
-	return [tablesInfo.reduce((database, { TABLE_NAME, TABLE_TYPE }) => {
-		if (TABLE_TYPE === 'VIEW') {
+	const databaseObject = tablesInfo.reduce((schemas, { TABLE_NAME, TABLE_TYPE, TABLE_SCHEMA }) => {
+		const schema = schemas[TABLE_SCHEMA];
+		if (schema) {
 			return {
-				...database,
-				views: [...database.views, TABLE_NAME],
-			}
+				...schemas,
+				[TABLE_SCHEMA]: {
+					...schema,
+					dbCollections: TABLE_TYPE === 'BASE TABLE' ? [...schema.dbCollections, TABLE_NAME] : schema.dbCollections,
+					views: TABLE_TYPE === 'VIEW' ? [...schema.views, TABLE_NAME] : schema.views,
+				}
+			};
 		}
+
 		return {
-			...database,
-			dbCollections: [...database.dbCollections, TABLE_NAME],
-		}
-	}, { dbName: client.config.database, views: [], dbCollections: [] })];
+			...schemas,
+			[TABLE_SCHEMA]: {
+				dbName: TABLE_SCHEMA,
+				dbCollections: TABLE_TYPE === 'BASE TABLE' ? [TABLE_NAME] : [],
+				views: TABLE_TYPE === 'VIEW' ? [TABLE_NAME] : [],
+			}
+		};
+	}, {});
+	return Object.values(databaseObject);
 };
 
 module.exports = getObjectsFromDatabase;

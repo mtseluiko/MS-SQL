@@ -38,29 +38,28 @@ const mergeCollectionsWithViews = jsonSchemas =>
 		return structuredJSONSchemas;
 	}, jsonSchemas);
 
-const getCollectionsRelationships = logger => async (dbConnectionClient, tablesInfo) => {
-	return await Object.entries(tablesInfo).reduce(async (relationships, [dbName]) => {
-		logger.progress({ message: 'Fetching tables relationships', containerName: dbName });
-		const tableForeignKeys = await getTableForeignKeys(dbConnectionClient, dbName);
-		const reversedTableRelationships = reverseTableForeignKeys(tableForeignKeys, dbName);
-		return [...await relationships, ...reversedTableRelationships];
-	}, Promise.resolve([]));
+const getCollectionsRelationships = logger => async (dbConnectionClient, dbName) => {
+	logger.progress({ message: 'Fetching tables relationships', containerName: dbName });
+	const tableForeignKeys = await getTableForeignKeys(dbConnectionClient, dbName);
+	const reversedTableRelationships = reverseTableForeignKeys(tableForeignKeys, dbName);
+	return reversedTableRelationships;
 };
 
 const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo) => {
-	return await Object.entries(tablesInfo).reduce(async (jsonSchemas, [dbName, tableNames]) => {
-		logger.progress({ message: 'Fetching database information', containerName: dbName });
-		const [databaseIndexes, databaseMemoryOptimizedTables, databaseCheckConstraints] = await Promise.all([
-			await getDatabaseIndexes(dbConnectionClient, dbName),
-			await getDatabaseMemoryOptimizedTables(dbConnectionClient, dbName),
-			await getDatabaseCheckConstraints(dbConnectionClient, dbName),
-		]);
+	const dbName = dbConnectionClient.config.database;
+	const [databaseIndexes, databaseMemoryOptimizedTables, databaseCheckConstraints] = await Promise.all([
+		await getDatabaseIndexes(dbConnectionClient, dbName),
+		await getDatabaseMemoryOptimizedTables(dbConnectionClient, dbName),
+		await getDatabaseCheckConstraints(dbConnectionClient, dbName),
+	]);
+	return await Object.entries(tablesInfo).reduce(async (jsonSchemas, [schemaName, tableNames]) => {
+		logger.progress({ message: 'Fetching database information', containerName: schemaName });
 		const tablesInfo = await Promise.all(
 			tableNames.map(async tableName => {
 				const trimmedTableName = tableName.replace(/ \(v\)$/, '');
 				const tableIndexes = databaseIndexes.filter(index => index.TableName === trimmedTableName);
 				const tableCheckConstraints = databaseCheckConstraints.filter(cc => cc.table === trimmedTableName);
-				logger.progress({ message: 'Fetching table information', containerName: dbName, entityName: trimmedTableName });
+				logger.progress({ message: 'Fetching table information', containerName: schemaName, entityName: trimmedTableName });
 
 				const [tableInfo, tableRow] = await Promise.all([
 					await getTableInfo(dbConnectionClient, dbName, trimmedTableName),
@@ -76,7 +75,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 
 				return {
 					collectionName: tableName,
-					dbName,
+					dbName: schemaName,
 					...(isView ? {
 						jsonSchema: changeViewPropertiesToReferences(jsonSchema, tableInfo),
 						name: trimmedTableName,
@@ -92,6 +91,9 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 						Indxs: reverseTableIndexes(tableIndexes),
 						memory_optimized: databaseMemoryOptimizedTables.includes(trimmedTableName),
 						chkConstr: reverseTableCheckConstraints(tableCheckConstraints),
+					},
+					bucketInfo: {
+						databaseName: dbName,
 					},
 					emptyBucket: false,
 				};

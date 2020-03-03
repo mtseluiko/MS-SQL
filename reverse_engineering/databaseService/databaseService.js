@@ -1,5 +1,5 @@
 const sql = require('mssql');
-const { getObjectsFromDatabase, getObjectsFromDatabases, getNewConnectionClientByDb } = require('./helpers');
+const { getObjectsFromDatabase, getNewConnectionClientByDb } = require('./helpers');
 
 const getConnectionClient = async connectionInfo => {
 	if (connectionInfo.authMethod === 'Username / Password') {
@@ -129,9 +129,14 @@ const getDatabaseCheckConstraints = async (connectionClient, dbName) => {
 	`;
 };
 
-const getObjects = async (client) => client.config.database
-	? await getObjectsFromDatabase(client)
-	: await getObjectsFromDatabases(client);
+const getDatabases = async (connectionClient) => {
+	return await connectionClient.query`
+		SELECT name FROM sys.databases
+		WHERE name NOT IN ('master', 'model', 'tempdb', 'msdb', 'Resource')
+	`;
+}
+
+const getObjects = async (client) => await getObjectsFromDatabase(client);
 
 module.exports = {
 	getConnectionClient,
@@ -143,4 +148,5 @@ module.exports = {
 	getTableColumnsDescription,
 	getDatabaseMemoryOptimizedTables,
 	getDatabaseCheckConstraints,
+	getDatabases,
 }
