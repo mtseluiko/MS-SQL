@@ -912,20 +912,6 @@ making sure that you maintain a proper JSON format.
 			},
 			"comments"
 		],
-		"cursor": [
-			"name",
-			"code",
-			"sampleName",
-			"schemaId",
-			"type",
-			"description",
-			{
-				"propertyName": "Not null",
-				"propertyKeyword": "required",
-				"propertyType": "checkbox"
-			},
-			"comments"
-		],
 		"rowversion": [
 			"name",
 			"code",
