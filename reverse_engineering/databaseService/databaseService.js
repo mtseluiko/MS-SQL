@@ -20,13 +20,20 @@ const getConnectionClient = async connectionInfo => {
 
 const getTableInfo = async (connectionClient, dbName, tableName, tableSchema) => {
 	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	const objectId = `${tableSchema}.${tableName}`;
 	return await currentDbConnectionClient.query`
-		SELECT c.*, v.table_name as RELATED_TABLE, k.column_name as PRIMARY_KEY_COLUMN
+		SELECT c.*,
+				v.table_name as RELATED_TABLE,
+				k.column_name as PRIMARY_KEY_COLUMN,
+				ic.SEED_VALUE,
+				ic.INCREMENT_VALUE,
+				COLUMNPROPERTY(object_id(${objectId}), c.column_name, 'IsIdentity') AS IS_IDENTITY
 		FROM information_schema.columns as c
 		LEFT JOIN INFORMATION_SCHEMA.VIEW_TABLE_USAGE v ON v.view_name=c.table_name
 		LEFT JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc ON tc.TABLE_NAME=c.TABLE_NAME AND tc.constraint_type='PRIMARY KEY'
 		LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE k ON k.CONSTRAINT_NAME=tc.CONSTRAINT_NAME
 		LEFT JOIN INFORMATION_SCHEMA.TABLES t ON t.TABLE_NAME=c.table_name
+		LEFT JOIN SYS.IDENTITY_COLUMNS ic ON ic.object_id=object_id(${objectId})
 		WHERE c.table_name = ${tableName}
 		AND c.table_schema = ${tableSchema}
 	;`

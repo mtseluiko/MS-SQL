@@ -75,6 +75,19 @@ const handleMaxLengthDataTypes = (maxLength, typeObject) => {
 	}
 }
 
+const handleIdentity = (column, value) => {
+	if (value !== 1) {
+		return {};
+	}
+
+	return {
+		identity: {
+			identitySeed: column['SEED_VALUE'],
+			identityIncrement: column['INCREMENT_VALUE'],
+		},
+	};
+};
+
 const handleColumnProperty = (column, propertyName, value) => {
 	switch(propertyName) {
 		case 'DATA_TYPE': return handleMaxLengthDataTypes(column['CHARACTER_MAXIMUM_LENGTH'], handleType(value));
@@ -85,6 +98,7 @@ const handleColumnProperty = (column, propertyName, value) => {
 		case 'NUMERIC_SCALE': return { scale: !isNaN(value) ? value : '' };
 		case 'NUMERIC_PRECISION': return { precision: !isNaN(value) ? value : '' };
 		case 'PRIMARY_KEY_COLUMN': return { primaryKey: column['COLUMN_NAME'] === value };
+		case 'IS_IDENTITY': return handleIdentity(column, value);
 		default: return {};
 	}
 };
