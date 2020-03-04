@@ -1,7 +1,7 @@
 'use strict';
 
 const { getClient, setClient, clearClient } = require('./connectionState');
-const { getObjects } = require('./databaseService/databaseService');
+const { getObjectsFromDatabase } = require('./databaseService/databaseService');
 const {
 	reverseCollectionsToJSON,
 	mergeCollectionsWithViews,
@@ -48,7 +48,11 @@ module.exports = {
 		try {
 			logInfo('Retrieving databases and tables information', connectionInfo, logger);
 			const client = await this.connect(connectionInfo);
-			const objects = await getObjects(client);
+			if (!client.config.database) {
+				throw new Error('No database specified');
+			}
+
+			const objects = await getObjectsFromDatabase(client);
 			callback(null, objects);
 		} catch(error) {
 			logger.log('error', { message: error.message, stack: error.stack, error }, 'Retrieving databases and tables information');
@@ -62,6 +66,10 @@ module.exports = {
 			logger.progress({ message: 'Start reverse-engineering process' });
 			const { collections } = collectionsInfo.collectionData;
 			const client = getClient();
+			if (!client.config.database) {
+				throw new Error('No database specified');
+			}
+
 			const [jsonSchemas, relationships] = await Promise.all([
 				await reverseCollectionsToJSON(logger)(client, collections),
 				await getCollectionsRelationships(logger)(client, collections),

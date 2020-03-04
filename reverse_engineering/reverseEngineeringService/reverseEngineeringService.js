@@ -38,27 +38,25 @@ const mergeCollectionsWithViews = jsonSchemas =>
 		return structuredJSONSchemas;
 	}, jsonSchemas);
 
-const getCollectionsRelationships = logger => async (dbConnectionClient, tablesInfo) => {
-	return await Object.entries(tablesInfo).reduce(async (relationships, [dbName]) => {
-		logger.progress({ message: 'Fetching tables relationships', containerName: dbName });
-		const tableForeignKeys = await getTableForeignKeys(dbConnectionClient, dbName);
-		const reversedTableRelationships = reverseTableForeignKeys(tableForeignKeys, dbName);
-		return [...await relationships, ...reversedTableRelationships];
-	}, Promise.resolve([]));
+const getCollectionsRelationships = logger => async (dbConnectionClient) => {
+	const dbName = dbConnectionClient.config.database;
+	logger.progress({ message: 'Fetching tables relationships', containerName: dbName });
+	const tableForeignKeys = await getTableForeignKeys(dbConnectionClient, dbName);
+	return reverseTableForeignKeys(tableForeignKeys, dbName);
 };
 
 const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo) => {
-	return await Object.entries(tablesInfo).reduce(async (jsonSchemas, [dbName, tableNames]) => {
+	const dbName = dbConnectionClient.config.database;
+	const [databaseIndexes, databaseMemoryOptimizedTables, databaseCheckConstraints] = await Promise.all([
+		await getDatabaseIndexes(dbConnectionClient, dbName),
+		await getDatabaseMemoryOptimizedTables(dbConnectionClient, dbName),
+		await getDatabaseCheckConstraints(dbConnectionClient, dbName),
+	]);
+	return await Object.entries(tablesInfo).reduce(async (jsonSchemas, [schemaName, tableNames]) => {
 		logger.progress({ message: 'Fetching database information', containerName: dbName });
-		const [databaseIndexes, databaseMemoryOptimizedTables, databaseCheckConstraints] = await Promise.all([
-			await getDatabaseIndexes(dbConnectionClient, dbName),
-			await getDatabaseMemoryOptimizedTables(dbConnectionClient, dbName),
-			await getDatabaseCheckConstraints(dbConnectionClient, dbName),
-		]);
 		const tablesInfo = await Promise.all(
-			tableNames.map(async tableNameWithSchema => {
-				const trimmedTableName = tableNameWithSchema.replace(/ \(v\)$/, '');
-				const [schemaName, tableName] = trimmedTableName.split('.');
+			tableNames.map(async untrimmedTableName => {
+				const tableName = untrimmedTableName.replace(/ \(v\)$/, '');
 				const tableIndexes = databaseIndexes.filter(index => index.TableName === tableName);
 				const tableCheckConstraints = databaseCheckConstraints.filter(cc => cc.table === tableName);
 				logger.progress({ message: 'Fetching table information', containerName: dbName, entityName: tableName });
@@ -77,7 +75,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 
 				return {
 					collectionName: tableName,
-					dbName: `${dbName}.${schemaName}`,
+					dbName: schemaName,
 					...(isView ? {
 						jsonSchema: changeViewPropertiesToReferences(jsonSchema, tableInfo),
 						name: tableName,

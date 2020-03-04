@@ -1,4 +1,4 @@
-const { getConnectionClient } = require('./databaseService');
+const { getConnectionClient } = require('./databaseService/databaseService');
 
 module.exports = {
 	_client: null,

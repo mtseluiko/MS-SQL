@@ -27,10 +27,6 @@
 				"description": "Database name",
 				"inputType": "text",
 				"inputPlaceholder": "Database name",
-				"dependency": {
-					"key": "source",
-					"value": "azure"
-				},
 				"regex": "([^\\s])"
 			},
 			{
