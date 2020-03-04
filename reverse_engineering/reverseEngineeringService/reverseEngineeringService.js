@@ -40,7 +40,7 @@ const mergeCollectionsWithViews = jsonSchemas =>
 
 const getCollectionsRelationships = logger => async (dbConnectionClient) => {
 	const dbName = dbConnectionClient.config.database;
-	logger.progress({ message: 'Fetching tables relationships', containerName: dbName });
+	logger.progress({ message: 'Fetching tables relationships', containerName: dbName, entityName: '' });
 	const tableForeignKeys = await getTableForeignKeys(dbConnectionClient, dbName);
 	return reverseTableForeignKeys(tableForeignKeys, dbName);
 };
@@ -53,7 +53,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 		await getDatabaseCheckConstraints(dbConnectionClient, dbName),
 	]);
 	return await Object.entries(tablesInfo).reduce(async (jsonSchemas, [schemaName, tableNames]) => {
-		logger.progress({ message: 'Fetching database information', containerName: dbName });
+		logger.progress({ message: 'Fetching database information', containerName: dbName, entityName: '' });
 		const tablesInfo = await Promise.all(
 			tableNames.map(async untrimmedTableName => {
 				const tableName = untrimmedTableName.replace(/ \(v\)$/, '');
