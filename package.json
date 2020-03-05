@@ -4,7 +4,7 @@
     "versionDate": "2018-06-25",
     "author": "hackolade",
     "engines": {
-        "hackolade": "2.3.2",
+        "hackolade": "3.6.8",
         "hackoladePlugin": "1.2.0"
     },
     "contributes": {
@@ -21,7 +21,7 @@
             "nestedCollections": false,
             "disablePatternField": false,
             "disableMultipleTypes": true,
-            "enableForwardEngineering": false,
+            "enableForwardEngineering": true,
             "disableReverseEngineering": false,
             "disableChoices": true,
             "enableJsonType": true,
