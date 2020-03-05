@@ -1,0 +1,9 @@
+{
+	"type": "ddl",
+	"ddlType": "mssql",
+	"level": {
+		"container": true,
+		"entity": true,
+		"view": true
+	}
+}
