@@ -1,6 +1,6 @@
-const changeViewPropertiesToReferences = (jsonSchema, tableInfo) => {
-	return tableInfo.reduce((jsonSchemaAcc, column) => {
-		const columnName = column['COLUMN_NAME'];
+const changeViewPropertiesToReferences = (jsonSchema, viewInfo) => {
+	return viewInfo.reduce((jsonSchemaAcc, column) => {
+		const columnName = column['ColumnName'];
 		if (!jsonSchemaAcc.properties[columnName]) {
 			return jsonSchemaAcc;
 		}
@@ -9,7 +9,7 @@ const changeViewPropertiesToReferences = (jsonSchema, tableInfo) => {
 			...jsonSchemaAcc,
 			properties: {
 				...jsonSchemaAcc.properties,
-				[columnName]: {$ref: `#collection/definitions/${tableInfo['RELATED_TABLE']}/${columnName}`},
+				[columnName]: {$ref: `#collection/definitions/${column['ReferencedTableName']}/${column['ReferencedColumnName']}`},
 			},
 		};
 	}, jsonSchema);

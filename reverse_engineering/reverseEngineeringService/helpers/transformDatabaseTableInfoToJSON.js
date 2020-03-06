@@ -99,6 +99,7 @@ const handleColumnProperty = (column, propertyName, value) => {
 		case 'NUMERIC_PRECISION': return { precision: !isNaN(value) ? value : '' };
 		case 'PRIMARY_KEY_COLUMN': return { primaryKey: column['COLUMN_NAME'] === value };
 		case 'IS_IDENTITY': return handleIdentity(column, value);
+		case 'TYPE_DESC': return { clustered: value === 'CLUSTERED' };
 		default: return {};
 	}
 };

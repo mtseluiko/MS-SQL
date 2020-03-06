@@ -6,6 +6,7 @@ const {
 	getTableColumnsDescription,
 	getDatabaseMemoryOptimizedTables,
 	getDatabaseCheckConstraints,
+	getViewTableInfo,
 } = require('../databaseService/databaseService');
 const {
 	transformDatabaseTableInfoToJSON,
@@ -45,6 +46,15 @@ const getCollectionsRelationships = logger => async (dbConnectionClient) => {
 	return reverseTableForeignKeys(tableForeignKeys, dbName);
 };
 
+const prepareViewJSON = (dbConnectionClient, dbName, viewName, schemaName) => async jsonSchema => {
+	const viewInfo = await getViewTableInfo(dbConnectionClient, dbName, viewName, schemaName);
+	return {
+		jsonSchema: changeViewPropertiesToReferences(jsonSchema, viewInfo),
+		name: viewName,
+		relatedTables: viewInfo.map((columnInfo => columnInfo['ReferencedTableName'])),
+	};
+}
+
 const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo) => {
 	const dbName = dbConnectionClient.config.database;
 	const [databaseIndexes, databaseMemoryOptimizedTables, databaseCheckConstraints] = await Promise.all([
@@ -57,7 +67,8 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 		const tablesInfo = await Promise.all(
 			tableNames.map(async untrimmedTableName => {
 				const tableName = untrimmedTableName.replace(/ \(v\)$/, '');
-				const tableIndexes = databaseIndexes.filter(index => index.TableName === tableName);
+				const tableIndexes = databaseIndexes.filter(index =>
+					index.TableName === tableName && index.schemaName === schemaName);
 				const tableCheckConstraints = databaseCheckConstraints.filter(cc => cc.table === tableName);
 				logger.progress({ message: 'Fetching table information', containerName: dbName, entityName: tableName });
 
@@ -65,7 +76,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					await getTableInfo(dbConnectionClient, dbName, tableName, schemaName),
 					await getTableRow(dbConnectionClient, dbName, tableName, schemaName),
 				]);
-				const isView = tableInfo.length && tableInfo[0]['RELATED_TABLE'];
+				const isView = tableInfo[0]['TABLE_TYPE'].trim() === 'V';
 
 				const jsonSchema = pipe(
 					transformDatabaseTableInfoToJSON(tableInfo),
@@ -76,11 +87,9 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 				return {
 					collectionName: tableName,
 					dbName: schemaName,
-					...(isView ? {
-						jsonSchema: changeViewPropertiesToReferences(jsonSchema, tableInfo),
-						name: tableName,
-						relatedTables: tableInfo.map((columnInfo => columnInfo['RELATED_TABLE'])),
-					} : {
+					...(isView
+						? await prepareViewJSON(dbConnectionClient, dbName, tableName, schemaName)(jsonSchema)
+						: {
 						validation: { jsonSchema },
 						views: [],
 					}),

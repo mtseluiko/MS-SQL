@@ -23,17 +23,18 @@ const getTableInfo = async (connectionClient, dbName, tableName, tableSchema) =>
 	const objectId = `${tableSchema}.${tableName}`;
 	return await currentDbConnectionClient.query`
 		SELECT c.*,
-				v.table_name as RELATED_TABLE,
 				k.column_name as PRIMARY_KEY_COLUMN,
 				ic.SEED_VALUE,
 				ic.INCREMENT_VALUE,
-				COLUMNPROPERTY(object_id(${objectId}), c.column_name, 'IsIdentity') AS IS_IDENTITY
+				COLUMNPROPERTY(object_id(${objectId}), c.column_name, 'IsIdentity') AS IS_IDENTITY,
+				ind.type_desc as TYPE_DESC,
+				o.type AS TABLE_TYPE
 		FROM information_schema.columns as c
-		LEFT JOIN INFORMATION_SCHEMA.VIEW_TABLE_USAGE v ON v.view_name=c.table_name
 		LEFT JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc ON tc.TABLE_NAME=c.TABLE_NAME AND tc.constraint_type='PRIMARY KEY'
 		LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE k ON k.CONSTRAINT_NAME=tc.CONSTRAINT_NAME
-		LEFT JOIN INFORMATION_SCHEMA.TABLES t ON t.TABLE_NAME=c.table_name
 		LEFT JOIN SYS.IDENTITY_COLUMNS ic ON ic.object_id=object_id(${objectId})
+		LEFT JOIN sys.indexes ind ON ind.object_id=object_id(${objectId})
+		LEFT JOIN sys.objects o ON o.object_id=object_id(${objectId})
 		WHERE c.table_name = ${tableName}
 		AND c.table_schema = ${tableSchema}
 	;`
@@ -83,10 +84,16 @@ const getDatabaseIndexes = async (connectionClient, dbName) => {
 		SELECT
 			TableName = t.name,
 			IndexName = ind.name,
+			ic.is_descending_key,
+			ic.is_included_column,
+			COL_NAME(t.object_id, ic.column_id) as columnName,
+			OBJECT_SCHEMA_NAME(t.object_id) as schemaName,
 			ind.*
 		FROM sys.indexes ind
-		LEFT JOIN
-			sys.tables t ON ind.object_id = t.object_id
+		LEFT JOIN sys.tables t
+			ON ind.object_id = t.object_id
+		INNER JOIN sys.index_columns ic
+			ON ind.object_id = ic.object_id AND ind.index_id = ic.index_id
 		WHERE
 			ind.is_primary_key = 0
 			AND ind.is_unique_constraint = 0
@@ -139,6 +146,47 @@ const getDatabaseCheckConstraints = async (connectionClient, dbName) => {
 	`;
 };
 
+const getViewTableInfo = async (connectionClient, dbName, viewName, schemaName) => {
+	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	const objectId = `${schemaName}.${viewName}`;
+	return currentDbConnectionClient.query`
+		SELECT
+			ViewName = O.name,
+			ColumnName = A.name,
+			ReferencedTableName = X.name,
+			ReferencedColumnName = C.name,
+			T.is_selected,
+			T.is_updated,
+			T.is_select_all,
+			ColumnType = M.name,
+			M.max_length,
+			M.precision,
+			M.scale
+		FROM
+			sys.sql_dependencies AS T
+			INNER JOIN sys.objects AS O ON T.object_id = O.object_id
+			INNER JOIN sys.objects AS X ON T.referenced_major_id = X.object_id
+			INNER JOIN sys.columns AS C ON
+				C.object_id = X.object_id AND
+				C.column_id = T.referenced_minor_id
+			INNER JOIN sys.types AS M ON
+				M.system_type_id = C.system_type_id AND
+				M.user_type_id = C.user_type_id
+			INNER JOIN sys.columns AS A ON
+				A.object_id = object_id(${objectId}) AND
+				T.referenced_minor_id = A.column_id
+		WHERE
+			O.type = 'V'
+		AND
+			O.name = ${viewName}
+		And O.schema_id=schema_id(${schemaName})
+		ORDER BY
+			O.name,
+			X.name,
+			C.name
+	`;
+};
+
 module.exports = {
 	getConnectionClient,
 	getObjectsFromDatabase,
@@ -149,4 +197,5 @@ module.exports = {
 	getTableColumnsDescription,
 	getDatabaseMemoryOptimizedTables,
 	getDatabaseCheckConstraints,
+	getViewTableInfo,
 }
