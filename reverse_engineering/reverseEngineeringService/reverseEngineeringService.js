@@ -7,6 +7,7 @@ const {
 	getDatabaseMemoryOptimizedTables,
 	getDatabaseCheckConstraints,
 	getViewTableInfo,
+	getTableIndexConstraints,
 } = require('../databaseService/databaseService');
 const {
 	transformDatabaseTableInfoToJSON,
@@ -17,6 +18,7 @@ const {
 	doesViewHaveRelatedTables,
 	reverseTableCheckConstraints,
 	changeViewPropertiesToReferences,
+	defineFieldsIndexes,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
 
@@ -82,6 +84,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					transformDatabaseTableInfoToJSON(tableInfo),
 					defineRequiredFields,
 					defineFieldsDescription(await getTableColumnsDescription(dbConnectionClient, dbName, tableName)),
+					defineFieldsIndexes(await getTableIndexConstraints(dbConnectionClient, dbName, tableName, schemaName)),
 				)({ required: [], properties: {} });
 
 				return {

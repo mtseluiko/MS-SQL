@@ -204,9 +204,23 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox",
 				"dependency": {
-					"key": "primaryKey",
-					"value": true
+					"type": "or",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "unique",
+							"value": true
+						}
+					]
 				}
+			},
+			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
 			},
 			"foreignCollection",
 			"foreignField",
@@ -397,9 +411,23 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox",
 				"dependency": {
-					"key": "primaryKey",
-					"value": true
+					"type": "or",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "unique",
+							"value": true
+						}
+					]
 				}
+			},
+			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
 			},
 			"foreignCollection",
 			"foreignField",
@@ -531,9 +559,23 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox",
 				"dependency": {
-					"key": "primaryKey",
-					"value": true
+					"type": "or",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "unique",
+							"value": true
+						}
+					]
 				}
+			},
+			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
 			},
 			"foreignCollection",
 			"foreignField",
@@ -643,6 +685,30 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "details",
 				"template": "textarea",
 				"markdown": false
+			},
+			"primaryKey",
+			{
+				"propertyName": "Clustered",
+				"propertyKeyword": "clustered",
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "unique",
+							"value": true
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
 			},
 			"comments"
 		],
@@ -757,6 +823,30 @@ making sure that you maintain a proper JSON format.
 					"value": "datetime2"
 				}
 			},
+			"primaryKey",
+			{
+				"propertyName": "Clustered",
+				"propertyKeyword": "clustered",
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "unique",
+							"value": true
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
+			},
 			"pattern",
 			"default",
 			"enum",
@@ -812,6 +902,30 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "sparse",
 				"propertyType": "checkbox"
 			},
+			"primaryKey",
+			{
+				"propertyName": "Clustered",
+				"propertyKeyword": "clustered",
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "unique",
+							"value": true
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
+			},
 			"pattern",
 			"default",
 			"enum",
@@ -859,6 +973,30 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "Row GUID Column",
 				"propertyKeyword": "ROWGUIDCOL",
+				"propertyType": "checkbox"
+			},
+			"primaryKey",
+			{
+				"propertyName": "Clustered",
+				"propertyKeyword": "clustered",
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "unique",
+							"value": true
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
 				"propertyType": "checkbox"
 			},
 			"foreignCollection",
@@ -923,6 +1061,30 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "Not null",
 				"propertyKeyword": "required",
+				"propertyType": "checkbox"
+			},
+			"primaryKey",
+			{
+				"propertyName": "Clustered",
+				"propertyKeyword": "clustered",
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "unique",
+							"value": true
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
 				"propertyType": "checkbox"
 			},
 			"comments"

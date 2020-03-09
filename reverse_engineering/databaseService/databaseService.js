@@ -23,17 +23,12 @@ const getTableInfo = async (connectionClient, dbName, tableName, tableSchema) =>
 	const objectId = `${tableSchema}.${tableName}`;
 	return await currentDbConnectionClient.query`
 		SELECT c.*,
-				k.column_name as PRIMARY_KEY_COLUMN,
 				ic.SEED_VALUE,
 				ic.INCREMENT_VALUE,
 				COLUMNPROPERTY(object_id(${objectId}), c.column_name, 'IsIdentity') AS IS_IDENTITY,
-				ind.type_desc as TYPE_DESC,
 				o.type AS TABLE_TYPE
 		FROM information_schema.columns as c
-		LEFT JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc ON tc.TABLE_NAME=c.TABLE_NAME AND tc.constraint_type='PRIMARY KEY'
-		LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE k ON k.CONSTRAINT_NAME=tc.CONSTRAINT_NAME
 		LEFT JOIN SYS.IDENTITY_COLUMNS ic ON ic.object_id=object_id(${objectId})
-		LEFT JOIN sys.indexes ind ON ind.object_id=object_id(${objectId})
 		LEFT JOIN sys.objects o ON o.object_id=object_id(${objectId})
 		WHERE c.table_name = ${tableName}
 		AND c.table_schema = ${tableSchema}
@@ -187,6 +182,18 @@ const getViewTableInfo = async (connectionClient, dbName, viewName, schemaName) 
 	`;
 };
 
+const getTableIndexConstraints = async (connectionClient, dbName, tableName, schemaName) => {
+	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	return currentDbConnectionClient.query`
+		SELECT TC.TABLE_NAME as tableName, TC.Constraint_Name as constraintName,
+			CC.Column_Name as columnName, TC.constraint_type as constraintType, ind.type_desc as typeDesc
+		FROM information_schema.table_constraints TC
+		INNER JOIN information_schema.constraint_column_usage CC on TC.Constraint_Name = CC.Constraint_Name
+			AND TC.TABLE_NAME=${tableName} and Tc.TABLE_SCHEMA=${schemaName}
+		LEFT JOIN sys.indexes ind ON ind.name = TC.CONSTRAINT_NAME
+	`;
+};
+
 module.exports = {
 	getConnectionClient,
 	getObjectsFromDatabase,
@@ -198,4 +205,5 @@ module.exports = {
 	getDatabaseMemoryOptimizedTables,
 	getDatabaseCheckConstraints,
 	getViewTableInfo,
+	getTableIndexConstraints,
 }

@@ -97,9 +97,7 @@ const handleColumnProperty = (column, propertyName, value) => {
 		case 'DATETIME_PRECISION': return { fractSecPrecision: !isNaN(value) ? value : '' };
 		case 'NUMERIC_SCALE': return { scale: !isNaN(value) ? value : '' };
 		case 'NUMERIC_PRECISION': return { precision: !isNaN(value) ? value : '' };
-		case 'PRIMARY_KEY_COLUMN': return { primaryKey: column['COLUMN_NAME'] === value };
 		case 'IS_IDENTITY': return handleIdentity(column, value);
-		case 'TYPE_DESC': return { clustered: value === 'CLUSTERED' };
 		default: return {};
 	}
 };
