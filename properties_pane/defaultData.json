@@ -17,10 +17,15 @@
 			"constrCheck": true,
 			"constrEnforceUpserts": true,
 			"constrEnforceReplication": true
+		},
+		"Indxs": {
+			"ALLOW_ROW_LOCKS": true,
+			"ALLOW_PAGE_LOCKS": true
 		}
 	},
 	"field": {
-		"name": "New column"
+		"name": "New column",
+		"clustered": true
 	},
 	"patternField": {
 		"name": "^[a-zA-Z0-9_.-]+$"
