@@ -93,9 +93,10 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					...(isView
 						? await prepareViewJSON(dbConnectionClient, dbName, tableName, schemaName)(jsonSchema)
 						: {
-						validation: { jsonSchema },
-						views: [],
-					}),
+							validation: { jsonSchema },
+							views: [],
+						}
+					),
 					standardDoc: tableRow,
 					collectionDocs: tableRow,
 					documents: tableRow,

@@ -1,18 +1,24 @@
+const COLUMNSTORE = 'Columnstore';
+const INDEX = 'Index';
+
 const handleDataCompression = index => {
 	const compressionTypes = ['NONE', 'ROW', 'PAGE', 'COLUMNSTORE', 'COLUMNSTORE_ARCHIVE'];
 	const type = compressionTypes.find(type => index.type_desc.includes(type));
 	return type || '';
 };
 
+const isClusteredIndex = index => !index.type_desc.includes('NONCLUSTERED');
+const getIndexType = index => (index.type === 5 || index.type === 6) ? COLUMNSTORE : INDEX;
+
 const reverseIndex = index => ({
 	indxName: index.IndexName,
 	ALLOW_ROW_LOCKS: index.allow_row_locks,
 	ALLOW_PAGE_LOCKS: index.allow_page_locks,
 	uniqueIndx: index.is_unique,
-	clusteredIndx: !index.type_desc.includes('NONCLUSTERED'),
+	clusteredIndx: isClusteredIndex(index),
 	IGNORE_DUP_KEY: index.ignore_dup_key,
 	OPTIMIZE_FOR_SEQUENTIAL_KEY: index.optimize_for_sequential_key,
-	indxType: (index.type === 5 || index.type === 6) ? 'Columnstore' : 'Index',
+	indxType: getIndexType(index),
 	COMPRESSION_DELAY: index.compression_delay,
 	OPTIMIZE_FOR_SEQUENTIAL_KEY: Boolean(index.optimize_for_sequential_key),
 	PAD_INDEX: Boolean(index.is_padded),
@@ -21,7 +27,8 @@ const reverseIndex = index => ({
 });
 
 const reverseIndexKey = index => {
-	if (index.is_included_column) {
+	const indexType = getIndexType(index);
+	if (index.is_included_column && indexType !== COLUMNSTORE) {
 		return null;
 	}
 
@@ -32,7 +39,8 @@ const reverseIndexKey = index => {
 };
 
 const reverseIncludedKey = index => {
-	if (!index.is_included_column) {
+	const indexType = getIndexType(index);
+	if (!index.is_included_column || indexType === COLUMNSTORE) {
 		return null;
 	}
 
