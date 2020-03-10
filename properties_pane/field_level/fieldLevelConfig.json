@@ -200,6 +200,11 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
+			},
+			{
 				"propertyName": "Clustered",
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox",
@@ -216,11 +221,6 @@ making sure that you maintain a proper JSON format.
 						}
 					]
 				}
-			},
-			{
-				"propertyName": "Unique",
-				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
 			},
 			"foreignCollection",
 			"foreignField",
@@ -407,6 +407,11 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
+			},
+			{
 				"propertyName": "Clustered",
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox",
@@ -423,11 +428,6 @@ making sure that you maintain a proper JSON format.
 						}
 					]
 				}
-			},
-			{
-				"propertyName": "Unique",
-				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
 			},
 			"foreignCollection",
 			"foreignField",
@@ -555,6 +555,11 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
+			},
+			{
 				"propertyName": "Clustered",
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox",
@@ -571,11 +576,6 @@ making sure that you maintain a proper JSON format.
 						}
 					]
 				}
-			},
-			{
-				"propertyName": "Unique",
-				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
 			},
 			"foreignCollection",
 			"foreignField",
@@ -688,6 +688,11 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
+			},
+			{
 				"propertyName": "Clustered",
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox",
@@ -704,11 +709,6 @@ making sure that you maintain a proper JSON format.
 						}
 					]
 				}
-			},
-			{
-				"propertyName": "Unique",
-				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
 			},
 			"comments"
 		],
@@ -825,6 +825,11 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
+			},
+			{
 				"propertyName": "Clustered",
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox",
@@ -841,11 +846,6 @@ making sure that you maintain a proper JSON format.
 						}
 					]
 				}
-			},
-			{
-				"propertyName": "Unique",
-				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
 			},
 			"pattern",
 			"default",
@@ -904,6 +904,11 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
+			},
+			{
 				"propertyName": "Clustered",
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox",
@@ -920,11 +925,6 @@ making sure that you maintain a proper JSON format.
 						}
 					]
 				}
-			},
-			{
-				"propertyName": "Unique",
-				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
 			},
 			"pattern",
 			"default",
@@ -977,6 +977,11 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
+			},
+			{
 				"propertyName": "Clustered",
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox",
@@ -993,11 +998,6 @@ making sure that you maintain a proper JSON format.
 						}
 					]
 				}
-			},
-			{
-				"propertyName": "Unique",
-				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
 			},
 			"foreignCollection",
 			"foreignField",
@@ -1065,6 +1065,11 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Unique",
+				"propertyKeyword": "unique",
+				"propertyType": "checkbox"
+			},
+			{
 				"propertyName": "Clustered",
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox",
@@ -1081,11 +1086,6 @@ making sure that you maintain a proper JSON format.
 						}
 					]
 				}
-			},
-			{
-				"propertyName": "Unique",
-				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
 			},
 			"comments"
 		]
