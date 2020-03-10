@@ -3,6 +3,7 @@
 	"erdAbbreviation": "<geom>",
 	"dtdAbbreviation": "{...}",
 	"parentType": "document",
+	"hiddenOnEntity": "view",
 	"defaultValues": {
 		"relationshipType": "",
 		"parentRelationship": "",

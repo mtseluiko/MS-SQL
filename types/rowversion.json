@@ -4,6 +4,7 @@
 	"dtdAbbreviation": "{rowv}",
 	"parentType": "binary",
 	"useSample": false,
+	"hiddenOnEntity": "view",
 	"defaultValues": {
 		"primaryKey": false
 	}

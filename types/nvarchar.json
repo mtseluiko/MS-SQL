@@ -7,6 +7,7 @@
 		"name": "nvarchar"
 	},
 	"structureType": true,
+	"hiddenOnEntity": "view",
 	"defaultValues": {
 		"primaryKey": false,
 		"relationshipType": "",

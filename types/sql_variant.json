@@ -4,6 +4,7 @@
 	"dtdAbbreviation": "{sql_v}",
 	"parentType": "string",
 	"useSample": true,
+	"hiddenOnEntity": "view",
 	"defaultValues": {
 		"primaryKey": false,
 		"relationshipType": "",
