@@ -1,7 +1,8 @@
 const doesViewHaveRelatedTables = (view, tables) => {
-	const currentDatabaseTables = tables.filter(table => table.dbName === view.dbName && !table.relatedTables);
-	const currentDatabaseTableNames = currentDatabaseTables.map(({ collectionName }) => collectionName);
-	return view.relatedTables.every(relatedTable => currentDatabaseTableNames.includes(relatedTable));
+	return view.relatedTables.every(({ tableName, schemaName }) =>
+		tables.find(({ collectionName, dbName }) =>
+			tableName === collectionName && schemaName === dbName)
+	);
 };
 
 module.exports = doesViewHaveRelatedTables;

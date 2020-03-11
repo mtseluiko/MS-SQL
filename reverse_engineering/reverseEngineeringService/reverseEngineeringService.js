@@ -8,6 +8,7 @@ const {
 	getDatabaseCheckConstraints,
 	getViewTableInfo,
 	getTableIndexConstraints,
+	getViewColumnRelations,
 } = require('../databaseService/databaseService');
 const {
 	transformDatabaseTableInfoToJSON,
@@ -26,9 +27,9 @@ const mergeCollectionsWithViews = jsonSchemas =>
 	jsonSchemas.reduce((structuredJSONSchemas, jsonSchema) => {
 		if (jsonSchema.relatedTables) {
 			const currentIndex = structuredJSONSchemas.findIndex(structuredSchema =>
-				jsonSchema.collectionName === structuredSchema.collectionName);
+				jsonSchema.collectionName === structuredSchema.collectionName && jsonSchema.dbName);
 			const relatedTableSchemaIndex = structuredJSONSchemas.findIndex(({ collectionName, dbName }) =>
-				jsonSchema.dbName === dbName && jsonSchema.relatedTables.includes(collectionName));
+				jsonSchema.relatedTables.find(({ tableName, schemaName }) => tableName === collectionName && schemaName === dbName));
 
 			if (relatedTableSchemaIndex !== -1 && doesViewHaveRelatedTables(jsonSchema, structuredJSONSchemas)) {
 				structuredJSONSchemas[relatedTableSchemaIndex].views.push(jsonSchema);
@@ -49,11 +50,17 @@ const getCollectionsRelationships = logger => async (dbConnectionClient) => {
 };
 
 const prepareViewJSON = (dbConnectionClient, dbName, viewName, schemaName) => async jsonSchema => {
-	const viewInfo = await getViewTableInfo(dbConnectionClient, dbName, viewName, schemaName);
+	const [viewInfo, viewColumnRelations] = await Promise.all([
+		await getViewTableInfo(dbConnectionClient, dbName, viewName, schemaName),
+		await getViewColumnRelations(dbConnectionClient, dbName, viewName, schemaName),
+	]);
 	return {
-		jsonSchema: changeViewPropertiesToReferences(jsonSchema, viewInfo),
+		jsonSchema: changeViewPropertiesToReferences(jsonSchema, viewInfo, viewColumnRelations),
 		name: viewName,
-		relatedTables: viewInfo.map((columnInfo => columnInfo['ReferencedTableName'])),
+		relatedTables: viewInfo.map((columnInfo => ({ 
+			tableName: columnInfo['ReferencedTableName'],
+			schemaName: columnInfo['ReferencedSchemaName'],
+		}))),
 	};
 }
 

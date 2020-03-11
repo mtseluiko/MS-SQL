@@ -1,6 +1,17 @@
-const changeViewPropertiesToReferences = (jsonSchema, viewInfo) => {
-	return viewInfo.reduce((jsonSchemaAcc, column) => {
-		const columnName = column['ColumnName'];
+const getColumnInfoByName = (columnsInfo, columnName, propertyName) => {
+	const relatedColumn = columnsInfo.find(column => column.name === columnName) || columnsInfo[0];
+	return relatedColumn[propertyName];
+};
+
+const changeViewPropertiesToReferences = (jsonSchema, viewInfo, viewColumnRelations) => {
+	return viewColumnRelations.reduce((jsonSchemaAcc, column) => {
+		const columnName = column['name'];
+		const referenceTable = column['source_table']
+			|| getColumnInfoByName(viewInfo, columnName, 'ReferencedTableName');
+		const referenceColumn = column['source_column']
+			|| getColumnInfoByName(viewInfo, columnName, 'ReferencedColumnName');
+		const referenceSchema = column['source_schema']
+			|| getColumnInfoByName(viewInfo, columnName, 'ReferencedSchemaName');
 		if (!jsonSchemaAcc.properties[columnName]) {
 			return jsonSchemaAcc;
 		}
@@ -9,7 +20,7 @@ const changeViewPropertiesToReferences = (jsonSchema, viewInfo) => {
 			...jsonSchemaAcc,
 			properties: {
 				...jsonSchemaAcc.properties,
-				[columnName]: {$ref: `#collection/definitions/${column['ReferencedTableName']}/${column['ReferencedColumnName']}`},
+				[columnName]: { $ref: `#collection/definitions/${referenceTable}/${referenceColumn}`, bucketName: referenceSchema },
 			},
 		};
 	}, jsonSchema);

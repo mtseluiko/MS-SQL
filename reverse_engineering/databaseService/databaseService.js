@@ -148,6 +148,7 @@ const getViewTableInfo = async (connectionClient, dbName, viewName, schemaName) 
 		SELECT
 			ViewName = O.name,
 			ColumnName = A.name,
+			ReferencedSchemaName = SCHEMA_NAME(X.schema_id),
 			ReferencedTableName = X.name,
 			ReferencedColumnName = C.name,
 			T.is_selected,
@@ -182,6 +183,20 @@ const getViewTableInfo = async (connectionClient, dbName, viewName, schemaName) 
 	`;
 };
 
+const getViewColumnRelations = async (connectionClient, dbName, viewName, schemaName) => {
+	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	return currentDbConnectionClient
+		.request()
+		.input('tableName', sql.VarChar, viewName)
+		.input('tableSchema', sql.VarChar, schemaName)
+		.query`
+			SELECT name, source_database, source_schema,
+				source_table, source_column
+			FROM sys.dm_exec_describe_first_result_set(N'SELECT TOP 1 * FROM [' + @TableSchema + '].[' + @TableName + ']', null, 1)
+			WHERE is_hidden=0
+	`;
+};
+
 const getTableIndexConstraints = async (connectionClient, dbName, tableName, schemaName) => {
 	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
 	return currentDbConnectionClient.query`
@@ -206,4 +221,5 @@ module.exports = {
 	getDatabaseCheckConstraints,
 	getViewTableInfo,
 	getTableIndexConstraints,
+	getViewColumnRelations,
 }
