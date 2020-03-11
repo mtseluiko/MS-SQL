@@ -9,6 +9,7 @@ const {
 	getViewTableInfo,
 	getTableIndexConstraints,
 	getViewColumnRelations,
+	getTableMaskedColumns,
 } = require('../databaseService/databaseService');
 const {
 	transformDatabaseTableInfoToJSON,
@@ -20,6 +21,7 @@ const {
 	reverseTableCheckConstraints,
 	changeViewPropertiesToReferences,
 	defineFieldsIndexes,
+	defineMaskedColumns,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
 
@@ -90,8 +92,9 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 				const jsonSchema = pipe(
 					transformDatabaseTableInfoToJSON(tableInfo),
 					defineRequiredFields,
-					defineFieldsDescription(await getTableColumnsDescription(dbConnectionClient, dbName, tableName)),
+					defineFieldsDescription(await getTableColumnsDescription(dbConnectionClient, dbName, tableName, schemaName)),
 					defineFieldsIndexes(await getTableIndexConstraints(dbConnectionClient, dbName, tableName, schemaName)),
+					defineMaskedColumns(await getTableMaskedColumns(dbConnectionClient, dbName, tableName, schemaName)),
 				)({ required: [], properties: {} });
 
 				return {

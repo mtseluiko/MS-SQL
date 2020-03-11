@@ -25,6 +25,7 @@ const getTableInfo = async (connectionClient, dbName, tableName, tableSchema) =>
 		SELECT c.*,
 				ic.SEED_VALUE,
 				ic.INCREMENT_VALUE,
+				COLUMNPROPERTY(object_id('dbo.test_sparse'), c.column_name, 'IsSparse') AS IS_SPARSE,
 				COLUMNPROPERTY(object_id(${objectId}), c.column_name, 'IsIdentity') AS IS_IDENTITY,
 				o.type AS TABLE_TYPE
 		FROM information_schema.columns as c
@@ -96,7 +97,7 @@ const getDatabaseIndexes = async (connectionClient, dbName) => {
 		`;
 };
 
-const getTableColumnsDescription = async (connectionClient, dbName, tableName) => {
+const getTableColumnsDescription = async (connectionClient, dbName, tableName, schemaName) => {
 	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
 	return currentDbConnectionClient.query`
 		select
@@ -109,6 +110,7 @@ const getTableColumnsDescription = async (connectionClient, dbName, tableName) =
 														and sc.column_id = sep.minor_id
 														and sep.name = 'MS_Description'
 		where st.name = ${tableName}
+		and st.schema_id=schema_id(${schemaName})
 	`;
 };
 
@@ -209,6 +211,15 @@ const getTableIndexConstraints = async (connectionClient, dbName, tableName, sch
 	`;
 };
 
+const getTableMaskedColumns = async (connectionClient, dbName, tableName, schemaName) => {
+	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	const objectId = `${schemaName}.${tableName}`;
+	return currentDbConnectionClient.query`
+		select name, masking_function from sys.masked_columns
+		where object_id=object_id(${objectId})
+	`;
+};
+
 module.exports = {
 	getConnectionClient,
 	getObjectsFromDatabase,
@@ -222,4 +233,5 @@ module.exports = {
 	getViewTableInfo,
 	getTableIndexConstraints,
 	getViewColumnRelations,
+	getTableMaskedColumns,
 }

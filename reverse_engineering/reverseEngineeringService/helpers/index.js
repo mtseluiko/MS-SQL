@@ -7,6 +7,7 @@ const doesViewHaveRelatedTables = require('./doesViewHaveRelatedTables');
 const reverseTableCheckConstraints = require('./reverseTableCheckConstraints');
 const changeViewPropertiesToReferences = require('./changeViewPropertiesToReferences');
 const defineFieldsIndexes = require('./defineFieldsIndexes');
+const defineMaskedColumns = require('./defineMaskedColumns');
 
 module.exports = {
 	transformDatabaseTableInfoToJSON,
@@ -18,4 +19,5 @@ module.exports = {
 	reverseTableCheckConstraints,
 	changeViewPropertiesToReferences,
 	defineFieldsIndexes,
+	defineMaskedColumns,
 }

@@ -163,7 +163,7 @@ making sure that you maintain a proper JSON format.
 			},
 			{
 				"propertyName": "Masked with function",
-				"propertyKeyword": "maskedWith",
+				"propertyKeyword": "maskedWithFunction",
 				"propertyTooltip": "Limit exposure of sensitive data with this function",
 				"propertyType": "details",
 				"template": "textarea",
@@ -370,7 +370,7 @@ making sure that you maintain a proper JSON format.
 			},
 			{
 				"propertyName": "Masked with function",
-				"propertyKeyword": "maskedWith",
+				"propertyKeyword": "maskedWithFunction",
 				"propertyTooltip": "Limit exposure of sensitive data with this function",
 				"propertyType": "details",
 				"template": "textarea",
