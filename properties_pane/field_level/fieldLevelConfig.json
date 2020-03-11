@@ -171,7 +171,7 @@ making sure that you maintain a proper JSON format.
 			},
 			{
 				"propertyName": "Encryption",
-				"propertyType": "group",
+				"propertyType": "block",
 				"propertyKeyword": "encryption",
 				"propertyTooltip": "",
 				"structure": [
@@ -378,7 +378,7 @@ making sure that you maintain a proper JSON format.
 			},
 			{
 				"propertyName": "Encryption",
-				"propertyType": "group",
+				"propertyType": "block",
 				"propertyKeyword": "encryption",
 				"propertyTooltip": "",
 				"structure": [
