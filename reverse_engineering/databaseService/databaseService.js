@@ -25,7 +25,7 @@ const getTableInfo = async (connectionClient, dbName, tableName, tableSchema) =>
 		SELECT c.*,
 				ic.SEED_VALUE,
 				ic.INCREMENT_VALUE,
-				COLUMNPROPERTY(object_id('dbo.test_sparse'), c.column_name, 'IsSparse') AS IS_SPARSE,
+				COLUMNPROPERTY(object_id(${objectId}), c.column_name, 'IsSparse') AS IS_SPARSE,
 				COLUMNPROPERTY(object_id(${objectId}), c.column_name, 'IsIdentity') AS IS_IDENTITY,
 				o.type AS TABLE_TYPE
 		FROM information_schema.columns as c
