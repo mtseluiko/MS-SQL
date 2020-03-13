@@ -5,7 +5,7 @@ const defineType = value => {
 			return 'array';
 		}
 
-		if (typeof parsedValue === 'object') {
+		if (parsedValue !== null && typeof parsedValue === 'object') {
 			return 'object';
 		}
 
