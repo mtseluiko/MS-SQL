@@ -254,6 +254,20 @@ making sure that you maintain a proper JSON format.
 				"valueType": "string"
 			},
 			{
+				"propertyName": "JSON Types",
+				"propertyKeyword": "subType",
+				"propertyType": "select",
+				"options": [
+					{ "name": " ", "value": "str", "snippet": "string" },
+					{ "name": "object", "value": "object", "snippet": "json-object" },
+					{ "name": "array", "value": "array", "snippet": "json-array" }
+				],
+				"dependency": {
+					"key": "mode",
+					"value": "nvarchar"
+				}
+			},
+			{
 				"propertyName": "Has max length",
 				"propertyKeyword": "hasMaxLength",
 				"propertyType": "checkbox",

@@ -6,6 +6,11 @@
 	"useSample": true,
 	"default": true,
 	"hiddenOnEntity": "view",
+	"jsonType": {
+		"order": 1,
+		"name": "nvarchar",
+		"jsonRoot": true
+	},
 	"defaultValues": {
 		"primaryKey": false,
 		"relationshipType": "",
@@ -21,6 +26,16 @@
 		"sample":"",
 		"comments":"",
 		"mode": "varchar",
-		"length": 10
+		"length": 10,
+		"subType": "str",
+		"properties": [],
+		"childValueType": [
+			"jsonString",
+			"jsonNumber",
+			"jsonObject",
+			"jsonArray",
+			"jsonBoolean",
+			"jsonNull"
+		]
 	}
 }
