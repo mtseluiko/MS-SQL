@@ -141,6 +141,10 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "JSON Types",
 				"propertyKeyword": "subType",
 				"propertyType": "select",
+				"dependency": {
+					"key": "mode",
+					"value": "nvarchar"
+				},
 				"options": [
 					{ "name": " ", "value": "string", "snippet": "string" },
 					{ "name": "object", "value": "object", "snippet": "json-object" },
