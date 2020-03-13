@@ -6,11 +6,6 @@
 	"useSample": true,
 	"default": true,
 	"hiddenOnEntity": "view",
-	"jsonType": {
-		"order": 1,
-		"name": "nvarchar",
-		"jsonRoot": true
-	},
 	"defaultValues": {
 		"primaryKey": false,
 		"relationshipType": "",
