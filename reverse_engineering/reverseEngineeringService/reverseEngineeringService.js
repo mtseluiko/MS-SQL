@@ -10,6 +10,7 @@ const {
 	getTableIndexConstraints,
 	getViewColumnRelations,
 	getTableMaskedColumns,
+	getDatabaseXmlSchemaCollection,
 } = require('../databaseService/databaseService');
 const {
 	transformDatabaseTableInfoToJSON,
@@ -23,6 +24,7 @@ const {
 	defineFieldsIndexes,
 	defineMaskedColumns,
 	defineJSONTypes,
+	defineXmlFieldsCollections,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
 
@@ -69,10 +71,11 @@ const prepareViewJSON = (dbConnectionClient, dbName, viewName, schemaName) => as
 
 const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo) => {
 	const dbName = dbConnectionClient.config.database;
-	const [databaseIndexes, databaseMemoryOptimizedTables, databaseCheckConstraints] = await Promise.all([
+	const [databaseIndexes, databaseMemoryOptimizedTables, databaseCheckConstraints, xmlSchemaCollections] = await Promise.all([
 		await getDatabaseIndexes(dbConnectionClient, dbName),
 		await getDatabaseMemoryOptimizedTables(dbConnectionClient, dbName),
 		await getDatabaseCheckConstraints(dbConnectionClient, dbName),
+		await getDatabaseXmlSchemaCollection(dbConnectionClient, dbName),
 	]);
 	return await Object.entries(tablesInfo).reduce(async (jsonSchemas, [schemaName, tableNames]) => {
 		logger.progress({ message: 'Fetching database information', containerName: dbName, entityName: '' });
@@ -81,6 +84,8 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 				const tableName = untrimmedTableName.replace(/ \(v\)$/, '');
 				const tableIndexes = databaseIndexes.filter(index =>
 					index.TableName === tableName && index.schemaName === schemaName);
+				const tableXmlSchemas = xmlSchemaCollections.filter(collection =>
+					collection.tableName === tableName && collection.schemaName === schemaName);
 				const tableCheckConstraints = databaseCheckConstraints.filter(cc => cc.table === tableName);
 				logger.progress({ message: 'Fetching table information', containerName: dbName, entityName: tableName });
 
@@ -97,6 +102,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					defineFieldsIndexes(await getTableIndexConstraints(dbConnectionClient, dbName, tableName, schemaName)),
 					defineMaskedColumns(await getTableMaskedColumns(dbConnectionClient, dbName, tableName, schemaName)),
 					defineJSONTypes(tableRow),
+					defineXmlFieldsCollections(tableXmlSchemas),
 				)({ required: [], properties: {} });
 
 				return {

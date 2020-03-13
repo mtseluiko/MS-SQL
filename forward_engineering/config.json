@@ -1,6 +1,7 @@
 {
 	"type": "ddl",
 	"ddlType": "mssql",
+	"namePrefix": "MS SQL Server",
 	"level": {
 		"container": true,
 		"entity": true,

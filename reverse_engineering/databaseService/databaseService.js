@@ -25,7 +25,7 @@ const getTableInfo = async (connectionClient, dbName, tableName, tableSchema) =>
 		SELECT c.*,
 				ic.SEED_VALUE,
 				ic.INCREMENT_VALUE,
-				COLUMNPROPERTY(object_id('dbo.test_sparse'), c.column_name, 'IsSparse') AS IS_SPARSE,
+				COLUMNPROPERTY(object_id(${objectId}), c.column_name, 'IsSparse') AS IS_SPARSE,
 				COLUMNPROPERTY(object_id(${objectId}), c.column_name, 'IsIdentity') AS IS_IDENTITY,
 				o.type AS TABLE_TYPE
 		FROM information_schema.columns as c
@@ -220,6 +220,18 @@ const getTableMaskedColumns = async (connectionClient, dbName, tableName, schema
 	`;
 };
 
+const getDatabaseXmlSchemaCollection = async (connectionClient, dbName) => {
+	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	return currentDbConnectionClient.query`
+		SELECT xsc.name as collectionName,
+				SCHEMA_NAME(xsc.schema_id) as schemaName,
+				OBJECT_NAME(xcu.object_id) as tableName,
+				COL_NAME(xcu.object_id, xcu.column_id) as columnName
+		FROM sys.column_xml_schema_collection_usages xcu
+		LEFT JOIN sys.xml_schema_collections xsc ON xsc.xml_collection_id=xcu.xml_collection_id
+	`
+};
+
 module.exports = {
 	getConnectionClient,
 	getObjectsFromDatabase,
@@ -234,4 +246,5 @@ module.exports = {
 	getTableIndexConstraints,
 	getViewColumnRelations,
 	getTableMaskedColumns,
+	getDatabaseXmlSchemaCollection,
 }

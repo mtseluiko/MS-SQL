@@ -46,11 +46,11 @@ const handleDefault = (typeObject, value) => {
 		return { default: '' };
 	}
 
-	const replaceRegex = /[\(|\|)]+/g;
 	const validValue = {
-		numeric: Number(value.replace(replaceRegex, '')),
-		char: value.replace(replaceRegex, ''),
-	}[typeObject.type] || value.replace(replaceRegex, '');
+		numeric: Number(value.replace(/(^\(\()|(\)\)$)/g, '')),
+		char: value.replace(/(^\(\')|(\'\))$/g, ''),
+		xml: value.replace(/(^\(N\')|(\'\))$/g, ''),
+	}[typeObject.type] || value;
 
 	return { default: validValue };
 };
@@ -98,6 +98,7 @@ const handleColumnProperty = (column, propertyName, value) => {
 		case 'NUMERIC_SCALE': return { scale: !isNaN(value) ? value : '' };
 		case 'NUMERIC_PRECISION': return { precision: !isNaN(value) ? value : '' };
 		case 'IS_IDENTITY': return handleIdentity(column, value);
+		case 'IS_SPARSE': return { sparse: Boolean(value) };
 		default: return {};
 	}
 };

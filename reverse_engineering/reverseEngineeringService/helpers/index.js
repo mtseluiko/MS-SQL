@@ -9,6 +9,7 @@ const changeViewPropertiesToReferences = require('./changeViewPropertiesToRefere
 const defineFieldsIndexes = require('./defineFieldsIndexes');
 const defineMaskedColumns = require('./defineMaskedColumns');
 const defineJSONTypes = require('./defineJSONTypes');
+const defineXmlFieldsCollections = require('./defineXmlFieldsCollections');
 
 module.exports = {
 	transformDatabaseTableInfoToJSON,
@@ -22,4 +23,5 @@ module.exports = {
 	defineFieldsIndexes,
 	defineMaskedColumns,
 	defineJSONTypes,
+	defineXmlFieldsCollections,
 }
