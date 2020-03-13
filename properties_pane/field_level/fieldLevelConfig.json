@@ -117,122 +117,6 @@ making sure that you maintain a proper JSON format.
 {
 	"lowerTab": "JsonDetails",
 	"structure": {
-		"nvarchar": [
-			"name",
-			"code",
-			"schemaId",
-			"type",
-			{
-				"propertyName": "Has max length",
-				"propertyKeyword": "hasMaxLength",
-				"propertyType": "checkbox",
-				"typeDecorator": {
-					"value": "MAX",
-					"dependency": { "key": "hasMaxLength", "value": true }
-				}
-			},
-			{
-				"propertyName": "Length",
-				"propertyKeyword": "length",
-				"propertyType": "numeric",
-				"valueType": "number",
-				"propertyTooltip": "Setting for Length must be between 1 and 4000",
-				"minValue": 1,
-				"maxValue": 4000,
-				"step": 1,
-				"typeDecorator": true,
-				"dependency": {
-					"type": "not",
-					"values": {
-						"key": "hasMaxLength",
-						"value": true
-					}
-				}
-			},
-			"default",
-			"description",
-			{
-				"propertyName": "Not null",
-				"propertyKeyword": "required",
-				"propertyType": "checkbox"
-			},
-			{
-				"propertyName": "Sparse",
-				"propertyKeyword": "sparse",
-				"propertyType": "checkbox"
-			},
-			{
-				"propertyName": "Masked with function",
-				"propertyKeyword": "maskedWithFunction",
-				"propertyTooltip": "Limit exposure of sensitive data with this function",
-				"propertyType": "details",
-				"template": "textarea",
-				"markdown": false
-			},
-			{
-				"propertyName": "Encryption",
-				"propertyType": "block",
-				"propertyKeyword": "encryption",
-				"propertyTooltip": "",
-				"structure": [
-					{
-						"propertyName": "Key name",
-						"propertyKeyword": "COLUMN_ENCRYPTION_KEY",
-						"propertyType": "text"
-					},
-					{
-						"propertyName": "Type",
-						"propertyKeyword": "ENCRYPTION_TYPE",
-						"propertyType": "select",
-						"options": [
-							"DETERMINISTIC",
-							"RANDOMIZED"
-						],
-						"data": "options",
-						"valueType": "string"
-					},
-					{
-						"propertyName": "Algorithm",
-						"propertyKeyword": "ENCRYPTION_ALGORITHM",
-						"propertyType": "text"
-					}
-				]
-			},
-			"primaryKey",
-			{
-				"propertyName": "Unique",
-				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
-			},
-			{
-				"propertyName": "Clustered",
-				"propertyKeyword": "clustered",
-				"propertyType": "checkbox",
-				"dependency": {
-					"type": "or",
-					"values": [
-						{
-							"key": "primaryKey",
-							"value": true
-						},
-						{
-							"key": "unique",
-							"value": true
-						}
-					]
-				}
-			},
-			"foreignCollection",
-			"foreignField",
-			"relationshipType",
-			"minLength",
-			"maxLength",
-			"pattern",
-			"format",
-			"enum",
-			"sample",
-			"comments"
-		],
 		"char": [
 			"name",
 			"code",
@@ -261,11 +145,7 @@ making sure that you maintain a proper JSON format.
 					{ "name": " ", "value": "str", "snippet": "string" },
 					{ "name": "object", "value": "object", "snippet": "json-object" },
 					{ "name": "array", "value": "array", "snippet": "json-array" }
-				],
-				"dependency": {
-					"key": "mode",
-					"value": "nvarchar"
-				}
+				]
 			},
 			{
 				"propertyName": "Has max length",
