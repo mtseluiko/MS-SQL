@@ -21,23 +21,32 @@ const handleField = (name, properties, cellValue) => {
 	}
 
 	const type = defineType(cellValue);
-	const preparedField = {
-		[name]: {
-			...properties,
-			subType: type,
-			properties: {},
-		},
-	};
-
 	if (type === 'array') {
-		return { ...preparedField, items: [] };
+		return {
+			[name]: {
+				...properties,
+				subType: type,
+				items: [],
+			},
+		};
 	}
 
 	if (type === 'object') {
-		return { ...preparedField, properties: {} };
+		return {
+			[name]: {
+				...properties,
+				subType: type,
+				properties: {},
+			},
+		};
 	}
 
-	return preparedField;
+	return {
+		[name]: {
+			...properties,
+			subType: type,
+		},
+	};
 }
 
 const defineJSONTypes = row => jsonSchema => {
