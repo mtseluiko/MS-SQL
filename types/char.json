@@ -21,6 +21,21 @@
 		"sample":"",
 		"comments":"",
 		"mode": "varchar",
-		"length": 10
+		"length": 10,
+		"properties": [],
+		"subType": "string",
+		"subtype": "json"
+	},
+	"subtypes": {
+		"json": {
+			"childValueType": [
+				"jsonString",
+				"jsonNumber",
+				"jsonObject",
+				"jsonArray",
+				"jsonBoolean",
+				"jsonNull"
+			]
+		}
 	}
 }
