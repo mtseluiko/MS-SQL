@@ -8,6 +8,7 @@ const reverseTableCheckConstraints = require('./reverseTableCheckConstraints');
 const changeViewPropertiesToReferences = require('./changeViewPropertiesToReferences');
 const defineFieldsIndexes = require('./defineFieldsIndexes');
 const defineMaskedColumns = require('./defineMaskedColumns');
+const defineXmlFieldsCollections = require('./defineXmlFieldsCollections');
 
 module.exports = {
 	transformDatabaseTableInfoToJSON,
@@ -20,4 +21,5 @@ module.exports = {
 	changeViewPropertiesToReferences,
 	defineFieldsIndexes,
 	defineMaskedColumns,
+	defineXmlFieldsCollections,
 }
