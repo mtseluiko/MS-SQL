@@ -22,6 +22,7 @@ const {
 	changeViewPropertiesToReferences,
 	defineFieldsIndexes,
 	defineMaskedColumns,
+	defineJSONTypes,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
 
@@ -95,6 +96,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					defineFieldsDescription(await getTableColumnsDescription(dbConnectionClient, dbName, tableName, schemaName)),
 					defineFieldsIndexes(await getTableIndexConstraints(dbConnectionClient, dbName, tableName, schemaName)),
 					defineMaskedColumns(await getTableMaskedColumns(dbConnectionClient, dbName, tableName, schemaName)),
+					defineJSONTypes(tableRow),
 				)({ required: [], properties: {} });
 
 				return {
