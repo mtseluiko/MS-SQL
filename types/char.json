@@ -27,15 +27,20 @@
 		"comments":"",
 		"mode": "varchar",
 		"length": 10,
-		"subType": "str",
 		"properties": [],
-		"childValueType": [
-			"jsonString",
-			"jsonNumber",
-			"jsonObject",
-			"jsonArray",
-			"jsonBoolean",
-			"jsonNull"
-		]
+		"subType": "string",
+		"subtype": "json"
+	},
+	"subtypes": {
+		"json": {
+			"childValueType": [
+				"jsonString",
+				"jsonNumber",
+				"jsonObject",
+				"jsonArray",
+				"jsonBoolean",
+				"jsonNull"
+			]
+		}
 	}
 }

@@ -142,7 +142,7 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "subType",
 				"propertyType": "select",
 				"options": [
-					{ "name": " ", "value": "str", "snippet": "string" },
+					{ "name": " ", "value": "string", "snippet": "string" },
 					{ "name": "object", "value": "object", "snippet": "json-object" },
 					{ "name": "array", "value": "array", "snippet": "json-array" }
 				]
