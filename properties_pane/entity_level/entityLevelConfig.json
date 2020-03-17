@@ -179,6 +179,10 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "staticticsNorecompute",
 				"propertyType": "checkbox"
 			}, {
+				"propertyName": "Statistics incremental",
+				"propertyKeyword": "statisticsIncremental",
+				"propertyType": "checkbox"
+			}, {
 				"propertyName": "Ignore duplicate",
 				"propertyKeyword": "ignoreDuplicate",
 				"propertyType": "checkbox"
@@ -248,6 +252,10 @@ making sure that you maintain a proper JSON format.
 			}, {
 				"propertyName": "Statistics no recompute",
 				"propertyKeyword": "staticticsNorecompute",
+				"propertyType": "checkbox"
+			}, {
+				"propertyName": "Statistics incremental",
+				"propertyKeyword": "statisticsIncremental",
 				"propertyType": "checkbox"
 			}, {
 				"propertyName": "Ignore duplicate",
