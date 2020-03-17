@@ -390,7 +390,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -426,6 +426,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -511,7 +523,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -547,6 +559,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -761,7 +785,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -797,6 +821,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -882,7 +918,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -918,6 +954,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -1113,7 +1161,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -1149,6 +1197,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -1234,7 +1294,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -1270,6 +1330,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -1469,7 +1541,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -1505,6 +1577,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -1590,7 +1674,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -1626,6 +1710,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -1771,7 +1867,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -1807,6 +1903,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -1892,7 +2000,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -1928,6 +2036,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -2072,7 +2192,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -2108,6 +2228,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -2193,7 +2325,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -2229,6 +2361,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -2388,7 +2532,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -2424,6 +2568,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},
@@ -2509,7 +2665,7 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "ingoreDuplicate",
+						"propertyKeyword": "ignoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
@@ -2545,6 +2701,18 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Clustered",
 						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "dataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
 					}
 				]
 			},

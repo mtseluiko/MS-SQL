@@ -179,7 +179,7 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "checkbox"
 			}, {
 				"propertyName": "Ignore duplicate",
-				"propertyKeyword": "ingoreDuplicate",
+				"propertyKeyword": "ignoreDuplicate",
 				"propertyType": "checkbox"
 			}, {
 				"propertyName": "Allow row locks",
@@ -209,6 +209,17 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "Clustered",
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox"
+			}, {
+				"propertyName": "Data compression",
+				"propertyKeyword": "dataCompression",
+				"propertyType": "select",
+				"options": [
+					"NONE",
+					"ROW",
+					"PAGE",
+					"COLUMNSTORE",
+					"COLUMNSTORE_ARCHIVE"
+				]
 			}]
 		}, {
 			"propertyName": "Unique key",
@@ -239,7 +250,7 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "checkbox"
 			}, {
 				"propertyName": "Ignore duplicate",
-				"propertyKeyword": "ingoreDuplicate",
+				"propertyKeyword": "ignoreDuplicate",
 				"propertyType": "checkbox"
 			}, {
 				"propertyName": "Allow row locks",
@@ -269,6 +280,17 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "Clustered",
 				"propertyKeyword": "clustered",
 				"propertyType": "checkbox"
+			}, {
+				"propertyName": "Data compression",
+				"propertyKeyword": "dataCompression",
+				"propertyType": "select",
+				"options": [
+					"NONE",
+					"ROW",
+					"PAGE",
+					"COLUMNSTORE",
+					"COLUMNSTORE_ARCHIVE"
+				]
 			}]
 		}]
 	},
