@@ -308,15 +308,55 @@ making sure that you maintain a proper JSON format.
 					}
 				]
 			},
-			"primaryKey",
+			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "compositePrimaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositePrimaryKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "primaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
+				}
+			},
 			{
 				"propertyName": "Primary key options",
 				"propertyType": "block",
 				"propertyKeyword": "primaryKeyOptions",
 				"propertyTooltip": "Primary key options",
 				"dependency": {
-					"key": "primaryKey",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
@@ -389,8 +429,31 @@ making sure that you maintain a proper JSON format.
 			},
 			{
 				"propertyName": "Unique",
+				"propertyKeyword": "compositeUniqueKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositeUniqueKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Unique",
 				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
+				}
 			},
 			{
 				"propertyName": "Unique key options",
@@ -398,8 +461,21 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "uniqueKeyOptions",
 				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"key": "unique",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "unique",
+							"value": true
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{

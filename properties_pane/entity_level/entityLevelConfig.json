@@ -149,6 +149,50 @@ making sure that you maintain a proper JSON format.
 		"columnsRatio": [3.7, 5]
 	},
 	{
+		"lowerTab": "Composite keys",
+		"structure": [{
+			"propertyName": "Primary key",
+			"propertyType": "group",
+			"propertyKeyword": "primaryKey",
+			"propertyTooltip": "",
+			"structure": [{
+				"propertyName": "Constraint name",
+				"propertyKeyword": "name",
+				"propertyTooltip": "",
+				"propertyType": "text"
+			}, {
+				"propertyName": "Key",
+				"propertyKeyword": "compositePrimaryKey",
+				"propertyType": "primaryKeySetter",
+				"abbr": "pk",
+				"attributeList": [
+					"ascending",
+					"descending"
+				]
+			}]
+		}, {
+			"propertyName": "Unique key",
+			"propertyType": "group",
+			"propertyKeyword": "uniqueKey",
+			"propertyTooltip": "",
+			"structure": [{
+				"propertyName": "Constraint name",
+				"propertyKeyword": "name",
+				"propertyTooltip": "",
+				"propertyType": "text"
+			}, {
+				"propertyName": "Key",
+				"propertyKeyword": "compositeUniqueKey",
+				"propertyType": "primaryKeySetter",
+				"abbr": " ",
+				"attributeList": [
+					"ascending",
+					"descending"
+				]
+			}]
+		}]
+	},
+	{
 		"lowerTab": "Indexes",
 		"structure": [{
 			"propertyName": "Index",
