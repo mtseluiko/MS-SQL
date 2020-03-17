@@ -152,7 +152,8 @@ making sure that you maintain a proper JSON format.
 		"lowerTab": "Composite keys",
 		"structure": [{
 			"propertyName": "Primary key",
-			"propertyType": "block",
+			"propertyType": "group",
+			"groupItemLimit": 1,
 			"propertyKeyword": "primaryKey",
 			"propertyTooltip": "",
 			"structure": [{
