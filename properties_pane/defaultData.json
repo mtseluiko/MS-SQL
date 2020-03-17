@@ -25,6 +25,8 @@
 	},
 	"field": {
 		"name": "New column",
+		"primaryKey": false,
+		"unique": false,
 		"clustered": true
 	},
 	"patternField": {

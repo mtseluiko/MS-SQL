@@ -1,3 +1,6 @@
+const UNIQUE = 'UNIQUE';
+const PRIMARY_KEY = 'PRIMARY KEY';
+
 const isClustered = key => !key.type_desc.includes('NONCLUSTERED');
 
 const reverseKey = keyInfo => ({
@@ -13,38 +16,58 @@ const reverseKey = keyInfo => ({
 	order: keyInfo.isDescending ? 'DESC' : 'ASC',
 	partitionName: keyInfo.dataSpaceName,
 	statisticsIncremental: keyInfo.statisticsIncremental,
+	dataCompression: keyInfo.dataCompression,
 });
 
-const handleKey = (column, columnKeyInfo) => {
-	const { constraintType } = columnKeyInfo;
+const handleKey = (field, fieldInfo) => {
+	const { constraintType, constraintName } = fieldInfo;
 	switch(constraintType) {
-		case 'UNIQUE': {
-			const { uniqueKeyOptions = [] } = column;
+		case UNIQUE: {
+			const { uniqueKeyOptions = [] } = field;
 			const isAlreadyExists = uniqueKeyOptions.find(currentOptions =>
-				currentOptions && currentOptions.constraintName === columnKeyInfo.constraintName);
+				currentOptions && currentOptions.constraintName === constraintName);
 			if (isAlreadyExists) {
 				return {};
 			}
 
-			const reversedKeyOptions = reverseKey(columnKeyInfo);
+			const reversedKeyOptions = reverseKey(fieldInfo);
 			return {
 				unique: true,
 				uniqueKeyOptions: uniqueKeyOptions.concat([reversedKeyOptions]),
 			};
 		};
-		case 'PRIMARY KEY': {
+		case PRIMARY_KEY: {
 			return {
 				primaryKey: true,
-				primaryKeyOptions: reverseKey(columnKeyInfo),
+				primaryKeyOptions: reverseKey(fieldInfo),
 			};
 		};
 	}
 };
 
-const defineFieldsKeyConstraints = columnsInfo => jsonSchema =>
-	columnsInfo.reduce((jsonSchemaAcc, columnKeyInfo) => {
-		const currentColumn = jsonSchemaAcc.properties[columnKeyInfo.columnName];
-		if (!currentColumn) {
+const getKeyConstraintsCompositionStatuses = fieldsInfo =>
+	fieldsInfo.reduce((constraintsStatuses, fieldInfo) => {
+		const { constraintName } = fieldInfo;
+		if (!constraintsStatuses.hasOwnProperty(constraintName)) {
+			return {
+				...constraintsStatuses,
+				[constraintName]: false,
+			};
+		}
+
+		return {
+			...constraintsStatuses,
+			[constraintName]: true,
+		};
+	}, {});
+
+const defineFieldsKeyConstraints = fieldsInfo => jsonSchema => {
+	const keyCompositionStatuses = getKeyConstraintsCompositionStatuses(fieldsInfo, jsonSchema);
+	return fieldsInfo.reduce((jsonSchemaAcc, fieldInfo) => {
+		const { columnName, constraintName } = fieldInfo;
+		const currentField = jsonSchemaAcc.properties[columnName];
+		const compositionStatus = keyCompositionStatuses[constraintName];
+		if (!currentField || compositionStatus) {
 			return jsonSchemaAcc;
 		}
 
@@ -52,12 +75,13 @@ const defineFieldsKeyConstraints = columnsInfo => jsonSchema =>
 			...jsonSchemaAcc,
 			properties: {
 				...jsonSchemaAcc.properties,
-				[columnKeyInfo.columnName]: {
-					...currentColumn,
-					...handleKey(currentColumn, columnKeyInfo),
+				[columnName]: {
+					...currentField,
+					...handleKey(currentField, fieldInfo),
 				},
 			},
-		}
+		};
 	}, jsonSchema);
+};
 
 module.exports = defineFieldsKeyConstraints;
