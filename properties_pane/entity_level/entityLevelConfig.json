@@ -164,7 +164,11 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "Key",
 				"propertyKeyword": "compositePrimaryKey",
 				"propertyType": "primaryKeySetter",
-				"abbr": "pk"
+				"abbr": "pk",
+				"attributeList": [
+					"ascending",
+					"descending"
+				]
 			}]
 		}, {
 			"propertyName": "Unique key",
@@ -180,7 +184,11 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "Key",
 				"propertyKeyword": "compositeUniqueKey",
 				"propertyType": "primaryKeySetter",
-				"abbr": " "
+				"abbr": " ",
+				"attributeList": [
+					"ascending",
+					"descending"
+				]
 			}]
 		}]
 	},
