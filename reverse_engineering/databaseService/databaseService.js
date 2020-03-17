@@ -205,7 +205,8 @@ const getTableKeyConstraints = async (connectionClient, dbName, tableName, schem
 	return currentDbConnectionClient.query`
 		SELECT TC.TABLE_NAME as tableName, TC.Constraint_Name as constraintName,
 		CC.Column_Name as columnName, TC.constraint_type as constraintType, ind.type_desc as typeDesc,
-		st.no_recompute as statisticNoRecompute, ic.is_descending_key as isDescending, ds.name as dataSpaceName, ind.*
+		st.no_recompute as statisticNoRecompute, st.is_incremental as statisticsIncremental,
+		ic.is_descending_key as isDescending, ds.name as dataSpaceName, ind.*
 		FROM information_schema.table_constraints TC
 		INNER JOIN information_schema.constraint_column_usage CC on TC.Constraint_Name = CC.Constraint_Name
 			AND TC.TABLE_NAME=${tableName} AND TC.TABLE_SCHEMA=${schemaName}

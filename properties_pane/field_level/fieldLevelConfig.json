@@ -361,42 +361,56 @@ making sure that you maintain a proper JSON format.
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -405,25 +419,13 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "primaryKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
@@ -480,42 +482,56 @@ making sure that you maintain a proper JSON format.
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -524,25 +540,13 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "uniqueIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "uniqueKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
@@ -675,55 +679,109 @@ making sure that you maintain a proper JSON format.
 				"template": "textarea",
 				"markdown": false
 			},
-			"primaryKey",
+			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "compositePrimaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositePrimaryKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "primaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
+				}
+			},
 			{
 				"propertyName": "Primary key options",
 				"propertyType": "block",
 				"propertyKeyword": "primaryKeyOptions",
 				"propertyTooltip": "Primary key options",
 				"dependency": {
-					"key": "primaryKey",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -732,32 +790,43 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "primaryKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
 			{
 				"propertyName": "Unique",
+				"propertyKeyword": "compositeUniqueKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositeUniqueKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Unique",
 				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
+				}
 			},
 			{
 				"propertyName": "Unique key options",
@@ -765,48 +834,75 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "uniqueKeyOptions",
 				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"key": "unique",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "unique",
+							"value": true
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -815,25 +911,13 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "uniqueIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "uniqueKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
@@ -948,53 +1032,108 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "compositePrimaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositePrimaryKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "primaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
+				}
+			},
+			{
 				"propertyName": "Primary key options",
 				"propertyType": "block",
 				"propertyKeyword": "primaryKeyOptions",
 				"propertyTooltip": "Primary key options",
 				"dependency": {
-					"key": "primaryKey",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -1003,32 +1142,43 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "primaryKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
 			{
 				"propertyName": "Unique",
+				"propertyKeyword": "compositeUniqueKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositeUniqueKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Unique",
 				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
+				}
 			},
 			{
 				"propertyName": "Unique key options",
@@ -1036,48 +1186,75 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "uniqueKeyOptions",
 				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"key": "unique",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "unique",
+							"value": true
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -1086,25 +1263,13 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "uniqueIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "uniqueKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
@@ -1223,53 +1388,108 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "compositePrimaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositePrimaryKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "primaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
+				}
+			},
+			{
 				"propertyName": "Primary key options",
 				"propertyType": "block",
 				"propertyKeyword": "primaryKeyOptions",
 				"propertyTooltip": "Primary key options",
 				"dependency": {
-					"key": "primaryKey",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -1278,32 +1498,43 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "primaryKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
 			{
 				"propertyName": "Unique",
+				"propertyKeyword": "compositeUniqueKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositeUniqueKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Unique",
 				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
+				}
 			},
 			{
 				"propertyName": "Unique key options",
@@ -1311,48 +1542,75 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "uniqueKeyOptions",
 				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"key": "unique",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "unique",
+							"value": true
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -1361,25 +1619,13 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "uniqueIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "uniqueKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
@@ -1443,55 +1689,109 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "sparse",
 				"propertyType": "checkbox"
 			},
-			"primaryKey",
+			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "compositePrimaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositePrimaryKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "primaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
+				}
+			},
 			{
 				"propertyName": "Primary key options",
 				"propertyType": "block",
 				"propertyKeyword": "primaryKeyOptions",
 				"propertyTooltip": "Primary key options",
 				"dependency": {
-					"key": "primaryKey",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -1500,32 +1800,43 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "primaryKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
 			{
 				"propertyName": "Unique",
+				"propertyKeyword": "compositeUniqueKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositeUniqueKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Unique",
 				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
+				}
 			},
 			{
 				"propertyName": "Unique key options",
@@ -1533,48 +1844,75 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "uniqueKeyOptions",
 				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"key": "unique",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "unique",
+							"value": true
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -1583,25 +1921,13 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "uniqueIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "uniqueKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
@@ -1664,55 +1990,109 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "ROWGUIDCOL",
 				"propertyType": "checkbox"
 			},
-			"primaryKey",
+			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "compositePrimaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositePrimaryKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "primaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
+				}
+			},
 			{
 				"propertyName": "Primary key options",
 				"propertyType": "block",
 				"propertyKeyword": "primaryKeyOptions",
 				"propertyTooltip": "Primary key options",
 				"dependency": {
-					"key": "primaryKey",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -1721,32 +2101,43 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "primaryKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
 			{
 				"propertyName": "Unique",
+				"propertyKeyword": "compositeUniqueKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositeUniqueKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Unique",
 				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
+				}
 			},
 			{
 				"propertyName": "Unique key options",
@@ -1754,48 +2145,75 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "uniqueKeyOptions",
 				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"key": "unique",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "unique",
+							"value": true
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -1804,25 +2222,13 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "uniqueIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "uniqueKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
@@ -1900,55 +2306,109 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "required",
 				"propertyType": "checkbox"
 			},
-			"primaryKey",
+			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "compositePrimaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositePrimaryKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Primary key",
+				"propertyKeyword": "primaryKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
+				}
+			},
 			{
 				"propertyName": "Primary key options",
 				"propertyType": "block",
 				"propertyKeyword": "primaryKeyOptions",
 				"propertyTooltip": "Primary key options",
 				"dependency": {
-					"key": "primaryKey",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "primaryKey",
+							"value": true
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"propertyName": "Statistics no recompute",
+						"propertyKeyword": "staticticsNorecompute",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyName": "Statistics incremental",
+						"propertyKeyword": "statisticsIncremental",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -1957,32 +2417,43 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "primaryKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},
 			{
 				"propertyName": "Unique",
+				"propertyKeyword": "compositeUniqueKey",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "compositeUniqueKey",
+					"value": true
+				},
+				"disabled": true
+			},
+			{
+				"propertyName": "Unique",
 				"propertyKeyword": "unique",
-				"propertyType": "checkbox"
+				"propertyType": "checkbox",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
+				}
 			},
 			{
 				"propertyName": "Unique key options",
@@ -1990,48 +2461,75 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "uniqueKeyOptions",
 				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"key": "unique",
-					"value": true
+					"type": "and",
+					"values": [
+						{
+							"key": "unique",
+							"value": true
+						},
+						{
+							"key": "compositeUniqueKey",
+							"value": false
+						},
+						{
+							"key": "compositePrimaryKey",
+							"value": false
+						}
+					]
 				},
 				"structure": [
 					{
 						"propertyName": "Constraint name",
-						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyKeyword": "constraintName",
 						"propertyType": "text"
 					},
 					{
-						"propertyName": "Is descending",
-						"propertyKeyword": "uniqueKeyIsDescending",
-						"propertyType": "checkbox"
+						"propertyName": "Partition name",
+						"propertyKeyword": "partitionName",
+						"propertyType": "text"
 					},
 					{
-						"propertyName": "Statistics norecompute",
-						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
-						"propertyType": "checkbox"
+						"propertyName": "Order",
+						"propertyKeyword": "order",
+						"propertyType": "select",
+						"options": [
+							"ASC",
+							"DESC"
+						]
 					},
+					{
+	"propertyName": "Statistics no recompute",
+						"propertyKeyword": "Statistics incremental",
+						"propertyType": "statisticsIncrementalx"
+					},
+						,				{
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
+						"propertyType": "checkbox"
+					}
 					{
 						"propertyName": "Ignore duplicate",
-						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyKeyword": "ingoreDuplicate",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow row locks",
-						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyKeyword": "allowRowLocks",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Allow page locks",
-						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyKeyword": "allowPageLocks",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is padded",
-						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyName": "Padded",
+						"propertyKeyword": "isPadded",
 						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Fill factor",
-						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyKeyword": "fillFactor",
 						"propertyType": "numeric",
 						"valueType": "number",
 						"allowNegative": false,
@@ -2040,25 +2538,13 @@ making sure that you maintain a proper JSON format.
 					},
 					{
 						"propertyName": "Optimize for sequential key",
-						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyKeyword": "isOptimizedForSequentialKey",
 						"propertyType": "checkbox"
 					},
 					{
-						"propertyName": "Is clustered",
-						"propertyKeyword": "uniqueIsClustered",
+						"propertyName": "Clustered",
+						"propertyKeyword": "clustered",
 						"propertyType": "checkbox"
-					},
-					{
-						"propertyName": "Data compression",
-						"propertyKeyword": "uniqueKeyDataCompression",
-						"propertyType": "select",
-						"options": [
-							"NONE",
-							"ROW",
-							"PAGE",
-							"COLUMNSTORE",
-							"COLUMNSTORE_ARCHIVE"
-						]
 					}
 				]
 			},

@@ -1,23 +1,18 @@
-const handleDataCompression = key => {
-	const compressionTypes = ['NONE', 'ROW', 'PAGE', 'COLUMNSTORE', 'COLUMNSTORE_ARCHIVE'];
-	const type = compressionTypes.find(type => key.type_desc.includes(type));
-	return type || '';
-};
-
 const isClustered = key => !key.type_desc.includes('NONCLUSTERED');
 
-const reverseKey = (keyInfo, keyType) => ({
-	[`${keyType}ConstraintName`]: keyInfo.constraintName,
-	[`${keyType}StaticticsNorecompute`]: Boolean(keyInfo.statisticNoRecompute),
-	[`${keyType}AllowRowLocks`]: keyInfo.allow_row_locks,
-	[`${keyType}AllowPageLocks`]: keyInfo.allow_page_locks,
-	[`${keyType}IsClustered`]: isClustered(keyInfo),
-	[`${keyType}IngoreDuplicate`]: Boolean(keyInfo.ignore_dup_key),
-	[`${keyType}IsOptimizedForSequentialKey`]: Boolean(keyInfo.optimize_for_sequential_key),
-	[`${keyType}IsPadded`]: Boolean(keyInfo.is_padded),
-	[`${keyType}FillFactor`]: keyInfo.fill_factor,
-	[`${keyType}DataCompression`]: handleDataCompression(keyInfo),
-	[`${keyType}IsDescending`]: keyInfo.isDescending,
+const reverseKey = keyInfo => ({
+	constraintName: keyInfo.constraintName,
+	staticticsNorecompute: Boolean(keyInfo.statisticNoRecompute),
+	allowRowLocks: keyInfo.allow_row_locks,
+	allowPageLocks: keyInfo.allow_page_locks,
+	isClustered: isClustered(keyInfo),
+	ignoreDuplicate: Boolean(keyInfo.ignore_dup_key),
+	isOptimizedForSequentialKey: Boolean(keyInfo.optimize_for_sequential_key),
+	isPadded: Boolean(keyInfo.is_padded),
+	fillFactor: keyInfo.fill_factor,
+	order: keyInfo.isDescending ? 'DESC' : 'ASC',
+	partitionName: keyInfo.dataSpaceName,
+	statisticsIncremental: keyInfo.statisticsIncremental,
 });
 
 const handleKey = (column, columnKeyInfo) => {
@@ -26,12 +21,12 @@ const handleKey = (column, columnKeyInfo) => {
 		case 'UNIQUE': {
 			const { uniqueKeyOptions = [] } = column;
 			const isAlreadyExists = uniqueKeyOptions.find(currentOptions =>
-				currentOptions && currentOptions.uniqueConstraintName === columnKeyInfo.constraintName);
+				currentOptions && currentOptions.constraintName === columnKeyInfo.constraintName);
 			if (isAlreadyExists) {
 				return {};
 			}
 
-			const reversedKeyOptions = reverseKey(columnKeyInfo, 'uniqueKey');
+			const reversedKeyOptions = reverseKey(columnKeyInfo);
 			return {
 				unique: true,
 				uniqueKeyOptions: uniqueKeyOptions.concat([reversedKeyOptions]),
@@ -40,7 +35,7 @@ const handleKey = (column, columnKeyInfo) => {
 		case 'PRIMARY KEY': {
 			return {
 				primaryKey: true,
-				primaryKeyOptions: reverseKey(columnKeyInfo, 'primaryKey'),
+				primaryKeyOptions: reverseKey(columnKeyInfo),
 			};
 		};
 	}
