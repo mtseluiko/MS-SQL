@@ -6,7 +6,7 @@ const defineFieldsDescription = require('./defineFieldsDescription');
 const doesViewHaveRelatedTables = require('./doesViewHaveRelatedTables');
 const reverseTableCheckConstraints = require('./reverseTableCheckConstraints');
 const changeViewPropertiesToReferences = require('./changeViewPropertiesToReferences');
-const defineFieldsIndexes = require('./defineFieldsIndexes');
+const defineFieldsKeyConstraints = require('./defineFieldsKeyConstraints');
 const defineMaskedColumns = require('./defineMaskedColumns');
 const defineJSONTypes = require('./defineJSONTypes');
 const defineXmlFieldsCollections = require('./defineXmlFieldsCollections');
@@ -20,7 +20,7 @@ module.exports = {
 	doesViewHaveRelatedTables,
 	reverseTableCheckConstraints,
 	changeViewPropertiesToReferences,
-	defineFieldsIndexes,
+	defineFieldsKeyConstraints,
 	defineMaskedColumns,
 	defineJSONTypes,
 	defineXmlFieldsCollections,

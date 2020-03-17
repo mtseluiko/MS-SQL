@@ -305,27 +305,155 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Primary key options",
+				"propertyType": "block",
+				"propertyKeyword": "primaryKeyOptions",
+				"propertyTooltip": "Primary key options",
+				"dependency": {
+					"key": "primaryKey",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "primaryKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
+			},
+			{
 				"propertyName": "Unique",
 				"propertyKeyword": "unique",
 				"propertyType": "checkbox"
 			},
 			{
-				"propertyName": "Clustered",
-				"propertyKeyword": "clustered",
-				"propertyType": "checkbox",
+				"propertyName": "Unique key options",
+				"propertyType": "group",
+				"propertyKeyword": "uniqueKeyOptions",
+				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"type": "or",
-					"values": [
-						{
-							"key": "primaryKey",
-							"value": true
-						},
-						{
-							"key": "unique",
-							"value": true
-						}
-					]
-				}
+					"key": "unique",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "uniqueIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "uniqueKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
 			},
 			"foreignCollection",
 			"foreignField",
@@ -453,27 +581,155 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Primary key options",
+				"propertyType": "block",
+				"propertyKeyword": "primaryKeyOptions",
+				"propertyTooltip": "Primary key options",
+				"dependency": {
+					"key": "primaryKey",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "primaryKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
+			},
+			{
 				"propertyName": "Unique",
 				"propertyKeyword": "unique",
 				"propertyType": "checkbox"
 			},
 			{
-				"propertyName": "Clustered",
-				"propertyKeyword": "clustered",
-				"propertyType": "checkbox",
+				"propertyName": "Unique key options",
+				"propertyType": "group",
+				"propertyKeyword": "uniqueKeyOptions",
+				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"type": "or",
-					"values": [
-						{
-							"key": "primaryKey",
-							"value": true
-						},
-						{
-							"key": "unique",
-							"value": true
-						}
-					]
-				}
+					"key": "unique",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "uniqueIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "uniqueKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
 			},
 			"foreignCollection",
 			"foreignField",
@@ -586,27 +842,155 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Primary key options",
+				"propertyType": "block",
+				"propertyKeyword": "primaryKeyOptions",
+				"propertyTooltip": "Primary key options",
+				"dependency": {
+					"key": "primaryKey",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "primaryKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
+			},
+			{
 				"propertyName": "Unique",
 				"propertyKeyword": "unique",
 				"propertyType": "checkbox"
 			},
 			{
-				"propertyName": "Clustered",
-				"propertyKeyword": "clustered",
-				"propertyType": "checkbox",
+				"propertyName": "Unique key options",
+				"propertyType": "group",
+				"propertyKeyword": "uniqueKeyOptions",
+				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"type": "or",
-					"values": [
-						{
-							"key": "primaryKey",
-							"value": true
-						},
-						{
-							"key": "unique",
-							"value": true
-						}
-					]
-				}
+					"key": "unique",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "uniqueIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "uniqueKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
 			},
 			"comments"
 		],
@@ -723,27 +1107,155 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Primary key options",
+				"propertyType": "block",
+				"propertyKeyword": "primaryKeyOptions",
+				"propertyTooltip": "Primary key options",
+				"dependency": {
+					"key": "primaryKey",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "primaryKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
+			},
+			{
 				"propertyName": "Unique",
 				"propertyKeyword": "unique",
 				"propertyType": "checkbox"
 			},
 			{
-				"propertyName": "Clustered",
-				"propertyKeyword": "clustered",
-				"propertyType": "checkbox",
+				"propertyName": "Unique key options",
+				"propertyType": "group",
+				"propertyKeyword": "uniqueKeyOptions",
+				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"type": "or",
-					"values": [
-						{
-							"key": "primaryKey",
-							"value": true
-						},
-						{
-							"key": "unique",
-							"value": true
-						}
-					]
-				}
+					"key": "unique",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "uniqueIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "uniqueKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
 			},
 			"pattern",
 			"default",
@@ -802,27 +1314,155 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Primary key options",
+				"propertyType": "block",
+				"propertyKeyword": "primaryKeyOptions",
+				"propertyTooltip": "Primary key options",
+				"dependency": {
+					"key": "primaryKey",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "primaryKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
+			},
+			{
 				"propertyName": "Unique",
 				"propertyKeyword": "unique",
 				"propertyType": "checkbox"
 			},
 			{
-				"propertyName": "Clustered",
-				"propertyKeyword": "clustered",
-				"propertyType": "checkbox",
+				"propertyName": "Unique key options",
+				"propertyType": "group",
+				"propertyKeyword": "uniqueKeyOptions",
+				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"type": "or",
-					"values": [
-						{
-							"key": "primaryKey",
-							"value": true
-						},
-						{
-							"key": "unique",
-							"value": true
-						}
-					]
-				}
+					"key": "unique",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "uniqueIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "uniqueKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
 			},
 			"pattern",
 			"default",
@@ -875,27 +1515,155 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Primary key options",
+				"propertyType": "block",
+				"propertyKeyword": "primaryKeyOptions",
+				"propertyTooltip": "Primary key options",
+				"dependency": {
+					"key": "primaryKey",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "primaryKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
+			},
+			{
 				"propertyName": "Unique",
 				"propertyKeyword": "unique",
 				"propertyType": "checkbox"
 			},
 			{
-				"propertyName": "Clustered",
-				"propertyKeyword": "clustered",
-				"propertyType": "checkbox",
+				"propertyName": "Unique key options",
+				"propertyType": "group",
+				"propertyKeyword": "uniqueKeyOptions",
+				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"type": "or",
-					"values": [
-						{
-							"key": "primaryKey",
-							"value": true
-						},
-						{
-							"key": "unique",
-							"value": true
-						}
-					]
-				}
+					"key": "unique",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "uniqueIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "uniqueKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
 			},
 			"foreignCollection",
 			"foreignField",
@@ -963,27 +1731,155 @@ making sure that you maintain a proper JSON format.
 			},
 			"primaryKey",
 			{
+				"propertyName": "Primary key options",
+				"propertyType": "block",
+				"propertyKeyword": "primaryKeyOptions",
+				"propertyTooltip": "Primary key options",
+				"dependency": {
+					"key": "primaryKey",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "primaryKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "primaryKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "primaryKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "primaryKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "primaryKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "primaryKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "primaryKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "primaryKeyIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "primaryKeyIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "primaryKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
+			},
+			{
 				"propertyName": "Unique",
 				"propertyKeyword": "unique",
 				"propertyType": "checkbox"
 			},
 			{
-				"propertyName": "Clustered",
-				"propertyKeyword": "clustered",
-				"propertyType": "checkbox",
+				"propertyName": "Unique key options",
+				"propertyType": "group",
+				"propertyKeyword": "uniqueKeyOptions",
+				"propertyTooltip": "Unique key options",
 				"dependency": {
-					"type": "or",
-					"values": [
-						{
-							"key": "primaryKey",
-							"value": true
-						},
-						{
-							"key": "unique",
-							"value": true
-						}
-					]
-				}
+					"key": "unique",
+					"value": true
+				},
+				"structure": [
+					{
+						"propertyName": "Constraint name",
+						"propertyKeyword": "uniqueKeyConstraintName",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Statistics norecompute",
+						"propertyKeyword": "uniqueKeyStaticticsNorecompute",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Ignore duplicate",
+						"propertyKeyword": "uniqueKeyIngoreDuplicate",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow row locks",
+						"propertyKeyword": "uniqueKeyAllowRowLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Allow page locks",
+						"propertyKeyword": "uniqueKeyAllowPageLocks",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is padded",
+						"propertyKeyword": "uniqueKeyIsPadded",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "uniqueKeyFillFactor",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"minValue": 0,
+						"maxValue": 100
+					},
+					{
+						"propertyName": "Optimize for sequential key",
+						"propertyKeyword": "uniqueIsOptimizedForSequentialKey",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Is clustered",
+						"propertyKeyword": "uniqueIsClustered",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Data compression",
+						"propertyKeyword": "uniqueKeyDataCompression",
+						"propertyType": "select",
+						"options": [
+							"NONE",
+							"ROW",
+							"PAGE",
+							"COLUMNSTORE",
+							"COLUMNSTORE_ARCHIVE"
+						]
+					}
+				]
 			},
 			"comments"
 		]

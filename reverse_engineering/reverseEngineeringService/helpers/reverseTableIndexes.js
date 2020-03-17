@@ -17,7 +17,6 @@ const reverseIndex = index => ({
 	uniqueIndx: index.is_unique,
 	clusteredIndx: isClusteredIndex(index),
 	IGNORE_DUP_KEY: index.ignore_dup_key,
-	OPTIMIZE_FOR_SEQUENTIAL_KEY: index.optimize_for_sequential_key,
 	indxType: getIndexType(index),
 	COMPRESSION_DELAY: index.compression_delay,
 	OPTIMIZE_FOR_SEQUENTIAL_KEY: Boolean(index.optimize_for_sequential_key),

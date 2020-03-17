@@ -64,7 +64,7 @@ module.exports = {
 	async getDbCollectionsData(collectionsInfo, logger, callback, app) {
 		try {
 			logger.log('info', collectionsInfo, 'Retrieving schema', collectionsInfo.hiddenKeys);
-			logger.progress({ message: 'Start reverse-engineering process' });
+			logger.progress({ message: 'Start reverse-engineering process', containerName: '', entityName: '' });
 			const { collections } = collectionsInfo.collectionData;
 			const client = getClient();
 			if (!client.config.database) {

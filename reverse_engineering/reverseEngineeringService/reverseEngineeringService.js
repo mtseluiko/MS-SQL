@@ -7,7 +7,7 @@ const {
 	getDatabaseMemoryOptimizedTables,
 	getDatabaseCheckConstraints,
 	getViewTableInfo,
-	getTableIndexConstraints,
+	getTableKeyConstraints,
 	getViewColumnRelations,
 	getTableMaskedColumns,
 	getDatabaseXmlSchemaCollection,
@@ -21,7 +21,7 @@ const {
 	doesViewHaveRelatedTables,
 	reverseTableCheckConstraints,
 	changeViewPropertiesToReferences,
-	defineFieldsIndexes,
+	defineFieldsKeyConstraints,
 	defineMaskedColumns,
 	defineJSONTypes,
 	defineXmlFieldsCollections,
@@ -62,7 +62,7 @@ const prepareViewJSON = (dbConnectionClient, dbName, viewName, schemaName) => as
 	return {
 		jsonSchema: changeViewPropertiesToReferences(jsonSchema, viewInfo, viewColumnRelations),
 		name: viewName,
-		relatedTables: viewInfo.map((columnInfo => ({ 
+		relatedTables: viewInfo.map((columnInfo => ({
 			tableName: columnInfo['ReferencedTableName'],
 			schemaName: columnInfo['ReferencedSchemaName'],
 		}))),
@@ -99,7 +99,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					transformDatabaseTableInfoToJSON(tableInfo),
 					defineRequiredFields,
 					defineFieldsDescription(await getTableColumnsDescription(dbConnectionClient, dbName, tableName, schemaName)),
-					defineFieldsIndexes(await getTableIndexConstraints(dbConnectionClient, dbName, tableName, schemaName)),
+					defineFieldsKeyConstraints(await getTableKeyConstraints(dbConnectionClient, dbName, tableName, schemaName)),
 					defineMaskedColumns(await getTableMaskedColumns(dbConnectionClient, dbName, tableName, schemaName)),
 					defineJSONTypes(tableRow),
 					defineXmlFieldsCollections(tableXmlSchemas),

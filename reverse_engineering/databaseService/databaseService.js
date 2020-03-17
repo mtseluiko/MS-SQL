@@ -199,15 +199,20 @@ const getViewColumnRelations = async (connectionClient, dbName, viewName, schema
 	`;
 };
 
-const getTableIndexConstraints = async (connectionClient, dbName, tableName, schemaName) => {
+const getTableKeyConstraints = async (connectionClient, dbName, tableName, schemaName) => {
 	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	const objectId = `${schemaName}.${tableName}`;
 	return currentDbConnectionClient.query`
 		SELECT TC.TABLE_NAME as tableName, TC.Constraint_Name as constraintName,
-			CC.Column_Name as columnName, TC.constraint_type as constraintType, ind.type_desc as typeDesc
+		CC.Column_Name as columnName, TC.constraint_type as constraintType, ind.type_desc as typeDesc,
+		st.no_recompute as statisticNoRecompute, ic.is_descending_key as isDescending, ds.name as dataSpaceName, ind.*
 		FROM information_schema.table_constraints TC
 		INNER JOIN information_schema.constraint_column_usage CC on TC.Constraint_Name = CC.Constraint_Name
-			AND TC.TABLE_NAME=${tableName} and Tc.TABLE_SCHEMA=${schemaName}
-		LEFT JOIN sys.indexes ind ON ind.name = TC.CONSTRAINT_NAME
+			AND TC.TABLE_NAME=${tableName} AND TC.TABLE_SCHEMA=${schemaName}
+		INNER JOIN sys.indexes ind ON ind.name = TC.CONSTRAINT_NAME
+		INNER JOIN sys.index_columns ic ON ic.object_id = object_id(${objectId}) AND ind.index_id=ic.index_id
+		INNER JOIN sys.data_spaces ds ON ds.data_space_id = ind.data_space_id
+		INNER JOIN sys.stats st ON st.name = TC.CONSTRAINT_NAME
 	`;
 };
 
@@ -243,7 +248,7 @@ module.exports = {
 	getDatabaseMemoryOptimizedTables,
 	getDatabaseCheckConstraints,
 	getViewTableInfo,
-	getTableIndexConstraints,
+	getTableKeyConstraints,
 	getViewColumnRelations,
 	getTableMaskedColumns,
 	getDatabaseXmlSchemaCollection,
