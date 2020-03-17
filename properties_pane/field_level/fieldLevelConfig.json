@@ -320,6 +320,11 @@ making sure that you maintain a proper JSON format.
 						"propertyType": "text"
 					},
 					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyType": "checkbox"
+					},
+					{
 						"propertyName": "Statistics norecompute",
 						"propertyKeyword": "primaryKeyStaticticsNorecompute",
 						"propertyType": "checkbox"
@@ -396,6 +401,11 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Constraint name",
 						"propertyKeyword": "uniqueKeyConstraintName",
 						"propertyType": "text"
+					},
+					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Statistics norecompute",
@@ -596,6 +606,11 @@ making sure that you maintain a proper JSON format.
 						"propertyType": "text"
 					},
 					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyType": "checkbox"
+					},
+					{
 						"propertyName": "Statistics norecompute",
 						"propertyKeyword": "primaryKeyStaticticsNorecompute",
 						"propertyType": "checkbox"
@@ -672,6 +687,11 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Constraint name",
 						"propertyKeyword": "uniqueKeyConstraintName",
 						"propertyType": "text"
+					},
+					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Statistics norecompute",
@@ -857,6 +877,11 @@ making sure that you maintain a proper JSON format.
 						"propertyType": "text"
 					},
 					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyType": "checkbox"
+					},
+					{
 						"propertyName": "Statistics norecompute",
 						"propertyKeyword": "primaryKeyStaticticsNorecompute",
 						"propertyType": "checkbox"
@@ -933,6 +958,11 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Constraint name",
 						"propertyKeyword": "uniqueKeyConstraintName",
 						"propertyType": "text"
+					},
+					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Statistics norecompute",
@@ -1122,6 +1152,11 @@ making sure that you maintain a proper JSON format.
 						"propertyType": "text"
 					},
 					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyType": "checkbox"
+					},
+					{
 						"propertyName": "Statistics norecompute",
 						"propertyKeyword": "primaryKeyStaticticsNorecompute",
 						"propertyType": "checkbox"
@@ -1198,6 +1233,11 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Constraint name",
 						"propertyKeyword": "uniqueKeyConstraintName",
 						"propertyType": "text"
+					},
+					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Statistics norecompute",
@@ -1329,6 +1369,11 @@ making sure that you maintain a proper JSON format.
 						"propertyType": "text"
 					},
 					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyType": "checkbox"
+					},
+					{
 						"propertyName": "Statistics norecompute",
 						"propertyKeyword": "primaryKeyStaticticsNorecompute",
 						"propertyType": "checkbox"
@@ -1405,6 +1450,11 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Constraint name",
 						"propertyKeyword": "uniqueKeyConstraintName",
 						"propertyType": "text"
+					},
+					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Statistics norecompute",
@@ -1530,6 +1580,11 @@ making sure that you maintain a proper JSON format.
 						"propertyType": "text"
 					},
 					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyType": "checkbox"
+					},
+					{
 						"propertyName": "Statistics norecompute",
 						"propertyKeyword": "primaryKeyStaticticsNorecompute",
 						"propertyType": "checkbox"
@@ -1606,6 +1661,11 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Constraint name",
 						"propertyKeyword": "uniqueKeyConstraintName",
 						"propertyType": "text"
+					},
+					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Statistics norecompute",
@@ -1746,6 +1806,11 @@ making sure that you maintain a proper JSON format.
 						"propertyType": "text"
 					},
 					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "primaryKeyIsDescending",
+						"propertyType": "checkbox"
+					},
+					{
 						"propertyName": "Statistics norecompute",
 						"propertyKeyword": "primaryKeyStaticticsNorecompute",
 						"propertyType": "checkbox"
@@ -1822,6 +1887,11 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "Constraint name",
 						"propertyKeyword": "uniqueKeyConstraintName",
 						"propertyType": "text"
+					},
+					{
+						"propertyName": "Is descending",
+						"propertyKeyword": "uniqueKeyIsDescending",
+						"propertyType": "checkbox"
 					},
 					{
 						"propertyName": "Statistics norecompute",

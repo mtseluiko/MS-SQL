@@ -17,6 +17,7 @@ const reverseKey = (keyInfo, keyType) => ({
 	[`${keyType}IsPadded`]: Boolean(keyInfo.is_padded),
 	[`${keyType}FillFactor`]: keyInfo.fill_factor,
 	[`${keyType}DataCompression`]: handleDataCompression(keyInfo),
+	[`${keyType}IsDescending`]: keyInfo.isDescending,
 });
 
 const handleKey = (column, columnKeyInfo) => {
