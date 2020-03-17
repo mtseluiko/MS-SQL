@@ -10,6 +10,7 @@ const defineFieldsKeyConstraints = require('./defineFieldsKeyConstraints');
 const defineMaskedColumns = require('./defineMaskedColumns');
 const defineJSONTypes = require('./defineJSONTypes');
 const defineXmlFieldsCollections = require('./defineXmlFieldsCollections');
+const defineFieldsDefaultConstraintNames = require('./defineFieldsDefaultConstraintNames');
 
 module.exports = {
 	transformDatabaseTableInfoToJSON,
@@ -24,4 +25,5 @@ module.exports = {
 	defineMaskedColumns,
 	defineJSONTypes,
 	defineXmlFieldsCollections,
+	defineFieldsDefaultConstraintNames,
 }

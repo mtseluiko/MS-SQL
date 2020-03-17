@@ -237,6 +237,29 @@ const getDatabaseXmlSchemaCollection = async (connectionClient, dbName) => {
 	`
 };
 
+const getTableDefaultConstraintNames = async (connectionClient, dbName, tableName, schemaName) => {
+	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	return currentDbConnectionClient.query`
+	SELECT
+		ac.name as columnName,
+		dc.name
+	FROM 
+		sys.all_columns as ac
+			INNER JOIN
+		sys.tables
+			ON ac.object_id = tables.object_id
+			INNER JOIN 
+		sys.schemas
+			ON tables.schema_id = schemas.schema_id
+			INNER JOIN
+		sys.default_constraints as dc
+			ON ac.default_object_id = dc.object_id
+	WHERE 
+			schemas.name = ${schemaName}
+		AND tables.name = ${tableName}
+	`
+};
+
 module.exports = {
 	getConnectionClient,
 	getObjectsFromDatabase,
@@ -252,4 +275,5 @@ module.exports = {
 	getViewColumnRelations,
 	getTableMaskedColumns,
 	getDatabaseXmlSchemaCollection,
+	getTableDefaultConstraintNames,
 }

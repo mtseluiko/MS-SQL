@@ -11,6 +11,7 @@ const {
 	getViewColumnRelations,
 	getTableMaskedColumns,
 	getDatabaseXmlSchemaCollection,
+	getTableDefaultConstraintNames,
 } = require('../databaseService/databaseService');
 const {
 	transformDatabaseTableInfoToJSON,
@@ -25,6 +26,7 @@ const {
 	defineMaskedColumns,
 	defineJSONTypes,
 	defineXmlFieldsCollections,
+	defineFieldsDefaultConstraintNames,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
 
@@ -103,6 +105,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					defineMaskedColumns(await getTableMaskedColumns(dbConnectionClient, dbName, tableName, schemaName)),
 					defineJSONTypes(tableRow),
 					defineXmlFieldsCollections(tableXmlSchemas),
+					defineFieldsDefaultConstraintNames(await getTableDefaultConstraintNames(dbConnectionClient, dbName, tableName, schemaName)),
 				)({ required: [], properties: {} });
 
 				return {

@@ -234,6 +234,11 @@ making sure that you maintain a proper JSON format.
 				}]
 			},
 			"default",
+			{
+				"propertyName": "Default constraint name",
+				"propertyKeyword": "defaultConstraintName",
+				"propertyType": "text"
+			},
 			"description",
 			{
 				"propertyName": "Not null",
@@ -544,6 +549,11 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			"default",
+			{
+				"propertyName": "Default constraint name",
+				"propertyKeyword": "defaultConstraintName",
+				"propertyType": "text"
+			},
 			"description",
 			{
 				"propertyName": "Not null",
@@ -1299,6 +1309,11 @@ making sure that you maintain a proper JSON format.
 			},
 			"pattern",
 			"default",
+			{
+				"propertyName": "Default constraint name",
+				"propertyKeyword": "defaultConstraintName",
+				"propertyType": "text"
+			},
 			"enum",
 			"sample",
 			"comments"
@@ -1516,10 +1531,15 @@ making sure that you maintain a proper JSON format.
 			},
 			"pattern",
 			"default",
+			{
+				"propertyName": "Default constraint name",
+				"propertyKeyword": "defaultConstraintName",
+				"propertyType": "text"
+			},
 			"enum",
 			"sample",
 			"comments"
-		],   
+		],
 		"sql_variant": [
 			"name",
 			"code",
@@ -1537,6 +1557,11 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "checkbox"
 			},
 			"default",
+			{
+				"propertyName": "Default constraint name",
+				"propertyKeyword": "defaultConstraintName",
+				"propertyType": "text"
+			},
 			"sample",
 			"comments"
 		],
@@ -1730,6 +1755,11 @@ making sure that you maintain a proper JSON format.
 			"relationshipType",
 			"pattern",
 			"default",
+			{
+				"propertyName": "Default constraint name",
+				"propertyKeyword": "defaultConstraintName",
+				"propertyType": "text"
+			},
 			"enum",
 			"sample",
 			"comments"
@@ -1748,6 +1778,11 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "details",
 				"template": "textarea",
 				"markdown": false
+			},
+			{
+				"propertyName": "Default constraint name",
+				"propertyKeyword": "defaultConstraintName",
+				"propertyType": "text"
 			},
 			{
 				"propertyName": "Not null",
