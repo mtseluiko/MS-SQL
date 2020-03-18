@@ -27,6 +27,7 @@ const {
 	defineJSONTypes,
 	defineXmlFieldsCollections,
 	defineFieldsDefaultConstraintNames,
+	defineFieldsCompositeKeyConstraints,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
 
@@ -91,9 +92,10 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 				const tableCheckConstraints = databaseCheckConstraints.filter(cc => cc.table === tableName);
 				logger.progress({ message: 'Fetching table information', containerName: dbName, entityName: tableName });
 
-				const [tableInfo, tableRow] = await Promise.all([
+				const [tableInfo, tableRow, fieldsKeyConstraints] = await Promise.all([
 					await getTableInfo(dbConnectionClient, dbName, tableName, schemaName),
 					await getTableRow(dbConnectionClient, dbName, tableName, schemaName),
+					await getTableKeyConstraints(dbConnectionClient, dbName, tableName, schemaName)
 				]);
 				const isView = tableInfo[0]['TABLE_TYPE'].trim() === 'V';
 
@@ -101,7 +103,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					transformDatabaseTableInfoToJSON(tableInfo),
 					defineRequiredFields,
 					defineFieldsDescription(await getTableColumnsDescription(dbConnectionClient, dbName, tableName, schemaName)),
-					defineFieldsKeyConstraints(await getTableKeyConstraints(dbConnectionClient, dbName, tableName, schemaName)),
+					defineFieldsKeyConstraints(fieldsKeyConstraints),
 					defineMaskedColumns(await getTableMaskedColumns(dbConnectionClient, dbName, tableName, schemaName)),
 					defineJSONTypes(tableRow),
 					defineXmlFieldsCollections(tableXmlSchemas),
@@ -125,6 +127,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 						Indxs: reverseTableIndexes(tableIndexes),
 						memory_optimized: databaseMemoryOptimizedTables.includes(tableName),
 						chkConstr: reverseTableCheckConstraints(tableCheckConstraints),
+						...defineFieldsCompositeKeyConstraints(fieldsKeyConstraints),
 					},
 					bucketInfo: {
 						databaseName: dbName,
