@@ -14,6 +14,7 @@ const defineFieldsDefaultConstraintNames = require('./defineFieldsDefaultConstra
 const getKeyConstraintsCompositionStatuses = require('./getKeyConstraintsCompositionStatuses');
 const reverseKeyConstraint = require('./reverseKeyConstraint');
 const defineFieldsCompositeKeyConstraints = require('./defineFieldsCompositeKeyConstraints');
+const reverseTableColumn = require('./reverseTableColumn');
 
 module.exports = {
 	transformDatabaseTableInfoToJSON,
@@ -32,4 +33,5 @@ module.exports = {
 	getKeyConstraintsCompositionStatuses,
 	reverseKeyConstraint,
 	defineFieldsCompositeKeyConstraints,
+	reverseTableColumn,
 }

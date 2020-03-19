@@ -28,6 +28,7 @@ const {
 	defineXmlFieldsCollections,
 	defineFieldsDefaultConstraintNames,
 	defineFieldsCompositeKeyConstraints,
+	reverseTableColumn,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
 
@@ -70,7 +71,19 @@ const prepareViewJSON = (dbConnectionClient, dbName, viewName, schemaName) => as
 			schemaName: columnInfo['ReferencedSchemaName'],
 		}))),
 	};
-}
+};
+
+const getUserDefinedTypes = tableInfo =>
+	tableInfo.reduce((columnSchemas, column) => {
+		if (!column['DOMAIN_NAME']) {
+			return columnSchemas;
+		}
+
+		return {
+			...columnSchemas,
+			[column['DOMAIN_NAME']]: reverseTableColumn(column),
+		};
+	}, {});
 
 const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo) => {
 	const dbName = dbConnectionClient.config.database;
@@ -132,6 +145,9 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					bucketInfo: {
 						databaseName: dbName,
 					},
+					modelDefinitions: {
+						definitions: getUserDefinedTypes(tableInfo),
+					},
 					emptyBucket: false,
 				};
 			})
@@ -144,4 +160,4 @@ module.exports = {
 	reverseCollectionsToJSON,
 	mergeCollectionsWithViews,
 	getCollectionsRelationships,
-}
+};
