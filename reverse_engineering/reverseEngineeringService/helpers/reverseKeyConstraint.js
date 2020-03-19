@@ -5,7 +5,7 @@ const reverseKeyConstraint = keyConstraintInfo => ({
 	staticticsNorecompute: Boolean(keyConstraintInfo.statisticNoRecompute),
 	allowRowLocks: keyConstraintInfo.allow_row_locks,
 	allowPageLocks: keyConstraintInfo.allow_page_locks,
-	isClustered: isClustered(keyConstraintInfo),
+	clustered: isClustered(keyConstraintInfo),
 	ignoreDuplicate: Boolean(keyConstraintInfo.ignore_dup_key),
 	isOptimizedForSequentialKey: Boolean(keyConstraintInfo.optimize_for_sequential_key),
 	isPadded: Boolean(keyConstraintInfo.is_padded),
