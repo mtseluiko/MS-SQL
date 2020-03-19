@@ -25,7 +25,7 @@ const handleField = (name, properties, cellValue) => {
 		return {
 			[name]: {
 				...properties,
-				subType: type,
+				subtype: type,
 				items: [],
 			},
 		};
@@ -35,7 +35,7 @@ const handleField = (name, properties, cellValue) => {
 		return {
 			[name]: {
 				...properties,
-				subType: type,
+				subtype: type,
 				properties: {},
 			},
 		};
@@ -44,7 +44,7 @@ const handleField = (name, properties, cellValue) => {
 	return {
 		[name]: {
 			...properties,
-			subType: type,
+			subtype: type,
 		},
 	};
 }

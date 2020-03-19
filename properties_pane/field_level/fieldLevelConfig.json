@@ -135,21 +135,32 @@ making sure that you maintain a proper JSON format.
 					"nvarchar"
 				],
 				"data": "options",
-				"valueType": "string"
+				"valueType": "string",
+				"cleanDependency": true
+			},
+			{
+				"propertyName": "JSON Type",
+				"propertyKeyword": "physicalType",
+				"propertyType": "select",
+				"dependency": {
+					"key": "mode",
+					"value": "mode"
+				}
 			},
 			{
 				"propertyName": "JSON Types",
-				"propertyKeyword": "subType",
+				"propertyKeyword": "subtype",
 				"propertyType": "select",
 				"dependency": {
 					"key": "mode",
 					"value": "nvarchar"
 				},
 				"options": [
-					{ "name": " ", "value": "string", "snippet": "string" },
-					{ "name": "object", "value": "object", "snippet": "json-object" },
-					{ "name": "array", "value": "array", "snippet": "json-array" }
-				]
+					{ "name": " ", "value": "string" },
+					{ "name": "object", "value": "object" },
+					{ "name": "array", "value": "array" }
+				],
+				"defaultValue": "string"
 			},
 			{
 				"propertyName": "Has max length",
