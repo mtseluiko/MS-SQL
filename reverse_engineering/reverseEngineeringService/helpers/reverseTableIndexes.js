@@ -3,7 +3,7 @@ const INDEX = 'Index';
 
 const handleDataCompression = index => {
 	const compressionTypes = ['NONE', 'ROW', 'PAGE', 'COLUMNSTORE', 'COLUMNSTORE_ARCHIVE'];
-	const type = compressionTypes.find(type => index.type_desc.includes(type));
+	const type = compressionTypes.find(type => index.dataCompression.includes(type));
 	return type || '';
 };
 
