@@ -36,14 +36,17 @@ const getTableInfo = async (connectionClient, dbName, tableName, tableSchema) =>
 	;`
 };
 
-const getTableRow = async (connectionClient, dbName, tableName, tableSchema) => {
+const getTableRow = async (connectionClient, dbName, tableName, tableSchema, reverseEngineeringOptions) => {
 	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	const percentageWord = reverseEngineeringOptions.isAbsoluteValue ? '' : 'PERCENT';
 	try {
 		return await currentDbConnectionClient
 			.request()
 			.input('tableName', sql.VarChar, tableName)
 			.input('tableSchema', sql.VarChar, tableSchema)
-			.query`EXEC('SELECT TOP 1 * FROM [' + @TableSchema + '].[' + @TableName + '];');`;
+			.input('amount', sql.Int, reverseEngineeringOptions.value)
+			.input('percent', sql.VarChar, percentageWord)
+			.query`EXEC('SELECT TOP '+ @Amount +' '+ @Percent +' * FROM [' + @TableSchema + '].[' + @TableName + '];');`;
 	} catch (e) {
 		return [];
 	}
