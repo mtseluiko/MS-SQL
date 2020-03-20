@@ -85,7 +85,7 @@
 	"MODAL_WINDOW___CONTAIN_COLLECTIONS": "tables",
 	"MODAL_WINDOW___CONTAIN_BUCKET": "schemas",
 	"MODAL_WINDOW___CONTAIN_COLLECTION": "tables",
-	"MODAL_WINDOW___MONGODB_CONNECTION_PROCESS": "SQL Server Reverse-Engineering Process",
+	"MODAL_WINDOW___DB_CONNECTION_PROCESS": "SQL Server Reverse-Engineering Process",
 	"PROGRESS_BAR___DATABASE": "Schema",
 	"PROGRESS_BAR___COLLECTION": "Table",
 	"PROGRESS_BAR___PROCESS": "Process",
