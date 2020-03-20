@@ -15,6 +15,7 @@ const getKeyConstraintsCompositionStatuses = require('./getKeyConstraintsComposi
 const reverseKeyConstraint = require('./reverseKeyConstraint');
 const defineFieldsCompositeKeyConstraints = require('./defineFieldsCompositeKeyConstraints');
 const reverseTableColumn = require('./reverseTableColumn');
+const reorderTableRows = require('./reorderTableRows');
 
 module.exports = {
 	transformDatabaseTableInfoToJSON,
@@ -34,4 +35,5 @@ module.exports = {
 	reverseKeyConstraint,
 	defineFieldsCompositeKeyConstraints,
 	reverseTableColumn,
+	reorderTableRows,
 }

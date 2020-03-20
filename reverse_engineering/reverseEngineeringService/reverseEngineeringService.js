@@ -29,6 +29,7 @@ const {
 	defineFieldsDefaultConstraintNames,
 	defineFieldsCompositeKeyConstraints,
 	reverseTableColumn,
+	reorderTableRows,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
 
@@ -105,13 +106,13 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 				const tableCheckConstraints = databaseCheckConstraints.filter(cc => cc.table === tableName);
 				logger.progress({ message: 'Fetching table information', containerName: dbName, entityName: tableName });
 
-				const [tableInfo, tableRow, fieldsKeyConstraints] = await Promise.all([
+				const [tableInfo, tableRows, fieldsKeyConstraints] = await Promise.all([
 					await getTableInfo(dbConnectionClient, dbName, tableName, schemaName),
 					await getTableRow(dbConnectionClient, dbName, tableName, schemaName, reverseEngineeringOptions.rowCollectionSettings),
 					await getTableKeyConstraints(dbConnectionClient, dbName, tableName, schemaName)
 				]);
 				const isView = tableInfo[0]['TABLE_TYPE'].trim() === 'V';
-				if (!reverseEngineeringOptions.includeEmptyCollection && !tableRow.length) {
+				if (!reverseEngineeringOptions.includeEmptyCollection && !tableRows.length) {
 					return null;
 				}
 
@@ -121,11 +122,12 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					defineFieldsDescription(await getTableColumnsDescription(dbConnectionClient, dbName, tableName, schemaName)),
 					defineFieldsKeyConstraints(fieldsKeyConstraints),
 					defineMaskedColumns(await getTableMaskedColumns(dbConnectionClient, dbName, tableName, schemaName)),
-					defineJSONTypes(tableRow),
+					defineJSONTypes(tableRows),
 					defineXmlFieldsCollections(tableXmlSchemas),
 					defineFieldsDefaultConstraintNames(await getTableDefaultConstraintNames(dbConnectionClient, dbName, tableName, schemaName)),
 				)({ required: [], properties: {} });
 
+				const reorderedTableRows = reorderTableRows(tableRows, reverseEngineeringOptions.isFieldOrderAlphabetic);
 				return {
 					collectionName: tableName,
 					dbName: schemaName,
@@ -136,9 +138,9 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 							views: [],
 						}
 					),
-					standardDoc: tableRow,
-					collectionDocs: tableRow,
-					documents: tableRow,
+					standardDoc: reorderedTableRows,
+					collectionDocs: reorderedTableRows,
+					documents: reorderedTableRows,
 					entityLevel: {
 						Indxs: reverseTableIndexes(tableIndexes),
 						memory_optimized: databaseMemoryOptimizedTables.includes(tableName),
