@@ -9,6 +9,7 @@ const {
 } = require('./reverseEngineeringService/reverseEngineeringService');
 const logInfo = require('./helpers/logInfo');
 const filterRelationships = require('./helpers/filterRelationships');
+const getOptionsFromConnectionInfo = require('./helpers/getOptionsFromConnectionInfo');
 
 module.exports = {
 	async connect(connectionInfo, logger, callback, app) {
@@ -71,8 +72,9 @@ module.exports = {
 				throw new Error('No database specified');
 			}
 
+			const reverseEngineeringOptions = getOptionsFromConnectionInfo(collectionsInfo);
 			const [jsonSchemas, relationships] = await Promise.all([
-				await reverseCollectionsToJSON(logger)(client, collections),
+				await reverseCollectionsToJSON(logger)(client, collections, reverseEngineeringOptions),
 				await getCollectionsRelationships(logger)(client, collections),
 			]);
 			callback(null, mergeCollectionsWithViews(jsonSchemas), null, filterRelationships(relationships, jsonSchemas));

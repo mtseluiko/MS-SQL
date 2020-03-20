@@ -85,7 +85,7 @@ const getUserDefinedTypes = tableInfo =>
 		};
 	}, {});
 
-const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo) => {
+const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo, reverseEngineeringOptions) => {
 	const dbName = dbConnectionClient.config.database;
 	const [databaseIndexes, databaseMemoryOptimizedTables, databaseCheckConstraints, xmlSchemaCollections] = await Promise.all([
 		await getDatabaseIndexes(dbConnectionClient, dbName),
@@ -107,10 +107,13 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 
 				const [tableInfo, tableRow, fieldsKeyConstraints] = await Promise.all([
 					await getTableInfo(dbConnectionClient, dbName, tableName, schemaName),
-					await getTableRow(dbConnectionClient, dbName, tableName, schemaName),
+					await getTableRow(dbConnectionClient, dbName, tableName, schemaName, reverseEngineeringOptions.rowCollectionSettings),
 					await getTableKeyConstraints(dbConnectionClient, dbName, tableName, schemaName)
 				]);
 				const isView = tableInfo[0]['TABLE_TYPE'].trim() === 'V';
+				if (!reverseEngineeringOptions.includeEmptyCollection && !tableRow.length) {
+					return null;
+				}
 
 				const jsonSchema = pipe(
 					transformDatabaseTableInfoToJSON(tableInfo),
@@ -152,7 +155,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 				};
 			})
 		);
-		return [...await jsonSchemas, ...tablesInfo];
+		return [...await jsonSchemas, ...tablesInfo.filter(Boolean)];
 	}, Promise.resolve([]));
 };
 
