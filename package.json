@@ -26,7 +26,8 @@
             "disableChoices": true,
             "enableJsonType": true,
             "views": {
-                "viewLevel": "model"
+                "viewLevel": "model",
+                "disablePipelines": true
             }
         }
     },
