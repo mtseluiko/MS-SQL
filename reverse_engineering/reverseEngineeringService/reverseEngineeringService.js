@@ -12,6 +12,7 @@ const {
 	getTableMaskedColumns,
 	getDatabaseXmlSchemaCollection,
 	getTableDefaultConstraintNames,
+	getDatabaseUserDefinedTypes,
 } = require('../databaseService/databaseService');
 const {
 	transformDatabaseTableInfoToJSON,
@@ -28,7 +29,7 @@ const {
 	defineXmlFieldsCollections,
 	defineFieldsDefaultConstraintNames,
 	defineFieldsCompositeKeyConstraints,
-	reverseTableColumn,
+	getUserDefinedTypes,
 	reorderTableRows,
 } = require('./helpers');
 const pipe = require('../helpers/pipe');
@@ -74,25 +75,16 @@ const prepareViewJSON = (dbConnectionClient, dbName, viewName, schemaName) => as
 	};
 };
 
-const getUserDefinedTypes = tableInfo =>
-	tableInfo.reduce((columnSchemas, column) => {
-		if (!column['DOMAIN_NAME']) {
-			return columnSchemas;
-		}
-
-		return {
-			...columnSchemas,
-			[column['DOMAIN_NAME']]: reverseTableColumn(column),
-		};
-	}, {});
-
 const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo, reverseEngineeringOptions) => {
 	const dbName = dbConnectionClient.config.database;
-	const [databaseIndexes, databaseMemoryOptimizedTables, databaseCheckConstraints, xmlSchemaCollections] = await Promise.all([
+	const [
+		databaseIndexes, databaseMemoryOptimizedTables, databaseCheckConstraints, xmlSchemaCollections, databaseUDT
+	] = await Promise.all([
 		await getDatabaseIndexes(dbConnectionClient, dbName),
 		await getDatabaseMemoryOptimizedTables(dbConnectionClient, dbName),
 		await getDatabaseCheckConstraints(dbConnectionClient, dbName),
 		await getDatabaseXmlSchemaCollection(dbConnectionClient, dbName),
+		await getDatabaseUserDefinedTypes(dbConnectionClient, dbName),
 	]);
 	return await Object.entries(tablesInfo).reduce(async (jsonSchemas, [schemaName, tableNames]) => {
 		logger.progress({ message: 'Fetching database information', containerName: dbName, entityName: '' });
@@ -151,7 +143,7 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 						databaseName: dbName,
 					},
 					modelDefinitions: {
-						definitions: getUserDefinedTypes(tableInfo),
+						definitions: getUserDefinedTypes(tableInfo, databaseUDT),
 					},
 					emptyBucket: false,
 				};

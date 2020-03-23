@@ -274,6 +274,14 @@ const getTableDefaultConstraintNames = async (connectionClient, dbName, tableNam
 	`
 };
 
+const getDatabaseUserDefinedTypes = async (connectionClient, dbName) => {
+	const currentDbConnectionClient = await getNewConnectionClientByDb(connectionClient, dbName);
+	return currentDbConnectionClient.query`
+		select * from sys.types
+		where is_user_defined = 1
+	`;
+}
+
 module.exports = {
 	getConnectionClient,
 	getObjectsFromDatabase,
@@ -290,4 +298,5 @@ module.exports = {
 	getTableMaskedColumns,
 	getDatabaseXmlSchemaCollection,
 	getTableDefaultConstraintNames,
+	getDatabaseUserDefinedTypes,
 }
