@@ -25,6 +25,7 @@
             "disableReverseEngineering": false,
             "disableChoices": true,
             "enableJsonType": true,
+            "useJsonTypesWithComplexTypes": true,
             "views": {
                 "viewLevel": "model",
                 "disablePipelines": true
