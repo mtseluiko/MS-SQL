@@ -25,8 +25,8 @@
             "disableReverseEngineering": false,
             "disableChoices": true,
             "enableJsonType": true,
-            "useJsonTypesWithComplexTypes": false,
-            "reverseSchemaIntoOneColumn": false,
+            "useJsonTypesWithComplexTypes": true,
+            "reverseSchemaIntoOneColumn": true,
             "views": {
                 "viewLevel": "model",
                 "disablePipelines": true
