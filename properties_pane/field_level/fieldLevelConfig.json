@@ -152,8 +152,17 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "subtype",
 				"propertyType": "select",
 				"dependency": {
-					"key": "mode",
-					"value": "nvarchar"
+					"type": "or",
+					"values": [
+						{
+							"key": "mode",
+							"value": "nvarchar"
+						},
+						{
+							"key": "mode",
+							"value": "varchar"
+						}
+					]
 				},
 				"options": [
 					{ "name": " ", "value": "string" },

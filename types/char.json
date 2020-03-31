@@ -10,8 +10,17 @@
 		"order": 1,
 		"jsonRoot": true,
 		"source": {
-			"key": "mode",
-			"value": "nvarchar"
+			"type": "or",
+			"values": [
+				{
+					"key": "mode",
+					"value": "nvarchar"
+				},
+				{
+					"key": "mode",
+					"value": "varchar"
+				}
+			]
 		}
 	},
 	"defaultValues": {
