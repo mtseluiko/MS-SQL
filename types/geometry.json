@@ -2,7 +2,7 @@
 	"name": "geometry",
 	"erdAbbreviation": "<geom>",
 	"dtdAbbreviation": "{...}",
-	"parentType": "document",
+	"parentType": "string",
 	"hiddenOnEntity": "view",
 	"defaultValues": {
 		"relationshipType": "",
@@ -10,22 +10,10 @@
 		"childRelationships": [],
 		"foreignCollection": "",
 		"foreignField": [],
-		"properties": [],
 		"dependencies": [],
 		"minProperties": "",
 		"maxProperties": "",
 		"additionalProperties": false,
-		"enum": [],
-		"subTypes": [
-			{ "name": "point", "snippet": "geometry-point" },
-			{ "name": "linestring", "snippet": "geometry-linestring" },
-			{ "name": "polygon", "snippet": "geometry-polygon" },
-			{ "name": "multipoint", "snippet": "geometry-multipoint" },
-			{ "name": "multilinestring", "snippet": "geometry-multilinestring" },
-			{ "name": "multipolygon", "snippet": "geometry-multipolygon" },
-			{ "name": "geometrycollection", "snippet": "geometry-geometrycollection" },
-			{ "name": "envelope", "snippet": "geometry-envelope" },
-			{ "name": "circle", "snippet": "geometry-circle" }
-		]
+		"enum": []
 	}
 }
