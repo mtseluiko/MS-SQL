@@ -27,7 +27,17 @@
 		"name": "New column",
 		"primaryKey": false,
 		"unique": false,
-		"clustered": true
+		"hasMaxLength": {
+			"valueDependencies": [
+				{
+					"value": true,
+					"dependency": {
+						"key": "subtype",
+						"value": "object"
+					}
+				}
+			]
+		}
 	},
 	"patternField": {
 		"name": "^[a-zA-Z0-9_.-]+$"
