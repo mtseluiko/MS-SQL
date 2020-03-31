@@ -34,6 +34,6 @@
         }
     },
     "description": "Hackolade plugin for Microsoft SQL Server",
-    "icon_url": "C:\\Users\\Pascal\\.hackolade\\plugins\\MSSQLServer\\logo.jpg",
+    "icon_url": "logo.jpg",
     "disabled": false
 }
