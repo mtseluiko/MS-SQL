@@ -104,9 +104,6 @@ const reverseCollectionsToJSON = logger => async (dbConnectionClient, tablesInfo
 					await getTableKeyConstraints(dbConnectionClient, dbName, tableName, schemaName)
 				]);
 				const isView = tableInfo[0]['TABLE_TYPE'].trim() === 'V';
-				if (!reverseEngineeringOptions.includeEmptyCollection && !tableRows.length) {
-					return null;
-				}
 
 				const jsonSchema = pipe(
 					transformDatabaseTableInfoToJSON(tableInfo),
