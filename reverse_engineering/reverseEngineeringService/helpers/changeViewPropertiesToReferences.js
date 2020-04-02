@@ -1,5 +1,5 @@
 const getColumnInfoByName = (columnsInfo, columnName, propertyName) => {
-	const relatedColumn = columnsInfo.find(column => column.name === columnName) || columnsInfo[0];
+	const relatedColumn = columnsInfo.find(column => column['ColumnName'] === columnName) || columnsInfo[0];
 	return relatedColumn[propertyName];
 };
 
