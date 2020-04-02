@@ -259,7 +259,13 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "defaultConstraintName",
 				"propertyType": "text"
 			},
-			"description",
+			{
+				"propertyName": "Comments",
+				"propertyKeyword": "description",
+				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
 			{
 				"propertyName": "Not null",
 				"propertyKeyword": "required",
@@ -656,7 +662,14 @@ making sure that you maintain a proper JSON format.
 			"format",
 			"enum",
 			"sample",
-			"comments"
+			{
+				"propertyName": "Remarks",
+				"propertyKeyword": "comments",
+				"shouldValidate": false,
+				"propertyTooltip": "remarks",
+				"propertyType": "details",
+				"template": "textarea"
+			}
 		],
 		"numeric": [
 			"name",
@@ -731,7 +744,13 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "defaultConstraintName",
 				"propertyType": "text"
 			},
-			"description",
+			{
+				"propertyName": "Comments",
+				"propertyKeyword": "description",
+				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
 			{
 				"propertyName": "Not null",
 				"propertyKeyword": "required",
@@ -1108,7 +1127,14 @@ making sure that you maintain a proper JSON format.
 			"pattern",
 			"enum",
 			"sample",
-			"comments"
+			{
+				"propertyName": "Remarks",
+				"propertyKeyword": "comments",
+				"shouldValidate": false,
+				"propertyTooltip": "remarks",
+				"propertyType": "details",
+				"template": "textarea"
+			}
 		],
 		"binary": [
 			"name",
@@ -1172,7 +1198,13 @@ making sure that you maintain a proper JSON format.
 					}]
 				}]
 			},
-			"description",
+			{
+				"propertyName": "Comments",
+				"propertyKeyword": "description",
+				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
 			{
 				"propertyName": "Not null",
 				"propertyKeyword": "required",
@@ -1523,7 +1555,14 @@ making sure that you maintain a proper JSON format.
 					}
 				]
 			},
-			"comments"
+			{
+				"propertyName": "Remarks",
+				"propertyKeyword": "comments",
+				"shouldValidate": false,
+				"propertyTooltip": "remarks",
+				"propertyType": "details",
+				"template": "textarea"
+			}
 		],
 		"datetime": [
 			"name",
@@ -1575,7 +1614,13 @@ making sure that you maintain a proper JSON format.
 					]
 				}
 			},
-			"description",
+			{
+				"propertyName": "Comments",
+				"propertyKeyword": "description",
+				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
 			{
 				"propertyName": "Not null",
 				"propertyKeyword": "required",
@@ -1964,7 +2009,14 @@ making sure that you maintain a proper JSON format.
 			},
 			"enum",
 			"sample",
-			"comments"
+			{
+				"propertyName": "Remarks",
+				"propertyKeyword": "comments",
+				"shouldValidate": false,
+				"propertyTooltip": "remarks",
+				"propertyType": "details",
+				"template": "textarea"
+			}
 		],
 		"___1": [],
 		"geography": [
@@ -1974,14 +2026,27 @@ making sure that you maintain a proper JSON format.
 			"schemaId",
 			"refPath",
 			"type",
-			"description",
+			{
+				"propertyName": "Comments",
+				"propertyKeyword": "description",
+				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
 			{
 				"propertyName": "Not null",
 				"propertyKeyword": "required",
 				"enableForReference": true,
 				"propertyType": "checkbox"
 			},
-			"comments"
+			{
+				"propertyName": "Remarks",
+				"propertyKeyword": "comments",
+				"shouldValidate": false,
+				"propertyTooltip": "remarks",
+				"propertyType": "details",
+				"template": "textarea"
+			}
 		],
 		"geometry": [
 			"name",
@@ -1990,14 +2055,27 @@ making sure that you maintain a proper JSON format.
 			"schemaId",
 			"refPath",
 			"type",
-			"description",
+			{
+				"propertyName": "Comments",
+				"propertyKeyword": "description",
+				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
 			{
 				"propertyName": "Not null",
 				"propertyKeyword": "required",
 				"enableForReference": true,
 				"propertyType": "checkbox"
 			},
-			"comments"
+			{
+				"propertyName": "Remarks",
+				"propertyKeyword": "comments",
+				"shouldValidate": false,
+				"propertyTooltip": "remarks",
+				"propertyType": "details",
+				"template": "textarea"
+			}
 		],
 		"hierarchyid": [
 			"name",
@@ -2006,7 +2084,13 @@ making sure that you maintain a proper JSON format.
 			"schemaId",
 			"refPath",
 			"type",
-			"description",
+			{
+				"propertyName": "Comments",
+				"propertyKeyword": "description",
+				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
 			{
 				"propertyName": "Not null",
 				"propertyKeyword": "required",
@@ -2345,14 +2429,27 @@ making sure that you maintain a proper JSON format.
 			},
 			"enum",
 			"sample",
-			"comments"
+			{
+				"propertyName": "Remarks",
+				"propertyKeyword": "comments",
+				"shouldValidate": false,
+				"propertyTooltip": "remarks",
+				"propertyType": "details",
+				"template": "textarea"
+			}
 		],
 		"sql_variant": [
 			"name",
 			"code",
 			"schemaId",
 			"type",
-			"description",
+			{
+				"propertyName": "Comments",
+				"propertyKeyword": "description",
+				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
 			{
 				"propertyName": "Not null",
 				"propertyKeyword": "required",
@@ -2371,7 +2468,14 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "text"
 			},
 			"sample",
-			"comments"
+			{
+				"propertyName": "Remarks",
+				"propertyKeyword": "comments",
+				"shouldValidate": false,
+				"propertyTooltip": "remarks",
+				"propertyType": "details",
+				"template": "textarea"
+			}
 		],
 		"uniqueidentifier": [
 			"name",
@@ -2380,7 +2484,13 @@ making sure that you maintain a proper JSON format.
 			"schemaId",
 			"refPath",
 			"type",
-			"description",
+			{
+				"propertyName": "Comments",
+				"propertyKeyword": "description",
+				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
 			{
 				"propertyName": "Not null",
 				"propertyKeyword": "required",
@@ -2727,7 +2837,14 @@ making sure that you maintain a proper JSON format.
 			},
 			"enum",
 			"sample",
-			"comments"
+			{
+				"propertyName": "Remarks",
+				"propertyKeyword": "comments",
+				"shouldValidate": false,
+				"propertyTooltip": "remarks",
+				"propertyType": "details",
+				"template": "textarea"
+			}
 		],
 		"xml": [
 			"name",
@@ -2736,7 +2853,13 @@ making sure that you maintain a proper JSON format.
 			"schemaId",
 			"refPath",
 			"type",
-			"description",
+			{
+				"propertyName": "Comments",
+				"propertyKeyword": "description",
+				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
 			{
 				"propertyName": "Default",
 				"propertyKeyword": "default",
@@ -2775,7 +2898,14 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "xml_schema_collection",
 				"propertyType": "text"
 			},
-			"comments"
+			{
+				"propertyName": "Remarks",
+				"propertyKeyword": "comments",
+				"shouldValidate": false,
+				"propertyTooltip": "remarks",
+				"propertyType": "details",
+				"template": "textarea"
+			}
 		],
 		"rowversion": [
 			"name",
@@ -2784,7 +2914,13 @@ making sure that you maintain a proper JSON format.
 			"schemaId",
 			"refPath",
 			"type",
-			"description",
+			{
+				"propertyName": "Comments",
+				"propertyKeyword": "description",
+				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
 			{
 				"propertyName": "Not null",
 				"propertyKeyword": "required",
@@ -3109,7 +3245,14 @@ making sure that you maintain a proper JSON format.
 					}
 				]
 			},
-			"comments"
+			{
+				"propertyName": "Remarks",
+				"propertyKeyword": "comments",
+				"shouldValidate": false,
+				"propertyTooltip": "remarks",
+				"propertyType": "details",
+				"template": "textarea"
+			}
 		]
 	}
 } 

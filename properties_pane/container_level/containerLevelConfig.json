@@ -58,18 +58,18 @@ making sure that you maintain a proper JSON format.
 		"lowerTab": "Details",
 		"structure": [
 			{
-				"propertyName": "Description",
+				"propertyName": "Comments",
 				"propertyKeyword": "description",
 				"shouldValidate": false,
-				"propertyTooltip": "description",
+				"propertyTooltip": "comments",
 				"propertyType": "details",
 				"template": "textarea"
 			},
 			{
-				"propertyName": "Comments",
+				"propertyName": "Remarks",
 				"propertyKeyword": "comments",
 				"shouldValidate": false,
-				"propertyTooltip": "comments",
+				"propertyTooltip": "remarks",
 				"propertyType": "details",
 				"template": "textarea"
 			},

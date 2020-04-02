@@ -13,9 +13,17 @@
 		"structure": [
 			{
 				"propertyName": "Comments",
-				"propertyKeyword": "comments",
+				"propertyKeyword": "description",
 				"shouldValidate": false,
 				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
+			{
+				"propertyName": "Remarks",
+				"propertyKeyword": "comments",
+				"shouldValidate": false,
+				"propertyTooltip": "remarks",
 				"propertyType": "details",
 				"template": "textarea"
 			},
