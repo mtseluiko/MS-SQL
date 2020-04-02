@@ -118,6 +118,14 @@ making sure that you maintain a proper JSON format.
 		"lowerTab": "Details",
 		"structure": [
 			{
+				"propertyName": "Comments",
+				"propertyKeyword": "description",
+				"shouldValidate": false,
+				"propertyTooltip": "comments",
+				"propertyType": "details",
+				"template": "textarea"
+			},
+			{
 				"propertyName": "Memory optimized",
 				"propertyKeyword": "memory_optimized",
 				"propertyType": "checkbox"
@@ -138,9 +146,9 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Comments",
+				"propertyName": "Remarks",
 				"propertyKeyword": "comments",
-				"propertyTooltip": "comments",
+				"propertyTooltip": "remarks",
 				"propertyType": "details",
 				"template": "textarea",
 				"valueType": "string"
