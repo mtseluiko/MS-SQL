@@ -19,7 +19,9 @@
 				"uniqueidentifier",
 				"xml",
 				"rowversion",
-				"table"
+				"table",
+				"reference",
+				"multiple"
 			]
 		}
 	}
