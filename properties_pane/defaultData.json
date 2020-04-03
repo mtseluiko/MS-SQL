@@ -32,8 +32,14 @@
 				{
 					"value": true,
 					"dependency": {
-						"key": "subtype",
-						"value": "object"
+						"type": "or",
+						"values": [{
+							"key": "subtype",
+							"value": "object"
+						}, {
+							"key": "subtype",
+							"value": "array"
+						}]
 					}
 				}
 			]
